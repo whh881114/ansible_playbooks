@@ -1,0 +1,5 @@
+# elk user configration inforamtion.
+elk_user: elk
+elk_user_id: 2000
+elk_user_passwd: $6$PohsRJR7Od91yrUp$lsSHQEnLIMFicF0Fjfdd0mPOK8TLIXX6NBOjIhz5fxZdL87N65KWnc/lZpkDBTjyWi8Qe6A41f8uXIpVXMEIm.
+elk_user_shell: /bin/bash
