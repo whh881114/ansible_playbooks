@@ -1,5 +1,13 @@
 # elk user configration inforamtion.
-elk_user: elk
+elk_user: "elk"
 elk_user_id: 2000
-elk_user_passwd: $6$PohsRJR7Od91yrUp$lsSHQEnLIMFicF0Fjfdd0mPOK8TLIXX6NBOjIhz5fxZdL87N65KWnc/lZpkDBTjyWi8Qe6A41f8uXIpVXMEIm.
-elk_user_shell: /bin/bash
+elk_user_passwd: "$6$PohsRJR7Od91yrUp$lsSHQEnLIMFicF0Fjfdd0mPOK8TLIXX6NBOjIhz5fxZdL87N65KWnc/lZpkDBTjyWi8Qe6A41f8uXIpVXMEIm."
+elk_user_shell: "/bin/bash"
+
+
+# elk elasticsearch package information.
+elk_pkg_version: "7.1.0"
+elk_pkg: "elasticsearch-{{ elk_pkg_version }}"
+elk_pkg_url: "ftp://foreman.example.com/pub/elk/elasticsearch-{{ elk_pkg_version }}-linux-x86_64.tar.gz"
+elk_pkg_dest: "/usr/local/"
+elk_link_dir: "/usr/local/elasticsearch"

@@ -1,0 +1,3 @@
+# nohup /usr/local/elasticsearch/bin/elasticsearch &>/dev/null &
+# /usr/local/elasticsearch/bin/elasticsearch -d
+# ps -ef | grep '/usr/local/elasticsearch/jdk/bin/java' | grep -v grep | awk '{print $2}' | xargs kill -9
