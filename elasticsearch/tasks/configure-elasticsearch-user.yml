@@ -1,0 +1,7 @@
+- name: Configure a generic user for elk.
+  user:
+    name: "{{ user_name }}"
+    uid: "{{ user_id }}"
+    password: "{{ user_passwd }}"
+    shell: "{{ user_shell }}"
+    state: present

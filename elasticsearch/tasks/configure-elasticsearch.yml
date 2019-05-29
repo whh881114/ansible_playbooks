@@ -1,0 +1,42 @@
+- name: Configure the global environment.
+  blockinfile:
+    path: /etc/profile
+    block: |
+      PATH=$PATH:"{{ pkg_link_dir }}/bin"
+      export PATH
+
+
+- name: Configure the limits settings.
+  blockinfile:
+    path: /etc/security/limits.conf
+    block: |
+      *       soft    nofile  65536
+      *       hard    nofile  131072
+      *       soft    nproc   2048
+      *       hard    nproc   4096
+
+
+- name: Create sysctl file of elk.
+  file:
+    path: /etc/sysctl.d/100-elk.conf
+    state: touch
+
+- name: Configure the kernel parameters.
+  blockinfile:
+    path: /etc/sysctl.d/100-elk.conf
+    block: |
+      {{ item.key }} = {{ item.value }}
+  with_items:
+  - { key: vm.max_map_count, value: 655360 }
+
+
+- name: Configure the elasticsearch.
+  template:
+    src: "{{ config_template }}"
+    dest: "{{ pkg_dest }}/{{ pkg }}/config/{{ config_file }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: 0644
+  notify: Restart elasticsearch.
+  when: create_config_file
+

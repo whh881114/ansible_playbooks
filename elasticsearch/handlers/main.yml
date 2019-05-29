@@ -1,0 +1,9 @@
+---
+- name: Restart elasticsearch.
+  shell: |
+    {{ elasticsearch_bin }}
+  args:
+    executable: /bin/bash
+  become_user: "{{ user_name }}"
+
+    #ps -ef | grep "{{ elasticsearch_proc }}" | grep -v grep | awk '{print $2}' | xargs kill -9

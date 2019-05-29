@@ -1,4 +1,0 @@
-# Setup/install tasks.
-- include_tasks: "configure-elk-user.yml"
-
-- include_tasks: "configure-elk-elasticsearch.yml"

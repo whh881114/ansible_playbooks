@@ -14,13 +14,13 @@
 #
 # Use a descriptive name for your cluster:
 #
-cluster.name: my-application
+cluster.name: {{ cluster_name }}
 #
 # ------------------------------------ Node ------------------------------------
 #
 # Use a descriptive name for the node:
 #
-node.name: elk-node1.example.com
+node.name: {{ ansible_fqdn }}
 #
 # Add custom attributes to the node:
 #
@@ -40,7 +40,7 @@ node.name: elk-node1.example.com
 #
 # Lock the memory on startup:
 #
-bootstrap.memory_lock: false
+bootstrap.memory_lock: {{ bootstrap_memory_lock }}
 #
 # Make sure that the heap size is set to about half the memory available
 # on the system and that the owner of the process is allowed to use this
@@ -53,11 +53,12 @@ bootstrap.memory_lock: false
 # Set the bind address to a specific IP (IPv4 or IPv6):
 #
 #network.host: 192.168.0.1
-network.host: 0.0.0.0
+network.host: {{ network_host }}
 #
 # Set a custom port for HTTP:
 #
 #http.port: 9200
+http.port: {{ http_port }}
 #
 # For more information, consult the network module documentation.
 #
@@ -66,11 +67,11 @@ network.host: 0.0.0.0
 # Pass an initial list of hosts to perform discovery when this node is started:
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 #
-discovery.seed_hosts: ["0.0.0.0"]
+discovery.seed_hosts: [{{ discovery_seed_hosts }}]
 #
 # Bootstrap the cluster using an initial set of master-eligible nodes:
 #
-cluster.initial_master_nodes: ["elk-node1.example.com"]
+cluster.initial_master_nodes: [{{ cluster_initial_master_nodes }}]
 #
 # For more information, consult the discovery and cluster formation module documentation.
 #
@@ -89,9 +90,10 @@ cluster.initial_master_nodes: ["elk-node1.example.com"]
 #action.destructive_requires_name: true
 #
 
-bootstrap.system_call_filter: false
+bootstrap.system_call_filter: {{ bootstrap_system_call_filter }}
 
 # 开启跨域访问支持，默认为false
-http.cors.enabled: true
+http.cors.enabled: {{ http_cors_enabled }}
+
 # 跨域访问允许的域名地址，(允许所有域名)以上使用正则
-http.cors.allow-origin: /.*/
+http.cors.allow-origin: {{ http_cors_allow_origin }}
