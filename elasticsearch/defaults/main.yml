@@ -32,5 +32,8 @@ http_cors_allow_origin: /.*/
 
 # elasticsearch服务进程信息
 elasticsearch_bin: /usr/local/elasticsearch/bin/elasticsearch -d
-elasticsearch_proc: "/usr/local/elasticsearch/jdk/bin/java"
+elasticsearch_proc: /usr/local/elasticsearch/jdk/bin/java
 
+
+# 系统调优参数
+sysctl_file: /etc/sysctl.d/100-elk.conf

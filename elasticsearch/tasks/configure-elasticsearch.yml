@@ -21,13 +21,22 @@
     path: /etc/sysctl.d/100-elk.conf
     state: touch
 
+
 - name: Configure the kernel parameters.
   blockinfile:
-    path: /etc/sysctl.d/100-elk.conf
+    path: "{{ sysctl_file }}"
     block: |
       {{ item.key }} = {{ item.value }}
   with_items:
   - { key: vm.max_map_count, value: 655360 }
+
+
+# 使用root账号调整系统参数
+- name: Apply the limits and kernel settings.
+  shell: |
+    source /etc/profile
+    /sbin/sysctl -p "{{ sysctl_file }}"
+    ulimit -n 65535
 
 
 - name: Configure the elasticsearch.
@@ -40,3 +49,15 @@
   notify: Restart elasticsearch.
   when: create_config_file
 
+
+- name: Configure the elasticsearch service boot on the start.
+  blockinfile:
+    path: /etc/rc.d/rc.local
+    block: |
+      su - {{user_name}} -c "{{ elasticsearch_bin }}"
+
+
+- name: Change mode for the shell start script.
+  file:
+    path: /etc/rc.d/rc.local
+    mode: '0755'
