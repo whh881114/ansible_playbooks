@@ -1,0 +1,13 @@
+---
+
+- hosts: django2
+  gather_facts: no
+
+  tasks:
+  - name: Run test command
+    command: echo '123'
+    notify: test1
+
+  handlers:
+  - name: test1
+    debug: msg='456'
