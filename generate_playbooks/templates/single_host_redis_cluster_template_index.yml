@@ -1,0 +1,16 @@
+---
+- name: redis-cluster
+  hosts: "[[ item.host ]]"
+  user: root
+  roles:
+    - role: common
+
+    - role: redis
+      vars:
+        redis_type: "single_host_cluster"
+        vars:
+          host: [
+      {% for conf in item.conf %}
+      { seq: "[[ conf.seq ]]", port: "[[ conf.port ]]" }  # seq表示安装目录序号，port表示监听端口。
+      {% endfor %}
+    ]

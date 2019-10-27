@@ -1,0 +1,8 @@
+---
+- include: sysctl.yml
+
+- include: rc_local.yml
+
+- include: limits.yml
+
+- include: pkgs.yml

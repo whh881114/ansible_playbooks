@@ -1,0 +1,26 @@
+---
+- name: generate single host redis cluster playbook
+  hosts: localhost
+  gather_facts: True
+
+  tasks:
+    - name: generate playbook
+      tags: generate-single_host_redis_cluster-playbook
+      template:
+        src: single_host_redis_cluster_template.yml
+        dest: "{{ output_dir }}/0-{{ item.service_name }}.yml"
+        variable_start_string: '[['
+        variable_end_string: ']]'
+      with_items:
+        - { service_name: 'single_host_redis_cluster_01',
+            host: '192.168.255.106',
+            redis_version: '5.0.5'
+            redis_nodes: [
+              { seq: '01', port: 7001 },
+              { seq: '02', port: 7002 },
+              { seq: '03', port: 7003 },
+              { seq: '04', port: 7004 },
+              { seq: '05', port: 7005 },
+              { seq: '06', port: 7006 }
+            ]
+        }

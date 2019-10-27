@@ -1,0 +1,16 @@
+---
+- name: copy redis package
+  tags:
+    - install-redis-package
+  copy:
+    src: "{{ redis_file }}"
+    dest: "{{ redis_dest_file }}"
+
+- name: install redis package
+  tags:
+    - install-redis-package
+  shell: |
+    cd "{{ redis_file_dir }}"
+    tar xf "{{ redis_file }}"
+    cd redis-"{{ redis_version }}"
+    make && make PREFIX="{{ redis_installation_dir }}" install

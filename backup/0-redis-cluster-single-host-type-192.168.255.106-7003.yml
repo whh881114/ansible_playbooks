@@ -1,0 +1,10 @@
+---
+- name: redis-cluster
+  hosts: "192.168.255.106"
+  user: root
+  roles:
+    - role: redis
+      vars:
+        - redis_type: single_host_cluster
+        - redis_port: 7003
+        - is_install_redis: false
