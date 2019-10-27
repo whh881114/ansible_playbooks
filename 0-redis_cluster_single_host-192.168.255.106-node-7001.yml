@@ -5,6 +5,6 @@
   roles:
     - role: redis
       vars:
-        - redis_type: single_host_cluster
-        - redis_port: 7005
+        - redis_type: redis_cluster_single_host
+        - redis_port: 7001
         - is_install_redis: false

@@ -10,5 +10,5 @@
   tags:
     - configure-redis
   template:
-    src: redis.conf.j2
-    dest: "{{ redis_installation_dir }}/redis-{{ redis_port }}.conf"
+    src: redis_cluster_single_host_redis.conf.j2
+    dest: "{{ redis_data_dir }}/{{ redis_port }}/redis-{{ redis_port }}.conf"
