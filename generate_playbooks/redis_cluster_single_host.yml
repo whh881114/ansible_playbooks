@@ -12,7 +12,11 @@
         variable_start_string: '[['
         variable_end_string: ']]'
       with_items:
-        - { service_name: 'redis_cluster_single_host', host: '192.168.255.106', redis_version: '3.2.13', redis_ports: [7001, 7002, 7003, 7004, 7005] }
+        - { service_name: 'redis_cluster_single_host',
+            host: '192.168.255.106',
+            redis_version: '3.2.13',
+            redis_ports: [7001, 7002, 7003, 7004, 7005, 7006, 7007, 7008, 7009, 7010]
+        }
 
     - name: generate redis cluster single host type node playbook
       tags: generate-redis_cluster_single_host_type-node-playbook
@@ -27,3 +31,8 @@
         - { service_name: 'redis_cluster_single_host', host: '192.168.255.106', redis_port: 7003 }
         - { service_name: 'redis_cluster_single_host', host: '192.168.255.106', redis_port: 7004 }
         - { service_name: 'redis_cluster_single_host', host: '192.168.255.106', redis_port: 7005 }
+        - { service_name: 'redis_cluster_single_host', host: '192.168.255.106', redis_port: 7006 }
+        - { service_name: 'redis_cluster_single_host', host: '192.168.255.106', redis_port: 7007 }
+        - { service_name: 'redis_cluster_single_host', host: '192.168.255.106', redis_port: 7008 }
+        - { service_name: 'redis_cluster_single_host', host: '192.168.255.106', redis_port: 7009 }
+        - { service_name: 'redis_cluster_single_host', host: '192.168.255.106', redis_port: 7010 }
