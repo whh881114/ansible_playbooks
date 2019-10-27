@@ -1,0 +1,6 @@
+---
+- name: redis-cluster
+  hosts: "192.168.255.106"
+  user: root
+  roles:
+    - role: ruby
