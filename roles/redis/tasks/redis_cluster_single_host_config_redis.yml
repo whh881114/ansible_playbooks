@@ -11,4 +11,12 @@
     - configure-redis
   template:
     src: redis_cluster_single_host_redis.conf.j2
-    dest: "{{ redis_data_dir }}/{{ redis_port }}/redis-{{ redis_port }}.conf"
+    dest: "{{ redis_conf_dir }}/redis_{{ redis_port }}.conf"
+
+- name: "config redis.sh for instance {{ redis_port }}"
+  tags:
+    - configure-redis
+  template:
+    src: redis.sh.j2
+    dest: "{{ redis_installation_dir }}/redis.sh"
+    mode: "0755"

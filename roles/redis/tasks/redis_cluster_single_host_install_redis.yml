@@ -14,3 +14,18 @@
     tar xf "{{ redis_file }}"
     cd redis-"{{ redis_version }}"
     make && make PREFIX="{{ redis_installation_dir }}" install
+
+- name: copy redis-trib.rb
+  copy:
+    src: "{{ redis_file_dir }}/redis-{{ redis_version }}/src/redis-trib.rb"
+    dest: "{{ redis_installation_dir }}/bin/redis-trib.rb"
+    remote_src: yes
+    mode: "0755"
+
+- name: configure etc and data directories
+  file:
+    path: "{{ item.name }}"
+    state: directory
+  with_items:
+    - { name: "{{ redis_conf_dir }}" }
+    - { name: "{{ redis_data_dir }}" }

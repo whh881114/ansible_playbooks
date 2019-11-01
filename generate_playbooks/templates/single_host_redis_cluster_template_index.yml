@@ -5,6 +5,8 @@
   roles:
     - role: common
 
+    - role: ruby
+
     - role: redis
       vars:
         - redis_type: redis_cluster_single_host
