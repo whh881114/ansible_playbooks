@@ -10,7 +10,7 @@
   tags:
     - configure-redis
   template:
-    src: redis_cluster_single_host_redis.conf.j2
+    src: redis_cluster.conf.j2
     dest: "{{ redis_conf_dir }}/redis_{{ redis_port }}.conf"
 
 - name: "config redis.sh for instance {{ redis_port }}"
@@ -20,3 +20,11 @@
     src: redis.sh.j2
     dest: "{{ redis_installation_dir }}/redis.sh"
     mode: "0755"
+
+- name: "start redis service"
+  shell: sh "{{ redis_installation_dir }}/redis.sh" {{ redis_port }} start
+  register: redis_service_status
+
+- name: "check redis service status"
+  debug:
+    var: redis_service_status.stdout_lines

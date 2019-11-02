@@ -35,4 +35,7 @@
   lineinfile:
     path: /etc/profile
     state: present
-    line: "export PATH=$PATH:{{ ruby_bin_path }}"
+    line: "export PATH={{ ruby_bin_path }}:$PATH"
+
+- name: source /etc/profile
+  shell: source /etc/profile

@@ -15,6 +15,12 @@
     cd redis-"{{ redis_version }}"
     make && make PREFIX="{{ redis_installation_dir }}" install
 
+- name: configure redis bin path
+  lineinfile:
+    path: /etc/profile
+    state: present
+    line: "export PATH=$PATH:{{ redis_bin_dir }}"
+
 - name: copy redis-trib.rb
   copy:
     src: "{{ redis_file_dir }}/redis-{{ redis_version }}/src/redis-trib.rb"
@@ -22,7 +28,7 @@
     remote_src: yes
     mode: "0755"
 
-- name: configure etc and data directories
+- name: mkdir etc and data directories
   file:
     path: "{{ item.name }}"
     state: directory

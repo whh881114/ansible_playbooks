@@ -1,9 +1,6 @@
 ---
-- block:
-    - include: redis_cluster_single_host_install_redis.yml
-      when: is_install_redis
+- include: install_redis.yml
+  when: is_install_redis
 
-    - include: redis_cluster_single_host_config_redis.yml
-      when: redis_port != ''
-
-  when: redis_type == "redis_cluster_single_host"
+- include: config_redis.yml
+  when: redis_port != ''
