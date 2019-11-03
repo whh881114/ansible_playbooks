@@ -1,0 +1,307 @@
+---
+- name: redis-cluster-192.168.255.106
+  hosts: 192.168.255.106
+  user: root
+
+  tasks:
+    - name: 'copy redis-port file'
+      copy:
+        src: /usr/local/bin/redis-port
+        dest: /usr/local/bin/redis-port
+        mode: "0755"
+
+    - name: "create dumping redis cluster rbd files shell script"
+      copy:
+        content: |
+          #!/bin/bash
+
+          source /etc/profile
+          
+          is_redis_running=`redis-cli -c -p 7001 cluster nodes`
+          is_redis_running=$?
+
+          is_master=`redis-cli -c -p 7001 cluster nodes | grep -w 'myself' | grep -w 'master' | wc -l`
+
+          if [ $is_redis_running -ne 0 ]; then
+              echo 'The redis instance is not running.'
+              exit 255
+          fi
+
+          if [ $is_master -eq 0 ]; then
+              echo 'The redis instance is slave role. Skip the dumping rbd file process.'
+
+          elif [ $is_master -ne 1 ]; then
+              echo 'Something unexpected happened, please check it out.'
+              exit 254
+
+          elif [ $is_master -eq 1 ]; then
+            echo 'The redis instance is master role. The dumping rbd file process is going on.'
+            redis-port dump --from 192.168.255.106:7001 --output /home/192.168.255.106-7001.rdb
+          fi
+        dest: /usr/local/bin/dump_rdb_file_7001.sh
+        mode: "0755"
+
+    - name: 'dump redis cluster rbd files'
+      shell: sh /usr/local/bin/dump_rdb_file_7001.sh
+      register: dump_redis_cluster_rdb_files_result
+
+    - name: 'debug dump redis cluster rbd files'
+      debug:
+        var: dump_redis_cluster_rdb_files_result.stdout_lines
+
+
+- name: redis-cluster-192.168.255.106
+  hosts: 192.168.255.106
+  user: root
+
+  tasks:
+    - name: 'copy redis-port file'
+      copy:
+        src: /usr/local/bin/redis-port
+        dest: /usr/local/bin/redis-port
+        mode: "0755"
+
+    - name: "create dumping redis cluster rbd files shell script"
+      copy:
+        content: |
+          #!/bin/bash
+
+          source /etc/profile
+          
+          is_redis_running=`redis-cli -c -p 7002 cluster nodes`
+          is_redis_running=$?
+
+          is_master=`redis-cli -c -p 7002 cluster nodes | grep -w 'myself' | grep -w 'master' | wc -l`
+
+          if [ $is_redis_running -ne 0 ]; then
+              echo 'The redis instance is not running.'
+              exit 255
+          fi
+
+          if [ $is_master -eq 0 ]; then
+              echo 'The redis instance is slave role. Skip the dumping rbd file process.'
+
+          elif [ $is_master -ne 1 ]; then
+              echo 'Something unexpected happened, please check it out.'
+              exit 254
+
+          elif [ $is_master -eq 1 ]; then
+            echo 'The redis instance is master role. The dumping rbd file process is going on.'
+            redis-port dump --from 192.168.255.106:7002 --output /home/192.168.255.106-7002.rdb
+          fi
+        dest: /usr/local/bin/dump_rdb_file_7002.sh
+        mode: "0755"
+
+    - name: 'dump redis cluster rbd files'
+      shell: sh /usr/local/bin/dump_rdb_file_7002.sh
+      register: dump_redis_cluster_rdb_files_result
+
+    - name: 'debug dump redis cluster rbd files'
+      debug:
+        var: dump_redis_cluster_rdb_files_result.stdout_lines
+
+
+- name: redis-cluster-192.168.255.106
+  hosts: 192.168.255.106
+  user: root
+
+  tasks:
+    - name: 'copy redis-port file'
+      copy:
+        src: /usr/local/bin/redis-port
+        dest: /usr/local/bin/redis-port
+        mode: "0755"
+
+    - name: "create dumping redis cluster rbd files shell script"
+      copy:
+        content: |
+          #!/bin/bash
+
+          source /etc/profile
+          
+          is_redis_running=`redis-cli -c -p 7003 cluster nodes`
+          is_redis_running=$?
+
+          is_master=`redis-cli -c -p 7003 cluster nodes | grep -w 'myself' | grep -w 'master' | wc -l`
+
+          if [ $is_redis_running -ne 0 ]; then
+              echo 'The redis instance is not running.'
+              exit 255
+          fi
+
+          if [ $is_master -eq 0 ]; then
+              echo 'The redis instance is slave role. Skip the dumping rbd file process.'
+
+          elif [ $is_master -ne 1 ]; then
+              echo 'Something unexpected happened, please check it out.'
+              exit 254
+
+          elif [ $is_master -eq 1 ]; then
+            echo 'The redis instance is master role. The dumping rbd file process is going on.'
+            redis-port dump --from 192.168.255.106:7003 --output /home/192.168.255.106-7003.rdb
+          fi
+        dest: /usr/local/bin/dump_rdb_file_7003.sh
+        mode: "0755"
+
+    - name: 'dump redis cluster rbd files'
+      shell: sh /usr/local/bin/dump_rdb_file_7003.sh
+      register: dump_redis_cluster_rdb_files_result
+
+    - name: 'debug dump redis cluster rbd files'
+      debug:
+        var: dump_redis_cluster_rdb_files_result.stdout_lines
+
+
+- name: redis-cluster-192.168.255.106
+  hosts: 192.168.255.106
+  user: root
+
+  tasks:
+    - name: 'copy redis-port file'
+      copy:
+        src: /usr/local/bin/redis-port
+        dest: /usr/local/bin/redis-port
+        mode: "0755"
+
+    - name: "create dumping redis cluster rbd files shell script"
+      copy:
+        content: |
+          #!/bin/bash
+
+          source /etc/profile
+          
+          is_redis_running=`redis-cli -c -p 7004 cluster nodes`
+          is_redis_running=$?
+
+          is_master=`redis-cli -c -p 7004 cluster nodes | grep -w 'myself' | grep -w 'master' | wc -l`
+
+          if [ $is_redis_running -ne 0 ]; then
+              echo 'The redis instance is not running.'
+              exit 255
+          fi
+
+          if [ $is_master -eq 0 ]; then
+              echo 'The redis instance is slave role. Skip the dumping rbd file process.'
+
+          elif [ $is_master -ne 1 ]; then
+              echo 'Something unexpected happened, please check it out.'
+              exit 254
+
+          elif [ $is_master -eq 1 ]; then
+            echo 'The redis instance is master role. The dumping rbd file process is going on.'
+            redis-port dump --from 192.168.255.106:7004 --output /home/192.168.255.106-7004.rdb
+          fi
+        dest: /usr/local/bin/dump_rdb_file_7004.sh
+        mode: "0755"
+
+    - name: 'dump redis cluster rbd files'
+      shell: sh /usr/local/bin/dump_rdb_file_7004.sh
+      register: dump_redis_cluster_rdb_files_result
+
+    - name: 'debug dump redis cluster rbd files'
+      debug:
+        var: dump_redis_cluster_rdb_files_result.stdout_lines
+
+
+- name: redis-cluster-192.168.255.106
+  hosts: 192.168.255.106
+  user: root
+
+  tasks:
+    - name: 'copy redis-port file'
+      copy:
+        src: /usr/local/bin/redis-port
+        dest: /usr/local/bin/redis-port
+        mode: "0755"
+
+    - name: "create dumping redis cluster rbd files shell script"
+      copy:
+        content: |
+          #!/bin/bash
+
+          source /etc/profile
+          
+          is_redis_running=`redis-cli -c -p 7005 cluster nodes`
+          is_redis_running=$?
+
+          is_master=`redis-cli -c -p 7005 cluster nodes | grep -w 'myself' | grep -w 'master' | wc -l`
+
+          if [ $is_redis_running -ne 0 ]; then
+              echo 'The redis instance is not running.'
+              exit 255
+          fi
+
+          if [ $is_master -eq 0 ]; then
+              echo 'The redis instance is slave role. Skip the dumping rbd file process.'
+
+          elif [ $is_master -ne 1 ]; then
+              echo 'Something unexpected happened, please check it out.'
+              exit 254
+
+          elif [ $is_master -eq 1 ]; then
+            echo 'The redis instance is master role. The dumping rbd file process is going on.'
+            redis-port dump --from 192.168.255.106:7005 --output /home/192.168.255.106-7005.rdb
+          fi
+        dest: /usr/local/bin/dump_rdb_file_7005.sh
+        mode: "0755"
+
+    - name: 'dump redis cluster rbd files'
+      shell: sh /usr/local/bin/dump_rdb_file_7005.sh
+      register: dump_redis_cluster_rdb_files_result
+
+    - name: 'debug dump redis cluster rbd files'
+      debug:
+        var: dump_redis_cluster_rdb_files_result.stdout_lines
+
+
+- name: redis-cluster-192.168.255.106
+  hosts: 192.168.255.106
+  user: root
+
+  tasks:
+    - name: 'copy redis-port file'
+      copy:
+        src: /usr/local/bin/redis-port
+        dest: /usr/local/bin/redis-port
+        mode: "0755"
+
+    - name: "create dumping redis cluster rbd files shell script"
+      copy:
+        content: |
+          #!/bin/bash
+
+          source /etc/profile
+          
+          is_redis_running=`redis-cli -c -p 7006 cluster nodes`
+          is_redis_running=$?
+
+          is_master=`redis-cli -c -p 7006 cluster nodes | grep -w 'myself' | grep -w 'master' | wc -l`
+
+          if [ $is_redis_running -ne 0 ]; then
+              echo 'The redis instance is not running.'
+              exit 255
+          fi
+
+          if [ $is_master -eq 0 ]; then
+              echo 'The redis instance is slave role. Skip the dumping rbd file process.'
+
+          elif [ $is_master -ne 1 ]; then
+              echo 'Something unexpected happened, please check it out.'
+              exit 254
+
+          elif [ $is_master -eq 1 ]; then
+            echo 'The redis instance is master role. The dumping rbd file process is going on.'
+            redis-port dump --from 192.168.255.106:7006 --output /home/192.168.255.106-7006.rdb
+          fi
+        dest: /usr/local/bin/dump_rdb_file_7006.sh
+        mode: "0755"
+
+    - name: 'dump redis cluster rbd files'
+      shell: sh /usr/local/bin/dump_rdb_file_7006.sh
+      register: dump_redis_cluster_rdb_files_result
+
+    - name: 'debug dump redis cluster rbd files'
+      debug:
+        var: dump_redis_cluster_rdb_files_result.stdout_lines
+
+
