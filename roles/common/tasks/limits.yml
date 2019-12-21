@@ -8,7 +8,7 @@
     state: present
     line: "{{ item.name }}"
   with_items:
-    - { name: '* soft nofile 65535'}
-    - { name: '* hard nofile 65535'}
+    - { name: '* soft nofile 65536'}
+    - { name: '* hard nofile 131072'}
     - { name: '* soft nproc 65535'}
     - { name: '* hard nproc 65535'}

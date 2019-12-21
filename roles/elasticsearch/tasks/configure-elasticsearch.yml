@@ -6,16 +6,6 @@
       export PATH
 
 
-- name: Configure the limits settings.
-  blockinfile:
-    path: /etc/security/limits.conf
-    block: |
-      *       soft    nofile  65536
-      *       hard    nofile  131072
-      *       soft    nproc   2048
-      *       hard    nproc   4096
-
-
 - name: Create sysctl file of elk.
   file:
     path: /etc/sysctl.d/100-elk.conf
