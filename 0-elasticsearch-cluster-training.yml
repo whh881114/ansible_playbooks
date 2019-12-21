@@ -1,0 +1,48 @@
+---
+
+
+- name: elasticsearch-cluster-elk-node1.example.com
+  hosts: elk-node1.example.com
+  user: root
+  roles:
+    - role: common
+
+    - role: elasticsearch
+      vars:
+        - pkg_version: 6.5.4
+        - cluster_name: training
+        - node_name: elk-node1.example.com
+        - cluster_hosts: "[u'elk-node1.example.com', u'elk-node2.example.com', u'elk-node3.example.com']"
+        - minimum_cluster_nodes: 2
+
+
+- name: elasticsearch-cluster-elk-node2.example.com
+  hosts: elk-node2.example.com
+  user: root
+  roles:
+    - role: common
+
+    - role: elasticsearch
+      vars:
+        - pkg_version: 6.5.4
+        - cluster_name: training
+        - node_name: elk-node2.example.com
+        - cluster_hosts: "[u'elk-node1.example.com', u'elk-node2.example.com', u'elk-node3.example.com']"
+        - minimum_cluster_nodes: 2
+
+
+- name: elasticsearch-cluster-elk-node3.example.com
+  hosts: elk-node3.example.com
+  user: root
+  roles:
+    - role: common
+
+    - role: elasticsearch
+      vars:
+        - pkg_version: 6.5.4
+        - cluster_name: training
+        - node_name: elk-node3.example.com
+        - cluster_hosts: "[u'elk-node1.example.com', u'elk-node2.example.com', u'elk-node3.example.com']"
+        - minimum_cluster_nodes: 2
+
+
