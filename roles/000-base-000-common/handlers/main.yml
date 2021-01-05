@@ -1,0 +1,12 @@
+---
+- name: restart kubelet
+  service:
+    name: kubelet
+    state: restarted
+    enabled: yes
+
+- name: restart-network
+  service:
+    name: network
+    state: restarted
+    enabled: yes
