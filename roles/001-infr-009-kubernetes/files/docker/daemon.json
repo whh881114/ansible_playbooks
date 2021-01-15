@@ -1,3 +1,9 @@
 {
-  "insecure-registries": ["registry.k8s.example.com:5000"]
+  "insecure-registries": ["registry.k8s.example.com:5000", "harbor.freedom.org"],
+  "log-driver": "local",
+  "log-opts": {
+     "max-size": "100m",
+     "max-file": 10,
+     "compress": false
+  }
 }
