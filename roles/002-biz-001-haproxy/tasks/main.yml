@@ -20,6 +20,12 @@
     - { line: 'local2.*  /var/log/haproxy.log', insertafter: None }
   notify: restart-rsyslog
 
+- name: delete haproxy log compress function
+  lineinfile:
+    path: /etc/logrotate.d/haproxy
+    regexp: compress
+    state: absent
+
 - block:
     - name: update systemd haproxy service
       lineinfile: 
