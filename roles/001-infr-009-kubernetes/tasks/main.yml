@@ -1,6 +1,10 @@
 ---
 - include: docker.yml
 
-- include: dl_k8s_imgs.yml
-
 - include: dl_offical_imgs.yml
+
+- include: dl_k8s_imgs.yml
+  when: k8s_version == "1.16.2"
+
+- include: dl_rancher_imgs.yml
+  when: rancher_version == "2.4.2"

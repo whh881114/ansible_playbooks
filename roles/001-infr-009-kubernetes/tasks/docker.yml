@@ -1,4 +1,16 @@
 ---
+- name: remove docker package from centos extras repo
+  yum:
+    name: "{{ item }}"
+    state: absent
+  loop:
+    - docker
+    - docker-common
+
+- name: install docker-ce
+  yum:
+    name: docker-ce
+
 - name: config docker
   copy:
     src: "{{ item.src }}"
@@ -8,7 +20,6 @@
     mode: "0644"
   with_items:
     - { src: docker/daemon.json, dest: /etc/docker/daemon.json }
-    - { src: docker/docker, dest: /etc/sysconfig/docker }
   notify:
     - restart docker
 

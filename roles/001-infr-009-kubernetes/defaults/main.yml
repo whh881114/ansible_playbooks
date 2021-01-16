@@ -1,4 +1,48 @@
-docker_registry_url: harbor.freedom.org
+k8s_version: "1.16.2"
+rancher_version: "2.4.2"
+
+docker_registry: harbor.freedom.org
+
+official_imgs:
+  - docker.io/nginx:1.17.8
+  - docker.io/httpd:2.4.41
+  - docker.io/mysql:5.7.29
+  - docker.io/php:7.4.2
+  - docker.io/redis:5.0.7
+  - docker.io/tomcat:9.0.30-jdk11-openjdk
+  - docker.io/busybox:1.31.1
+  - docker.io/consul:1.7.11
+  - docker.io/consul:1.8.7
+  - docker.io/consul:1.9.1
+  - docker.io/jenkins/jenkins:lts
+
+  - zabbix/zabbix-agent:centos-4.0.17
+  - zabbix/zabbix-java-gateway:centos-4.0.17
+  - zabbix/zabbix-server-mysql:centos-4.0.17
+  - zabbix/zabbix-web-apache-mysql:centos-4.0.17
+
+  - prom/alertmanager:v0.20.0
+  - prom/prometheus:v2.15.2
+  - prom/pushgateway:v1.1.0
+  - prom/bind-exporter:master
+  - prom/blackbox-exporter:master
+  - prom/collectd-exporter:master
+  - prom/consul-exporter:master
+  - prom/haproxy-exporter:master
+  - prom/mysqld-exporter:master
+  - prom/node-exporter:master
+  - prom/statsd-exporter:master
+
+  - elastic/apm-server:7.9.2
+  - elastic/auditbeat:7.9.2
+  - elastic/elasticsearch:7.9.2
+  - elastic/filebeat:7.9.2
+  - elastic/heartbeat:7.9.2
+  - elastic/journalbeat:7.9.2
+  - elastic/kibana:7.9.2
+  - elastic/logstash:7.9.2
+  - elastic/metricbeat:7.9.2
+  - elastic/packetbeat:7.9.2
 
 k8s_v1_16_2_imgs:
   - k8s.gcr.io/coredns:1.6.2
@@ -13,45 +57,6 @@ quay_v1_16_2_imgs:
   - quay.io/coreos/flannel:v0.11.0-amd64
   - quay.io/external_storage/nfs-client-provisioner:latest
   - quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.28.0
-
-official_imgs:
-  - docker.io/nginx:1.17.8
-  - docker.io/httpd:2.4.41
-  - docker.io/mysql:5.7.29
-  - docker.io/php:7.4.2
-  - docker.io/redis:5.0.7
-  - docker.io/tomcat:9.0.30-jdk11-openjdk
-  - docker.io/busybox:1.31.1
-  - docker.io/consul:1.6.2
-  - docker.io/jenkins/jenkins:lts
-
-  - docker.io/zabbix/zabbix-agent:centos-4.0.17
-  - docker.io/zabbix/zabbix-java-gateway:centos-4.0.17
-  - docker.io/zabbix/zabbix-server-mysql:centos-4.0.17
-  - docker.io/zabbix/zabbix-web-apache-mysql:centos-4.0.17
-
-  - docker.io/prom/alertmanager:v0.20.0
-  - docker.io/prom/bind-exporter:master
-  - docker.io/prom/blackbox-exporter:v0.16.0
-  - docker.io/prom/collectd-exporter:master
-  - docker.io/prom/consul-exporter:v0.6.0
-  - docker.io/prom/haproxy-exporter:v0.10.0
-  - docker.io/prom/mysqld-exporter:v0.12.1
-  - docker.io/prom/node-exporter:v0.18.1
-  - docker.io/prom/prometheus:v2.15.2
-  - docker.io/prom/pushgateway:v1.1.0
-  - docker.io/prom/statsd-exporter:v0.14.1
-
-  - docker.io/elastic/apm-server:7.5.2
-  - docker.io/elastic/auditbeat:7.5.2
-  - docker.io/elastic/elasticsearch:7.5.2
-  - docker.io/elastic/filebeat:7.5.2
-  - docker.io/elastic/heartbeat:7.5.2
-  - docker.io/elastic/journalbeat:7.5.2
-  - docker.io/elastic/kibana:7.5.2
-  - docker.io/elastic/logstash:7.5.2
-  - docker.io/elastic/metricbeat:7.5.2
-  - docker.io/elastic/packetbeat:7.5.2
 
 rancher_2_4_2_imgs:
   - docker.io/ranchercharts/beats-filebeat:7.3.0
