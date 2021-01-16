@@ -36,8 +36,7 @@ listen tcp-stats
     mode http
     # 默认HTTP格式
     # log-format %ci:%cp\ [%t]\ %ft\ %b/%s\ %Tq/%Tw/%Tc/%Tr/%Tt\ %ST\ %B\ %CC\ %CS\ %tsc\ %ac/%fc/%bc/%sc/%rc\ %sq/%bq\ %hr\ %hs\ %{+Q}r
-    log-format {"client_ip":"%ci","client_port":"%cp","datetime":"%t","frontend_name_transport":"%ft","backend_name":"%b","server_name":"%s","time_request":"%Tq","time_wait":"%Tw","time_conn":"%Tc","time_reponse","%Tr","time_total":"%Tt","status_code","%ST","server2client_bytes_read":"%B","captured_request_cookie","%CC","captured_response_cookie":"%CS","termination_state_with_cooke_status":"%tsc","termination_state":"%ts","action":"%ac","frontend_concurrent_connections":"%fc","backend_concurrent_connections":"%bc","server_concurrent_connections":"%sc","retries":"%rc","srv_queue":"%sq","backend_queue":"%bq","captured_request_headers":"%hr",http_request:"%r"}
-    log global
+    # log-format {"client_ip":"%ci","client_port":"%cp","datetime":"%t","frontend_name_transport":"%ft","backend_name":"%b","server_name":"%s","time_request":"%Tq","time_wait":"%Tw","time_conn":"%Tc","time_reponse","%Tr","time_total":"%Tt","status_code","%ST","server2client_bytes_read":"%B","captured_request_cookie","%CC","captured_response_cookie":"%CS","termination_state_with_cooke_status":"%tsc","termination_state":"%ts","action":"%ac","frontend_concurrent_connections":"%fc","backend_concurrent_connections":"%bc","server_concurrent_connections":"%sc","retries":"%rc","srv_queue":"%sq","backend_queue":"%bq","captured_request_headers":"%hr",http_request:"%r"}
     stats refresh 30s
     stats uri /stats
     stats realm Private lands
@@ -50,7 +49,7 @@ listen tcp-80-ingress-nginx
     mode tcp
     # 默认TCP格式
     # log-format %ci:%cp\ [%t]\ %ft\ %b/%s\ %Tw/%Tc/%Tt\ %B\ %ts\ %ac/%fc/%bc/%sc/%rc\ %sq/%bq
-    log-format {"client_ip":"%ci","client_port":"%cp","datetime":"%t","frontend_name_transport":"%ft","backend_name":"%b","server_name":"%s","time_wait":"%Tw","time_conn":"%Tc","time_total":"%Tt","server2client_bytes_read":"%B","termination_state":"%ts","action":"%ac","frontend_concurrent_connections":"%fc","backend_concurrent_connections":"%bc","server_concurrent_connections":"%sc","retries":"%rc","srv_queue":"%sq","backend_queue":"%bq"}
+    # log-format {"client_ip":"%ci","client_port":"%cp","datetime":"%t","frontend_name_transport":"%ft","backend_name":"%b","server_name":"%s","time_wait":"%Tw","time_conn":"%Tc","time_total":"%Tt","server2client_bytes_read":"%B","termination_state":"%ts","action":"%ac","frontend_concurrent_connections":"%fc","backend_concurrent_connections":"%bc","server_concurrent_connections":"%sc","retries":"%rc","srv_queue":"%sq","backend_queue":"%bq"}
     option tcplog
     bind 0.0.0.0:80
     balance source
@@ -63,7 +62,7 @@ listen tcp-443-ingress-nginx
     mode tcp
     # 默认TCP格式
     # log-format %ci:%cp\ [%t]\ %ft\ %b/%s\ %Tw/%Tc/%Tt\ %B\ %ts\ %ac/%fc/%bc/%sc/%rc\ %sq/%bq
-    log-format {"client_ip":"%ci","client_port":"%cp","datetime":"%t","frontend_name_transport":"%ft","backend_name":"%b","server_name":"%s","time_wait":"%Tw","time_conn":"%Tc","time_total":"%Tt","server2client_bytes_read":"%B","termination_state":"%ts","action":"%ac","frontend_concurrent_connections":"%fc","backend_concurrent_connections":"%bc","server_concurrent_connections":"%sc","retries":"%rc","srv_queue":"%sq","backend_queue":"%bq"}
+    # log-format {"client_ip":"%ci","client_port":"%cp","datetime":"%t","frontend_name_transport":"%ft","backend_name":"%b","server_name":"%s","time_wait":"%Tw","time_conn":"%Tc","time_total":"%Tt","server2client_bytes_read":"%B","termination_state":"%ts","action":"%ac","frontend_concurrent_connections":"%fc","backend_concurrent_connections":"%bc","server_concurrent_connections":"%sc","retries":"%rc","srv_queue":"%sq","backend_queue":"%bq"}
     option tcplog
     bind 0.0.0.0:443
     balance source
