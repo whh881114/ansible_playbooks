@@ -20,13 +20,6 @@
     - { line: 'local2.*  /var/log/haproxy.log', insertafter: None }
   notify: restart-rsyslog
 
-- name: configure rsyslog for haproxy step 2
-  blockinfile:
-    path: /etc/rsyslog.conf
-    block: |
-      local2.*                                                /var/log/haproxy.log
-  notify: restart-rsyslog
-
 - block:
     - name: update systemd haproxy service
       lineinfile: 
