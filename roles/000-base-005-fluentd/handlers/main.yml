@@ -1,0 +1,6 @@
+- include: 000-base-000-common/handlers/main.yml
+
+- name: restart-td-agent
+  service:
+    name: td-agent
+    state: restarted
