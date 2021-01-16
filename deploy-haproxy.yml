@@ -37,6 +37,11 @@
       tags:
         - puppet-agent
 
+    - role: 000-base-005-fluentd
+      tags:
+        - fluentd
+        - td-agent
+
     - role: 002-biz-001-haproxy
       tags:
         - haproxy
