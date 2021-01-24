@@ -17,7 +17,6 @@
       tags:
         - consul-agent
       vars:
-        consul_template_role: True
         consul_agent_role: True
         consul_agent_items:
           services:
@@ -29,18 +28,29 @@
               port: 8500
         consul_agent_ipaddr: 192.168.2.250    # 如果有多个haproxy实例，那就不需要一个模板生成此playbook。
 
+
+    - role: 000-base-001-consul
+      tags:
+        - consul-template
+      vars:
+        consul_template_role: True
+
+
     - role: 000-base-002-zabbix
       tags:
         - zabbix-agent
+
 
     - role: 000-base-003-puppet
       tags:
         - puppet-agent
 
+
     - role: 000-base-005-fluentd
       tags:
         - fluentd
         - td-agent
+
 
     - role: 002-biz-001-haproxy
       tags:
