@@ -81,3 +81,5 @@ listen tcp-6443-kube-apiserver
     bind 0.0.0.0:6443
     balance source
     server master01.k8s.freedom.org master01.k8s.freedom.org:6443 check
+    server master01.k8s.freedom.org master02.k8s.freedom.org:6443 check
+    server master01.k8s.freedom.org master03.k8s.freedom.org:6443 check
