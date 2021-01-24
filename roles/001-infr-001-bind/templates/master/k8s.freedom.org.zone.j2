@@ -12,9 +12,11 @@ $TTL 600
 ns01    A   {{ bind_master_ip }}
 ns02    A   {{ bind_slave_ip }}
 
-master                IN      A       192.168.2.1
-worker01              IN      A       192.168.2.2
-worker02              IN      A       192.168.2.3
-worker03              IN      A       192.168.2.4
+master01              IN      A       192.168.2.1
+master02              IN      A       192.168.2.2
+master03              IN      A       192.168.2.3
+worker01              IN      A       192.168.2.4
+worker02              IN      A       192.168.2.5
+worker03              IN      A       192.168.2.6
 
 *                     IN      A       192.168.1.250 ; 将k8s中的访问入口全指向haproxy那台主机。
