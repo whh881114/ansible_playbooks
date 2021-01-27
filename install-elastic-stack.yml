@@ -7,9 +7,11 @@
       tags:
         - common
 
-    - role: elastic_stack
+    - role: 001-infra-002-elastic
       tags:
-        - elastic_stack
+        - elasticsearch
+        - es
+        - elk
       vars:
         elasticsearch: true
         cluster_nodes:
@@ -33,9 +35,11 @@
       tags:
         - common
 
-    - role: elastic_stack
+    - role: 001-infra-002-elastic
       tags:
-        - elastic_stack
+        - elasticsearch
+        - es
+        - elk
       vars:
         elasticsearch: true
         cluster_nodes:
@@ -54,9 +58,11 @@
       tags:
         - common
 
-    - role: elastic_stack
+    - role: 001-infra-002-elastic
       tags:
-        - elastic_stack
+        - elasticsearch
+        - es
+        - elk
       vars:
         elasticsearch: true
         cluster_nodes:

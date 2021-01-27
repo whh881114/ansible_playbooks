@@ -10,7 +10,7 @@
       tags:
         - common
 
-    - role: 001-infr-009-kubernetes
+    - role: 001-infra-009-kubernetes
       tags:
         - kubernetes
         - k8s

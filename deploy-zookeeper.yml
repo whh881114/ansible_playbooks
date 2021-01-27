@@ -40,7 +40,7 @@
     - node01.zookeeper.freedom.org
   user: root
   roles:
-    - role: 001-infr-004-zookeeper
+    - role: 001-infra-004-zookeeper
       tags:
         - zookeeper
       vars:
@@ -55,7 +55,7 @@
     - node02.zookeeper.freedom.org
   user: root
   roles:
-    - role: 001-infr-004-zookeeper
+    - role: 001-infra-004-zookeeper
       tags:
         - zookeeper
       vars:
@@ -70,7 +70,7 @@
     - node03.zookeeper.freedom.org
   user: root
   roles:
-    - role: 001-infr-004-zookeeper
+    - role: 001-infra-004-zookeeper
       tags:
         - zookeeper
       vars:
