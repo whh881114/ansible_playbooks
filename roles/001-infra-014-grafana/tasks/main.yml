@@ -1,0 +1,16 @@
+---
+- name: install grafana {{ grafana_version }}
+  yum:
+    name: "{{ grafana_pkg }}"
+    state: present
+
+- name: install grafana configuration file
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { src: "{{ grafana_version }}/grafana.ini", dest: /etc/grafana/grafana.ini }
+  notify:
+    - systemctl-daemon-reload
+    - enable-grafana-server
+    - restart-grafana-server

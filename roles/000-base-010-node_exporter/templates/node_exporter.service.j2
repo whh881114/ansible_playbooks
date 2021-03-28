@@ -1,0 +1,11 @@
+[Unit]
+Description=Prometheus Server
+Documentation=https://prometheus.io/docs/introduction/overview/
+After=network.target
+
+[Service]
+Restart=on-failure
+ExecStart={{ node_exporter_bin }}
+
+[Install]
+WantedBy=multi-user.target

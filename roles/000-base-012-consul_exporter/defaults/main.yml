@@ -1,0 +1,4 @@
+---
+consul_exporter_version: 0.7.1
+consul_exporter_pkg: "ftp://foreman.freedom.org/pub/tools/consul_exporter-{{ consul_exporter_version }}.linux-amd64/consul_exporter"
+consul_exporter_bin: /usr/local/bin/consul_exporter

@@ -1,0 +1,38 @@
+---
+- name: install pushgateway {{ pushgateway_version }}
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ item.dest }}"
+    mode: "0755"
+  with_items:
+    - { url: "{{ pushgateway_pkg }}", dest: "{{ pushgateway_bin }}" }
+
+- name: create pushgateway configuration directory
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: yes
+    owner: prometheus
+    group: prometheus
+    mode: '0755'
+  loop:
+    - "{{ pushgateway_config_dir }}"
+#
+#- name: install pushgateway configuration file
+#  template:
+#    src: "{{ item.src }}"
+#    dest: "{{ item.dest }}"
+#    owner: prometheus
+#    group: prometheus
+#    mode: "0644"
+#  with_items:
+#    - { src: pushgateway.yml.j2, dest: "{{ pushgateway_config_dir }}/pushgateway.yml" }
+      
+- name: create pushgateway service
+  template:
+    src: pushgateway.service.j2
+    dest: "{{ systemd_conf_dir }}/pushgateway.service"
+  notify:
+    - systemctl-daemon-reload
+    - enable-pushgateway
+    - restart-pushgateway

@@ -1,0 +1,15 @@
+---
+- name: install consul_exporter {{ consul_exporter_version }}
+  get_url:
+    url: "{{ consul_exporter_pkg }}"
+    dest: "{{ consul_exporter_bin }}"
+    mode: "0755"
+
+- name: create consul_exporter service
+  template:
+    src: consul_exporter.service.j2
+    dest: "{{ systemd_conf_dir }}/consul_exporter.service"
+  notify:
+    - systemctl-daemon-reload
+    - enable-consul_exporter
+    - restart-consul_exporter

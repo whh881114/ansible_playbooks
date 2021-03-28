@@ -1,0 +1,8 @@
+---
+pushgateway_version: 1.4.0
+pushgateway_pkg: "ftp://foreman.freedom.org/pub/tools/pushgateway-{{ pushgateway_version }}.linux-amd64/pushgateway"
+pushgateway_bin: /usr/local/bin/pushgateway
+
+pushgateway_config_dir: /etc/pushgateway
+pushgateway_persistence_file: "{{ pushgateway_config_dir }}/persistence.file"
+pushgateway_persistence_interval: "5m"

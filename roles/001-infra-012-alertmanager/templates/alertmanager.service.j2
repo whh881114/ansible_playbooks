@@ -1,0 +1,14 @@
+[Unit]
+Description=Prometheus AlertManager plugin
+Documentation=https://github.com/prometheus/alertmanager
+After=network.target
+
+[Service]
+User=prometheus
+Group=prometheus
+Restart=on-failure
+ExecStart={{ alertmanager_bin }} --config.file={{ alertmanager_config_dir }}/alertmanager.yml \
+--storage.path={{ alertmanager_data_dir }}
+
+[Install]
+WantedBy=multi-user.target

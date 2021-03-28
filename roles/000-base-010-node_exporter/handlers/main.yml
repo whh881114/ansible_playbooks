@@ -1,0 +1,14 @@
+- name: systemctl-daemon-reload
+  systemd:
+    daemon_reload: yes
+
+- name: enable-node_exporter
+  service:
+    name: node_exporter
+    enabled: yes
+
+- name: restart-node_exporter
+  service:
+    name: node_exporter
+    state: restarted
+    enabled: yes

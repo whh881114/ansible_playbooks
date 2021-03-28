@@ -1,0 +1,13 @@
+[
+{{range service "[[ item ]]"}}
+  {
+    "targets": [
+      "{{.Address}}:9100"
+    ],
+    labels: {
+      "job": "[[ item ]]",
+      "hostname": {{.Node}}
+    }
+  },
+{{end}}
+]

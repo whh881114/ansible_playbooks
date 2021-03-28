@@ -1,0 +1,15 @@
+[Unit]
+Description=Prometheus PushGateway plugin
+Documentation=https://github.com/prometheus/pushgateway
+After=network.target
+
+[Service]
+User=prometheus
+Group=prometheus
+Restart=on-failure
+ExecStart={{ pushgateway_bin }} \
+--persistence.file={{ pushgateway_persistence_file }} \
+--persistence.interval={{ pushgateway_persistence_interval }}
+
+[Install]
+WantedBy=multi-user.target

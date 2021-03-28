@@ -1,0 +1,14 @@
+- name: systemctl-daemon-reload
+  systemd:
+    daemon_reload: yes
+
+- name: enable-pushgateway
+  service:
+    name: pushgateway
+    enabled: yes
+
+- name: restart-pushgateway
+  service:
+    name: pushgateway
+    state: restarted
+    enabled: yes

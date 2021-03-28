@@ -1,0 +1,14 @@
+- name: systemctl-daemon-reload
+  systemd:
+    daemon_reload: yes
+
+- name: enable-consul_exporter
+  service:
+    name: consul_exporter
+    enabled: yes
+
+- name: restart-consul_exporter
+  service:
+    name: consul_exporter
+    state: restarted
+    enabled: yes

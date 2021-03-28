@@ -1,0 +1,15 @@
+---
+- name: install haproxy_exporter {{ haproxy_exporter_version }}
+  get_url:
+    url: "{{ haproxy_exporter_pkg }}"
+    dest: "{{ haproxy_exporter_bin }}"
+    mode: "0755"
+
+- name: create haproxy_exporter service
+  template:
+    src: haproxy_exporter.service.j2
+    dest: "{{ systemd_conf_dir }}/haproxy_exporter.service"
+  notify:
+    - systemctl-daemon-reload
+    - enable-haproxy_exporter
+    - restart-haproxy_exporter

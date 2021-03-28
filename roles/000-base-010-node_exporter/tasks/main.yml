@@ -1,0 +1,15 @@
+---
+- name: install node_exporter {{ node_exporter_version }}
+  get_url:
+    url: "{{ node_exporter_pkg }}"
+    dest: "{{ node_exporter_bin }}"
+    mode: "0755"
+
+- name: create node_exporter service
+  template:
+    src: node_exporter.service.j2
+    dest: "{{ systemd_conf_dir }}/node_exporter.service"
+  notify:
+    - systemctl-daemon-reload
+    - enable-node_exporter
+    - restart-node_exporter
