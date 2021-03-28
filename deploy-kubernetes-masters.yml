@@ -10,17 +10,6 @@
       tags:
         - common
 
-    - role: 000-base-001-consul
-      tags:
-        - consul
-      vars:
-        consul_agent_role: true
-        consul_agent_items:
-          services:
-            - { name: kubernetes-master, port: 6443 }
-            - { name: k8s-master, port: 6443 }
-            - { name: consul-agent, port: 8500 }
-
     - role: 001-infra-009-kubernetes
       tags:
         - kubernetes
