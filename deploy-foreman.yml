@@ -1,0 +1,28 @@
+---
+- name: deploy foreman
+  hosts:
+    - foreman.freedom.org
+  user: root
+  roles:
+    - role: 000-base-001-consul
+      tags:
+        - consul-agent
+      vars:
+        consul_agent_role: True
+        consul_agent_items:
+          services:
+            - name: http
+              port: 80
+            - name: https
+              port: 443
+            - name: foreman-proxy
+              port: 8443
+            - name: consul-agent
+              port: 8500
+
+
+    - role: 000-base-001-consul
+      tags:
+        - consul-template
+      vars:
+        consul_template_role: True
