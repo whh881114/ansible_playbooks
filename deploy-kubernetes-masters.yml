@@ -17,8 +17,8 @@
         consul_agent_role: true
         consul_agent_items:
           services:
-            - { name: kubernetes-masters, port: 6443 }
-            - { name: k8s-masters, port: 6443 }
+            - { name: kubernetes-master, port: 6443 }
+            - { name: k8s-master, port: 6443 }
             - { name: consul-agent, port: 8500 }
 
     - role: 001-infra-009-kubernetes

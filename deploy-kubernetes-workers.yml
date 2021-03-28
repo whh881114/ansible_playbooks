@@ -17,8 +17,8 @@
         consul_agent_role: true
         consul_agent_items:
           services:
-            - { name: kubernetes-workers, port: 10250 }
-            - { name: k8s-workers, port: 10250 }
+            - { name: kubernetes-worker, port: 10250 }
+            - { name: k8s-worker, port: 10250 }
             - { name: consul-agent, port: 8500 }
 
     - role: 001-infra-009-kubernetes
