@@ -35,6 +35,7 @@ bind_zones:
   - consul.freedom.org
   - k8s.freedom.org
   - test.freedom.org
+  - ingress-nginx.freedom.org
 
 bind_rev_zones:
   - {ip: "2.168.192", domain_name: "freedom.org"}
