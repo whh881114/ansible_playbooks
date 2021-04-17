@@ -3,5 +3,4 @@ name=Kubernetes
 baseurl=ftp://foreman.freedom.org/pub/yum/7/kubernetes/
 enabled=1
 gpgcheck=1
-repo_gpgcheck=1
 gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
