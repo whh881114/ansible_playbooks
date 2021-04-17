@@ -1,5 +1,5 @@
 ---
-- name: deploy consul server
+- name: deploy haproxy server
   hosts:
     - haproxy.freedom.org
   user: root
