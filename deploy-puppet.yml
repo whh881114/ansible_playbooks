@@ -1,0 +1,6 @@
+---
+- name: install puppet
+  hosts: "{{ hosts }}"
+  user: root
+  roles:
+    - role: 000-base-003-puppet

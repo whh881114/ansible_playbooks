@@ -40,13 +40,7 @@ listen tcp-stats
     stats auth freedom:Haproxy007@freedom.org
     stats hide-version
 
-# 2020/09/27 -- 因docker-distribution使用的是443端口，所以rancher改用为8443。这是在rancher为443端口时，使用docker push镜像
-#               时报错了，最后去掉此配置就正常了。
-# 2020/10/01 -- 当使用docker pull拉取镜像时，默认会走https端口，当不存在时就走http端口，所以最开始时使用443转rancher时就会与
-#               docker registry服务起冲突，而采用集群方式安装rancher时要进行转发时要用到TCP模式，所以最终决定使用TCP转发rancher
-#               和docker registry服务。
-# 2020/10/01 -- 经测试发现，此转registry的服务还不通使用TCP，必须要用到HTTP，也就是说要用http转https，当haproxy返回时就是https协议，
-#               所以443端口就能用来转发了。这个理解应该是不对的，先留下来。
+{% if tcp_instances %}
 {% for item in tcp_instances %}
 listen tcp-[[ item.listen_name ]]
     mode tcp
@@ -59,8 +53,9 @@ listen tcp-[[ item.listen_name ]]
 
 
 {% endfor %}
+{% endif %}
 
-
+{% if http_instances %}
 frontend  http-frontend
     bind *:80
 {% for item in http_instances %}
@@ -70,6 +65,7 @@ frontend  http-frontend
     use_backend http-backend-[[ item.service_name ]] if acl-[[ item.service_name ]]
 
 {% endfor %}
+
 
 {% for item in http_instances %}
 backend http-backend-[[ item.service_name ]]
@@ -87,9 +83,10 @@ backend http-backend-[[ item.service_name ]]
 
 
 {% endfor %}
+{% endif %}
 
 
-
+{% if https_instances %}
 frontend  https-frontend
     bind *:443 ssl crt /etc/ssl/certs/haproxy.crt
     mode http
@@ -120,3 +117,4 @@ backend https-backend-[[ item.service_name ]]
 
 
 {% endfor %}
+{% endif %}
