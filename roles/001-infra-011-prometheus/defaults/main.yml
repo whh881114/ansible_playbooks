@@ -161,40 +161,10 @@ prometheus_scrape_configs:
 #        target_label: service_name
 
 
-# 私有云中数据较小，先取消些配置。
 # 汪浩浩配置，根据定义不同的job_name来进行主机分类从而在grafana上面显示。consul_sd发现的机器数量过多，不分组则不易显示。
-#file_sd_services:
-#  - drill-eshop-oms-frd
-#  - drill-eshop-oms-api
-#  - drill-eshop-oms-svc
-#  - drill-eshop-customer-api
-#  - drill-eshop-sale-api
-#  - drill-eshop-wx-mini-api
-#  - drill-ems-customer-api
-#  - drill-ems-pay-api
-#  - drill-ems-wxmini-api
-#  - drill-ems-bgxx-api
-#  - drill-ems-sale-api
-#  - drill-eshop-content-ms
-#  - drill-eshop-customer-ms
-#  - drill-eshop-goods-ms
-#  - drill-eshop-order-ms
-#  - drill-eshop-pay-ms
-#  - drill-eshop-buy-app
-#  - drill-platform-mkt-dm
-#  - drill-account-transaction-api
-#  - drill-customer-openCenter-api
-#  - drill-customer-member-ms
-#  - drill-customer-coupon-ms
-#  - drill-customer-trade-ms
-#  - drill-customer-center-dm
-#  - drill-customer-account-ms
-#  - drill-eshop-eh5brd-api
-#  - drill-goods-dm
-#  - drill-goods-ms
-#  - drill-goods-ms-read
-#  - drill-goods-ms-migration
-#  - drill-member-core
+file_sd_services:
+  - k8s-master
+  - k8s-worker
 
 
 # Alternative config file name, searched in ansible templates path.
