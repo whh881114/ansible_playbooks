@@ -161,7 +161,7 @@ prometheus_scrape_configs:
     scheme: https
     tls_config:
       insecure_skip_verify: true
-    bearer_token_file: /prometheus/k8s_token
+    bearer_token_file: "{{ prometheus_config_dir }}/k8s-prometheus.token"
     kubernetes_sd_configs:
       - role: node
         api_server: "https://{{ k8s_api_server }}:6443"

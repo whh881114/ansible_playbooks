@@ -22,7 +22,7 @@
     - prometheus_install
 
 # 安装后，需要安装k8s token文件。
-#- include: kubernetes_sd.yml
+- include: kubernetes_sd.yml
 
 - include: configure.yml
   become: true
