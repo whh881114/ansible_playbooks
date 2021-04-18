@@ -1,6 +1,6 @@
 ---
 - name: install prometheus
-  hosts: prometheus
+  hosts: prometheus.freedom.org
   user: root
   roles:
     - role: 000-base-000-common
@@ -25,15 +25,6 @@
 
     - role: 000-base-003-puppet
       tags: puppet-agent
-
-    - role: 000-base-004-logdel
-      tags: logdel
-
-    - role: 000-base-006-logrotate
-      tags: logrotate
-
-    - role: 000-base-008-router
-      tags: router
 
     - role: 000-base-010-node_exporter
       tags: node_exporter
