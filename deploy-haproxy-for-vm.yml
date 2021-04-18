@@ -50,4 +50,4 @@
       tags:
         - haproxy
       vars:
-        - haproxy_ctmpl: haproxy-ctmpl-static
+        - haproxy_ctmpl: haproxy-ctmpl-dynamic
