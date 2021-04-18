@@ -142,17 +142,147 @@ prometheus_scrape_configs:
         tls_config:
           insecure_skip_verify: true
     relabel_configs:
-    - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
-      separator: ;
-      regex: default;kubernetes;https
+      - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+        separator: ;
+        regex: default;kubernetes;https
+        replacement: $1
+        action: keep
+      - separator: ;
+        regex: (.*)
+        target_label: __address__
+        replacement: "{{ k8s_api_server }}:6443"
+        action: replace
+  - job_name: kubernetes-node-exporter
+    metrics_path: /metrics
+    scheme: https
+    bearer_token_file: "{{ prometheus_config_dir }}/k8s-prometheus.token"
+    tls_config:
+      insecure_skip_verify: true
+    kubernetes_sd_configs:
+      - api_server: "https://{{ k8s_api_server }}:6443"
+        role: node
+        bearer_token_file: "{{ prometheus_config_dir }}/k8s-prometheus.token"
+        tls_config:
+          insecure_skip_verify: true
+    relabel_configs:
+      - separator: ;
+        regex: __meta_kubernetes_node_label_(.+)
+        replacement: $1
+        action: labelmap
+      - separator: ;
+        regex: (.*)
+        target_label: __address__
+        replacement: "{{ k8s_api_server }}:6443"
+        action: replace
+      - source_labels: [__meta_kubernetes_node_name]
+        separator: ;
+        regex: (.+)
+        target_label: __metrics_path__
+        replacement: /api/v1/nodes/${1}:9100/proxy/metrics
+        action: replace
+  - job_name: kubernetes-node-kubelet
+    metrics_path: /metrics
+    scheme: https
+    kubernetes_sd_configs:
+    - api_server: "https://{{ k8s_api_server }}:6443"
+      role: node
+      bearer_token_file: "{{ prometheus_config_dir }}/k8s-prometheus.token"
+      tls_config:
+        insecure_skip_verify: true
+    bearer_token_file: "{{ prometheus_config_dir }}/k8s-prometheus.token"
+    tls_config:
+      insecure_skip_verify: true
+    relabel_configs:
+    - separator: ;
+      regex: __meta_kubernetes_node_label_(.+)
       replacement: $1
-      action: keep
+      action: labelmap
     - separator: ;
       regex: (.*)
       target_label: __address__
       replacement: "{{ k8s_api_server }}:6443"
       action: replace
-
+    - source_labels: [__meta_kubernetes_node_name]
+      separator: ;
+      regex: (.+)
+      target_label: __metrics_path__
+      replacement: /api/v1/nodes/${1}:10255/proxy/metrics
+      action: replace
+  - job_name: kubernetes-cadvisor
+    metrics_path: /metrics
+    scheme: https
+    kubernetes_sd_configs:
+    - api_server: "https://{{ k8s_api_server }}:6443"
+      role: node
+      bearer_token_file: "{{ prometheus_config_dir }}/k8s-prometheus.token"
+      tls_config:
+        insecure_skip_verify: true
+    bearer_token_file: "{{ prometheus_config_dir }}/k8s-prometheus.token"
+    tls_config:
+      insecure_skip_verify: true
+    relabel_configs:
+    - separator: ;
+      regex: __meta_kubernetes_node_label_(.+)
+      replacement: $1
+      action: labelmap
+    - separator: ;
+      regex: (.*)
+      target_label: __address__
+      replacement: "{{ k8s_api_server }}:6443"
+      action: replace
+    - source_labels: [__meta_kubernetes_node_name]
+      separator: ;
+      regex: (.+)
+      target_label: __metrics_path__
+      replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
+      action: replace
+  - job_name: 'kubernetes-pods'
+    scheme: https
+    kubernetes_sd_configs:
+    - api_server: "https://{{ k8s_api_server }}:6443"
+      role: pod
+      bearer_token_file: "{{ prometheus_config_dir }}/k8s-prometheus.token"
+      tls_config:
+        insecure_skip_verify: true
+    tls_config:
+      insecure_skip_verify: true
+    bearer_token_file: "{{ prometheus_config_dir }}/k8s-prometheus.token"
+    relabel_configs:
+    - source_labels: [__meta_kubernetes_namespace]
+      action: replace
+      target_label: kubernetes_namespace
+    - source_labels: [__meta_kubernetes_pod_name]
+      action: replace
+      target_label: kubernetes_pod_name
+    - action: labelmap
+      regex: __meta_kubernetes_pod_label_(.+)
+    - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+      action: replace
+      target_label: __metrics_path__
+      regex: (.+)
+    - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+      action: replace
+      regex: ([^:]+)(?::\d+)?;(\d+)
+      replacement: $1:$2
+      target_label: __address__
+    - source_labels: [__address__]
+      separator: ;
+      regex: '.*:(.*)'
+      target_label: __pod_port__
+      replacement: $1
+      action: replace
+    - source_labels: [__meta_kubernetes_namespace,__meta_kubernetes_pod_name, __pod_port__]
+      separator: ;
+      regex: (.*);(.*);(.*)
+      target_label: __metrics_path__
+      replacement: /api/v1/namespaces/$1/pods/$2:$3/proxy/metrics
+      action: replace
+    - source_labels: [__address__]
+      separator: ;
+      regex: (.*)
+      target_label: __address__
+      replacement: "{{ k8s_api_server }}:6443"
+      action: replace
 
 # 汪浩浩配置，根据定义不同的job_name来进行主机分类从而在grafana上面显示。consul_sd发现的机器数量过多，不分组则不易显示。
 file_sd_services:

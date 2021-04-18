@@ -3,6 +3,8 @@
 ## 参考资料
 - https://www.qikqiak.com/post/monitor-external-k8s-on-prometheus/
 - https://blog.csdn.net/yanggd1987/article/details/108807171
+- https://help.aliyun.com/document_detail/123394.html
+
 
 ## 部署
 - 创建用于Prometheus访问Kubernetes资源对象的RBAC对象，文件在`files/k8s-prometheus-rbac.yaml`。
@@ -31,3 +33,6 @@
       ```
 
 - 配置prometheus配置文件，具体查看`defaults/main.yml`中的`prometheus_scrape_configs`变量配置。
+
+## 待解决
+- `server returned HTTP status 403 Forbidden`
