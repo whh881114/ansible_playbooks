@@ -1,5 +1,5 @@
 ---
-k8s_api_server: master02.k8s.freedom.org
+k8s_api_server: apiserver.k8s.freedom.org
 prometheus_version: 2.25.2
 prometheus_binary_local_dir: ''
 prometheus_skip_install: false
