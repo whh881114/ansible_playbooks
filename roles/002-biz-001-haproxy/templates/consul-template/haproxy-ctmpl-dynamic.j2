@@ -40,7 +40,7 @@ listen tcp-stats
     stats auth freedom:Haproxy007@freedom.org
     stats hide-version
 
-{% if tcp_instances %}
+{% if tcp_instances is defined %}
 {% for item in tcp_instances %}
 listen tcp-[[ item.listen_name ]]
     mode tcp
@@ -55,7 +55,7 @@ listen tcp-[[ item.listen_name ]]
 {% endfor %}
 {% endif %}
 
-{% if http_instances %}
+{% if http_instances is defined %}
 frontend  http-frontend
     bind *:80
 {% for item in http_instances %}
@@ -86,7 +86,7 @@ backend http-backend-[[ item.service_name ]]
 {% endif %}
 
 
-{% if https_instances %}
+{% if https_instances is defined %}
 frontend  https-frontend
     bind *:443 ssl crt /etc/ssl/certs/haproxy.crt
     mode http
