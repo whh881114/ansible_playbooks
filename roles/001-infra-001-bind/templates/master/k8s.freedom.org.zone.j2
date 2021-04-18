@@ -18,3 +18,6 @@ master03              IN      A       192.168.2.3
 worker01              IN      A       192.168.2.4
 worker02              IN      A       192.168.2.5
 worker03              IN      A       192.168.2.6
+
+; 192.168.1.250/192.168.2.250为haproxy服务器，进行四层及七层代理，搭建多master节点时使用到。
+apiserver             IN      A       192.168.2.250
