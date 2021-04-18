@@ -32,7 +32,6 @@ bind_slave_dir: "{{ bind_dir }}/slaves"
 bind_zones:
   - freedom.org
   - ceph.freedom.org
-  - consul.freedom.org
   - k8s.freedom.org
   - test.freedom.org
   - ingress-nginx.freedom.org
