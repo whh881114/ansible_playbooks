@@ -368,9 +368,10 @@ prometheus_scrape_configs:
 
 
 # 汪浩浩配置，根据定义不同的job_name来进行主机分类从而在grafana上面显示。consul_sd发现的机器数量过多，不分组则不易显示。
-file_sd_services:
-  - k8s-master
-  - k8s-worker
+# 暂时取消。
+#file_sd_services:
+#  - k8s-master
+#  - k8s-worker
 
 
 # Alternative config file name, searched in ansible templates path.
