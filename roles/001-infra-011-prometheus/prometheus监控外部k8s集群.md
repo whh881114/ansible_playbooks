@@ -4,6 +4,7 @@
 - https://www.qikqiak.com/post/monitor-external-k8s-on-prometheus/
 - https://blog.csdn.net/yanggd1987/article/details/108807171
 - https://help.aliyun.com/document_detail/123394.html
+- https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/troubleshooting.md
 
 
 ## 部署
