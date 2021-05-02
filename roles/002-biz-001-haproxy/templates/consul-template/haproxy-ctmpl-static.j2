@@ -52,7 +52,8 @@ listen tcp-80-ingress-nginx
     log-format "HAPROXY-LOG-FORMAT-TCP"--{"client_ip":"%ci","client_port":"%cp","datetime":"%t","frontend_name_transport":"%ft","backend_name":"%b","server_name":"%s","time_wait":"%Tw","time_conn":"%Tc","time_total":"%Tt","server2client_bytes_read":"%B","termination_state":"%ts","action":"%ac","frontend_concurrent_connections":"%fc","backend_concurrent_connections":"%bc","server_concurrent_connections":"%sc","retries":"%rc","srv_queue":"%sq","backend_queue":"%bq"}
     option tcplog
     bind 0.0.0.0:80
-    balance source
+    # balance source
+    balance roundrobin
     server master01.k8s.freedom.org master01.k8s.freedom.org:32415 check
     server master02.k8s.freedom.org master02.k8s.freedom.org:32415 check
     server master03.k8s.freedom.org master03.k8s.freedom.org:32415 check
@@ -67,7 +68,8 @@ listen tcp-443-ingress-nginx
     log-format "HAPROXY-LOG-FORMAT-TCP"--{"client_ip":"%ci","client_port":"%cp","datetime":"%t","frontend_name_transport":"%ft","backend_name":"%b","server_name":"%s","time_wait":"%Tw","time_conn":"%Tc","time_total":"%Tt","server2client_bytes_read":"%B","termination_state":"%ts","action":"%ac","frontend_concurrent_connections":"%fc","backend_concurrent_connections":"%bc","server_concurrent_connections":"%sc","retries":"%rc","srv_queue":"%sq","backend_queue":"%bq"}
     option tcplog
     bind 0.0.0.0:443
-    balance source
+    # balance source
+    balance roundrobin
     server master01.k8s.freedom.org master01.k8s.freedom.org:30990 check
     server master02.k8s.freedom.org master02.k8s.freedom.org:30990 check
     server master03.k8s.freedom.org master03.k8s.freedom.org:30990 check
@@ -83,7 +85,8 @@ listen tcp-6443-kube-apiserver
     log-format "HAPROXY-LOG-FORMAT-TCP"--{"client_ip":"%ci","client_port":"%cp","datetime":"%t","frontend_name_transport":"%ft","backend_name":"%b","server_name":"%s","time_wait":"%Tw","time_conn":"%Tc","time_total":"%Tt","server2client_bytes_read":"%B","termination_state":"%ts","action":"%ac","frontend_concurrent_connections":"%fc","backend_concurrent_connections":"%bc","server_concurrent_connections":"%sc","retries":"%rc","srv_queue":"%sq","backend_queue":"%bq"}
     option tcplog
     bind 0.0.0.0:6443
-    balance source
+    # balance source
+    balance roundrobin
     server master01.k8s.freedom.org master01.k8s.freedom.org:6443 check
     server master02.k8s.freedom.org master02.k8s.freedom.org:6443 check
     server master03.k8s.freedom.org master03.k8s.freedom.org:6443 check
