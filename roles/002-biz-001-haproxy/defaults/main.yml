@@ -15,6 +15,8 @@ haproxy_ctmpl: haproxy-ctmpl-static
 #      - "bind 0.0.0.0:2181"
 #      - "balance source"
 
+
+# 以下的http/https配置项默认值是针对playbook：deploy-haproxy-for-vm.yml。
 http_instances:
   - service_name: prometheus                         # service_name，主机上报的consul service名称，进示渲染backend_name后端的主机。
     http_host_header: ^prometheus.freedom.org$          # 当前acl规则以hdr_reg(host)进行匹配。
