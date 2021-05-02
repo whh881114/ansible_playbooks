@@ -26,6 +26,8 @@
               port: 443
             - name: consul-agent
               port: 8500
+            - name: node-exporter
+              port: 9100
         consul_agent_ipaddr: 192.168.2.250    # 如果有多个haproxy实例，那就不需要一个模板生成此playbook。
 
 
@@ -51,6 +53,9 @@
         - fluentd
         - td-agent
 
+    - role: 000-base-010-node_exporter
+      tags:
+        - node-exporter
 
     - role: 002-biz-001-haproxy
       tags:
