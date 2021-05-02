@@ -26,6 +26,10 @@ http_instances:
     http_host_header: ^grafana.freedom.org$
     httpchk_method: GET
     httpchk: "/"
+  - service_name: kiali
+    http_host_header: ^kiali.istio.freedom.org$
+    httpchk_method: GET
+    httpchk: "/"
 
 
 https_instances:
