@@ -16,7 +16,7 @@
       secrets:
         - name: prometheus-token-4jbqs
       ```
-  - `kubectl get secret prometheus-token-4jbqs -n default`，获取secret所对应的token。
+  - `kubectl get secret prometheus-token-4jbqs -n default -o yaml`，获取secret所对应的token。
       ```
         apiVersion: v1
         data:
