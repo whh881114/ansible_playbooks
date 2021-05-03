@@ -19,12 +19,15 @@ metadata:
 rules:
   - apiGroups:
       - ""
-    resources:
+    resources:    # resources定义的是资源，像nodes/services/endpoints/pods，后面的proxy也要授权，重中之中。
       - nodes
-      - nodes/metrics
+      - nodes/proxy
       - services
+      - services/proxy
       - endpoints
+      - endpoints/proxy
       - pods
+      - pods/proxy
     verbs:
       - get
       - list
