@@ -24,7 +24,7 @@
 
 - name: disable selinux
   selinux:
-    state: disabled
+    state: "{{ common_selinux_state }}"
 
 - name: copy vimrc
   copy:

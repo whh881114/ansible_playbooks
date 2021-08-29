@@ -1,3 +1,4 @@
 ---
 common_repo_type: tsinghua
 common_local_dns: true
+common_selinux_state: disabled
