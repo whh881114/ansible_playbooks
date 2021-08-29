@@ -9,4 +9,4 @@ $TTL 1D
         IN      NS      ns01.{{ domain_name }}.
         IN      NS      ns02.{{ domain_name }}.
 
-{{ foreman_ip }}.     IN      PTR     foreman.{{ domain_name }}.
+{{ bind_foreman_rev_ip }}     IN      PTR     foreman.{{ domain_name }}.

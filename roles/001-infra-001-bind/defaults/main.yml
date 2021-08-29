@@ -2,7 +2,8 @@
 bind_master_role: False
 bind_slave_role: False
 
-bind_foreman_rev_ip: 1.2.168.192
+bind_foreman_rev_net: 2.168.192
+bind_foreman_rev_ip: 1
 
 bind_packages:
   - bind
@@ -30,4 +31,4 @@ bind_zones:
   - freedom.org
 
 bind_rev_zones:
-  - {ip: "{{ bind_foreman_rev_ip }}", domain_name: "freedom.org"}
+  - {ip: "{{ bind_foreman_rev_net }}", domain_name: "freedom.org"}
