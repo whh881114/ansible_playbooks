@@ -1,2 +1,4 @@
 ---
+- include: dns.yml
+- include: repo.yml
 - include: common.yml
