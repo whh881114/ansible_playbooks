@@ -1,5 +1,2 @@
 ---
 - include: common.yml
-
-- include: sysctl-redis.yml
-  when: is_redis_host
