@@ -7,7 +7,7 @@
       tags: common
       vars:
         - common_local_dns: false
-        - common_selinux_state: enabled
+        - common_selinux_state: disabled
 
     - role: 001-infra-001-bind
       tags: dns
