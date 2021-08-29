@@ -13,32 +13,13 @@ ns01    A   {{ bind_master_ip }}
 ns02    A   {{ bind_slave_ip }}
 
 
-foreman             IN      A       192.168.2.253
-nfs                 IN      A       192.168.2.253
-jenkins             IN      A       192.168.2.253
-registry            IN      A       192.168.2.253
+foreman             IN      A           192.168.2.1
+nfs                 IN      CNAME       foreman
+jenkins             IN      CNAME       foreman
+harbor              IN      CNAME       foreman
 
-; 192.168.1.250/192.168.2.250为haproxy服务器，进行四层及七层代理。
-; 将虚拟机/k8s里的服务都通过这台主机进行转发。
-node01.haproxy             IN      A       192.168.2.250
+haproxy             IN      A           192.168.2.2
 
 
-; pfsense为NAT服务器
-pfsense             IN      A       192.168.2.249
-
-; vcenter为管理服务器地址
-vcenter             IN      A       192.168.2.248
-
-; harbor从k8s集群中剥离出来，用于在创建k8s集群前准备的docker仓库，主机名为harbor.freedom.org。
-harbor              IN      A       192.168.2.247
-
-
-; 192.168.1.246/192.168.2.246为haproxy服务器，进行四层及七层代理，转发非k8s内的服务。
-node02.haproxy             IN      A       192.168.2.246
-
-
-; 192.168.1.245/192.168.2.245为haproxy服务器，进行四层及七层代理，转发istio服务。
-node03.haproxy             IN      A       192.168.2.245
-kiali.istio                IN      A       192.168.2.245
-
-prometheus          IN      A   192.168.2.154
+pfsense             IN      A           192.168.2.254
+vcenter             IN      A           192.168.2.253
