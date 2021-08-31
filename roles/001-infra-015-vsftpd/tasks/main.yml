@@ -1,0 +1,30 @@
+---
+- name: install vsftpd
+  yum:
+    name: vsftpd
+    state: present
+  notify:
+    - systemctl-daemon-reload
+    - enable-vsftpd
+    - restart-vsftpd
+
+- name: mkdir iso directories
+  file:
+    name: "{{ item }}"
+    state: directory
+    recurse: yes
+  loop: "{{ vsftpd_ios_directories }}"
+
+- name: mount ios files
+  mount:
+    path: /var/ftp/pub/CentOS-7-x86_64
+    src: /dev/sr0
+    fstype: iso9660
+    opts: ro,noauto
+    state: present
+
+- name: mount ios files when boot server
+  blockinfile:
+    path: /etc/fstab
+    block: |
+      /dev/sr0  /var/ftp/pub/CentOS-7-x86_64  iso9660 defaults  0 0

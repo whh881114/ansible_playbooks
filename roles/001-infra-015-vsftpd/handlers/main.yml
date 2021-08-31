@@ -1,0 +1,14 @@
+- name: systemctl-daemon-reload
+  systemd:
+    daemon_reload: yes
+
+- name: enable-vsftpd
+  service:
+    name: vsftpd
+    enabled: yes
+
+- name: restart-vsftpd
+  service:
+    name: vsftpd
+    state: restarted
+    enabled: yes

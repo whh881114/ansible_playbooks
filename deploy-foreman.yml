@@ -1,6 +1,6 @@
 ---
 - name: deploy foreman
-  hosts: 192.168.2.1
+  hosts: localhost
   user: root
   roles:
     - role: 000-base-000-common
@@ -13,3 +13,6 @@
       tags: dns
       vars:
         - bind_master_role: true
+
+    - role: 001-infra-015-vsftpd
+      tags: vsftpd

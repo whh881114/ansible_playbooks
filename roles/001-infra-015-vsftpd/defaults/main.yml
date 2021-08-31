@@ -1,0 +1,3 @@
+---
+vsftpd_ios_directories:
+  - /var/ftp/pub/CentOS-7-x86_64
