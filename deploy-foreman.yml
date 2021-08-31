@@ -19,6 +19,3 @@
 
     - role: 001-infra-016-dhcp
       tags: dhcp
-
-    - role: 001-infra-017-tftp
-      tags: tftp
