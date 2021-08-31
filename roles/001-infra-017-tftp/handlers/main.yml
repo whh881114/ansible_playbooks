@@ -1,0 +1,9 @@
+- name: systemctl-daemon-reload
+  systemd:
+    daemon_reload: yes
+
+- name: restart-xinetd
+  service:
+    name: xinetd
+    state: restarted
+    enabled: yes

@@ -1,0 +1,14 @@
+- name: systemctl-daemon-reload
+  systemd:
+    daemon_reload: yes
+
+- name: enable-dhcpd
+  service:
+    name: dhcpd
+    enabled: yes
+
+- name: restart-dhcpd
+  service:
+    name: dhcpd
+    state: restarted
+    enabled: yes
