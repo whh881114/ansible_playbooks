@@ -1,5 +1,5 @@
 ---
-- name: restart puppet-agent
+- name: restart-puppet-agent
   service:
     name: puppet
     state: restarted
