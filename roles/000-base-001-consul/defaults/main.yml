@@ -1,5 +1,7 @@
 ---
-consul_datacenter: k8s
+consul_datacenter: vm
+consul_bootstrap_expect: 1
+consul_domain: freedom.org
 
 #consul_ver: 1.8.0
 #consul_template_ver: 0.25.1
