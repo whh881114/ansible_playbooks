@@ -19,3 +19,9 @@
 
     - role: 001-infra-016-dhcp
       tags: dhcp
+
+    - role: 000-base-001-consul
+      tags: consul
+      vars:
+        consul_server_role: True
+        consul_template_role: True
