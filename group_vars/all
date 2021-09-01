@@ -34,18 +34,9 @@ consul_agent_items:
     - { name: consul-agent, port: 8500 }
 
 
-# 以下是虚拟机部署三台consul server变量配置示例。
-# consul_servers:
-#   - server01.consul.freedom.org
-#   - server02.consul.freedom.org
-#   - server03.consul.freedom.org
-
-# 2020/10/01 -- consul_servers地址改回nodePort的访问方式，本来是可以使用pod的dns的，但是在bind中转发域名解析时一直失败，
-#               现在解决不了，记得昨天是可以的。现在是加了路由，可以直接访问到pod地址。
+# consul服务位于基础服务，必须先于其他服务启动，所以部署在foreman.freedom.org服务器上。
 consul_servers:
-  - worker01.k8s.freedom.org:31425
-  - worker02.k8s.freedom.org:31425
-  - worker03.k8s.freedom.org:31425
+  - server01.consul.freedom.org
 
 consul_agent_dir: /etc/consul-agent
 consul_agent_log_dir: "{{ consul_agent_dir }}/log"
