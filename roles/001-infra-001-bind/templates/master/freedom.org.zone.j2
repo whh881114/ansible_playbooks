@@ -13,6 +13,7 @@ ns01    A   {{ bind_master_ip }}
 ns02    A   {{ bind_slave_ip }}
 
 
+server01.consul     IN      A           192.168.2.1
 foreman             IN      A           192.168.2.1
 nfs                 IN      CNAME       foreman
 jenkins             IN      CNAME       foreman
@@ -21,7 +22,6 @@ ansible             IN      CNAME       foreman
 katello             IN      CNAME       foreman
 
 haproxy             IN      A           192.168.2.2
-
 
 master01.k8s        IN      A           192.168.2.11
 master02.k8s        IN      A           192.168.2.12
