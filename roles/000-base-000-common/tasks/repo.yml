@@ -28,3 +28,4 @@
     - { src: "el{{ ansible_distribution_major_version }}-repos/{{ common_repo_type }}/CentOS-Sources.repo", dest: /etc/yum.repos.d/CentOS-Sources.repo }
     - { src: "el{{ ansible_distribution_major_version }}-repos/{{ common_repo_type }}/CentOS-Vault.repo", dest: /etc/yum.repos.d/CentOS-Vault.repo }
     - { src: "el{{ ansible_distribution_major_version }}-repos/{{ common_repo_type }}/epel.repo", dest: /etc/yum.repos.d/epel.repo }
+  when: common_repo_type != katello
