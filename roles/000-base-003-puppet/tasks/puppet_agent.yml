@@ -3,7 +3,7 @@
   yum:
     name: "{{ item }}"
     state: present
-  with_items:
+  loop:
     - puppet-agent
 
 - name: generate puppet agent configuration file
