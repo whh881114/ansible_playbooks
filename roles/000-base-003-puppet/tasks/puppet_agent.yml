@@ -1,7 +1,7 @@
 ---
 - name: install puppet package
-  package:
-    pkg: "{{ item }}"
+  yum:
+    name: "{{ item }}"
     state: present
   with_items:
     - puppet-agent
