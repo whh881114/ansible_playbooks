@@ -1,18 +1,5 @@
 ---
-- name: delete original repo files
-  file:
-    path: "/etc/yum.repos.d/{{ item }}"
-    state: absent
-  with_items:
-    - CentOS-Base.repo
-    - CentOS-CR.repo
-    - CentOS-Debuginfo.repo
-    - CentOS-fasttrack.repo
-    - CentOS-Media.repo
-    - CentOS-Sources.repo
-    - CentOS-Vault.repo
-
-- name: copy common repo files
+- name: copy tsinghua repo files
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -28,4 +15,30 @@
     - { src: "el{{ ansible_distribution_major_version }}-repos/{{ common_repo_type }}/CentOS-Sources.repo", dest: /etc/yum.repos.d/CentOS-Sources.repo }
     - { src: "el{{ ansible_distribution_major_version }}-repos/{{ common_repo_type }}/CentOS-Vault.repo", dest: /etc/yum.repos.d/CentOS-Vault.repo }
     - { src: "el{{ ansible_distribution_major_version }}-repos/{{ common_repo_type }}/epel.repo", dest: /etc/yum.repos.d/epel.repo }
-  when: common_repo_type != katello
+  when: common_repo_type == "tsinghua"
+
+- block:
+    - name: delete original repo files
+      file:
+        path: "/etc/yum.repos.d/{{ item }}"
+        state: absent
+      with_items:
+        - CentOS-Base.repo
+        - CentOS-CR.repo
+        - CentOS-Debuginfo.repo
+        - CentOS-fasttrack.repo
+        - CentOS-Media.repo
+        - CentOS-Sources.repo
+        - CentOS-Vault.repo
+
+    - name: install katello-ca-consumer-latest.noarch.rpm
+      yum:
+        name: "{{ item }}"
+      loop:
+        - subscription-manager
+        - http://foreman.freedom.org/pub/katello-ca-consumer-latest.noarch.rpm
+
+    - name: subscribe yum repo
+      shell: |
+        subscription-manager register --force --org="{{ common_register_org }}" --activationkey="{{ common_register_activationkey }}"
+  when: common_repo_type == "katello"

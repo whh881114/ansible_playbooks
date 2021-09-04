@@ -1,4 +1,6 @@
 ---
-common_repo_type: tsinghua
+common_repo_type: katello
 common_local_dns: true
 common_selinux_state: disabled
+common_register_org: Default_Organization
+common_register_activationkey: "CentOS-7-x86_64"
