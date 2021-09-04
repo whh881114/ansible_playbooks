@@ -22,6 +22,6 @@
 #      tags:
 #        - zabbix-agent
 #
-#    - role: 000-base-003-puppet
-#      tags:
-#        - puppet-agent
+    - role: 000-base-003-puppet
+      tags:
+        - puppet-agent
