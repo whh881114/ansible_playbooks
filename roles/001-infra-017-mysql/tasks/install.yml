@@ -1,0 +1,28 @@
+---
+- name: install mysql {{ mysql_ver }}
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ mysql_pkgs }}"
+
+# 修改后启动配置，取消密码复杂度的配置并且root用户为空密码。
+- name: generate mysqld_pre_systemd file
+  template:
+    src: "{{ mysql_ver }}/mysqld_pre_systemd.j2"
+    dest: /usr/bin/mysqld_pre_systemd
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: generate my.cnf file
+  template:
+    src: "{{ mysql_ver }}/my.cnf.j2"
+    dest: /etc/my.cnf
+    owner: root
+    group: root
+
+- name: start mysqld
+  service:
+    name: mysqld
+    state: started
+    enabled: yes
