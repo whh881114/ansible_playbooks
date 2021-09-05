@@ -28,3 +28,8 @@
 
     - role: 001-infra-017-mysql
       tags: mysql
+
+    - role: 001-infra-018-zabbix
+      tags: zabbix
+      vars:
+        zabbix_server_role: true
