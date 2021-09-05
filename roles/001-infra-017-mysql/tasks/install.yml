@@ -20,9 +20,4 @@
     dest: /etc/my.cnf
     owner: root
     group: root
-
-- name: start mysqld
-  service:
-    name: mysqld
-    state: started
-    enabled: yes
+  notify: restart-mysqld
