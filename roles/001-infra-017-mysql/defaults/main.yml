@@ -1,9 +1,9 @@
 ---
 mysql_ver: 5.7
 mysql_pkgs:
+  - "mysql-community-common-{{ mysql_ver }}.*"
   - "mysql-community-libs-{{ mysql_ver }}.*"
   - "mysql-community-libs-compat-{{ mysql_ver }}.*"
-  - "mysql-community-server-{{ mysql_ver }}.*"
   - "mysql-community-client-{{ mysql_ver }}.*"
-  - "mysql-community-common-{{ mysql_ver }}.*"
   - "mysql-community-devel-{{ mysql_ver }}.*"
+  - "mysql-community-server-{{ mysql_ver }}.*"
