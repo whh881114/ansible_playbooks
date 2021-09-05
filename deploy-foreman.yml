@@ -25,3 +25,6 @@
       vars:
         consul_server_role: True
         consul_template_role: True
+
+    - role: 001-infra-017-mysql
+      tags: mysql
