@@ -39,14 +39,8 @@
     name: "{{ packages }}"
     state: present
   vars:
-    packages:
-      - tcl
-      - openssl-devel
-      - zlib-devel
-      - lrzsz
-      - tree
-      - nc
-      - telnet
+    packages: "{{ common_pkgs }}"
+
 
 - name: unlimit the system limitations
   shell: ulimit -SHn 65535 && ulimit -n
