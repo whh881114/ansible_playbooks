@@ -1,0 +1,24 @@
+---
+zabbix_version: 5.0
+
+zabbix_server_role: False
+zabbix_agent_role: True
+
+zabbix_server_pkgs:
+  - "zabbix-server-mysql-{{ zabbix_version }}.*"
+  - "zabbix-web-mysql-scl-{{ zabbix_version }}.*"
+  - "zabbix-apache-conf-scl-{{ zabbix_version }}.*"
+
+zabbix_agent_pkgs:
+  - "zabbix-agent-{{ zabbix_version }}.*"
+  - "zabbix-get-{{ zabbix_version }}.*"
+  - "zabbix-sender-{{ zabbix_version }}.*"
+
+zabbix_server: "192.168.1.0/24,192.168.2.0/24"
+zabbix_active_server: ""
+
+zabbix_db_host: localhost
+zabbix_db_port: 3306
+zabbix_db_name: zabbix
+zabbix_db_username: zabbix
+zabbix_db_password: Zabbix@123.com

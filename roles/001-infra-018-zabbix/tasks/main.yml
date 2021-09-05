@@ -1,0 +1,6 @@
+---
+- include: "server-{{ zabbix_version }}.yml"
+  when: zabbix_server_role
+
+- include: "agent-{{ zabbix_version }}.yml"
+  when: zabbix_agent_role

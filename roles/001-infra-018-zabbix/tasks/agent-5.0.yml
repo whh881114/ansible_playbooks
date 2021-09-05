@@ -3,13 +3,11 @@
   yum:
     name: "{{ item }}"
     state: present
-  with_items:
-    - zabbix-agent
-    - zabbix-get
-    - zabbix-sender
+  loop:
+    - "{{ zabbix_agent_pkgs }}"
 
 - name: update zabbix agentd config
   template:
-    src: zabbix_agentd.conf.j2
+    src: "{{ zabbix_version }}/zabbix_agentd.conf.j2"
     dest: /etc/zabbix/zabbix_agentd.conf
   notify: restart-zabbix-agent

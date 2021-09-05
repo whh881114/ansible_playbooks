@@ -1,0 +1,50 @@
+#
+# Zabbix monitoring system php web frontend
+#
+<VirtualHost *:80>
+  ServerName zabbix.freedom.org
+
+  Alias /zabbix /usr/share/zabbix
+
+  ProxyTimeout 300
+
+  ## Logging
+  ErrorLog "/var/log/httpd/zabbix_error.log"
+  ServerSignature Off
+  CustomLog "/var/log/httpd/zabbix_access.log" combined
+
+  <Directory "/usr/share/zabbix">
+      Options FollowSymLinks
+      AllowOverride None
+      Require all granted
+
+      <IfModule dir_module>
+          DirectoryIndex index.php
+      </IfModule>
+
+      <FilesMatch \.(php|phar)$>
+          SetHandler "proxy:unix:/var/opt/rh/rh-php72/run/php-fpm/zabbix.sock|fcgi://localhost"
+  #        SetHandler "proxy:unix:/var/opt/rh/rh-php73/run/php-fpm/zabbix.sock|fcgi://localhost"
+      </FilesMatch>
+  </Directory>
+
+  <Directory "/usr/share/zabbix/conf">
+      Require all denied
+  </Directory>
+
+  <Directory "/usr/share/zabbix/app">
+      Require all denied
+  </Directory>
+
+  <Directory "/usr/share/zabbix/include">
+      Require all denied
+  </Directory>
+
+  <Directory "/usr/share/zabbix/local">
+      Require all denied
+  </Directory>
+
+  <Directory "/usr/share/zabbix/vendor">
+      Require all denied
+  </Directory>
+</VirtualHost>

@@ -1,0 +1,24 @@
+---
+- name: restart-zabbix-server
+  service:
+    name: zabbix-server
+    state: restarted
+    enabled: yes
+
+- name: restart-zabbix-agent
+  service:
+    name: zabbix-agent
+    state: restarted
+    enabled: yes
+
+- name: restart-zabbix-web
+  service:
+    name: httpd
+    state: restarted
+    enabled: yes
+
+- name: restart-zabbix-php
+  service:
+    name: rh-php72-php-fpm
+    state: restarted
+    enabled: yes

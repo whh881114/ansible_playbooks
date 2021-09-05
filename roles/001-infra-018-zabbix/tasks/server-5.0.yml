@@ -1,0 +1,70 @@
+---
+- name: install zabbix server
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - "{{ zabbix_server_pkgs }}"
+
+- name: install necessary python package
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - python2-PyMySQL
+
+- name: create zabbix database
+  community.mysql.mysql_db:
+    name: "{{ zabbix_db_username }}"
+    state: present
+    encoding: utf8
+    collation: utf8_bin
+
+- name: config zabbix database user
+  community.mysql.mysql_user:
+    state: present
+    name: "{{ zabbix_db_username }}"
+    password: "{{ zabbix_db_password }}"
+    priv: "{{ zabbix_db_name }}.*:ALL"
+    host: "%"
+
+- name: get zabbix sql file
+  shell: rpm -ql zabbix-server-mysql | grep 'create.sql.gz$'
+  register: zabbix_sql_file
+
+- name: show zabbix sql file
+  debug:
+    msg: "Zabbix sql file is {{ zabbix_sql_file.stdout }}."
+
+# 重复部署时，初始化数据库就失败了，所以增加ignore_errors配置。
+- name: init zabbix database
+  community.mysql.mysql_db:
+    name: "{{ zabbix_db_name }}"
+    state: import
+    target: "{{ zabbix_sql_file.stdout }}"
+  ignore_errors: yes
+
+- name: config zabbix server
+  template:
+    src: "{{ zabbix_version }}/zabbix_server.conf.j2"
+    dest: /etc/zabbix/zabbix_server.conf
+    mode: "0644"
+  notify: restart-zabbix-server
+
+
+
+- name: config zabbix web
+  template:
+    src: "{{ zabbix_version }}/zabbix_web.conf.j2"
+    dest: /etc/httpd/conf.d/zabbix.conf
+    mode: "0644"
+  notify: restart-zabbix-web
+
+
+
+- name: config zabbix php
+  template:
+    src: "{{ zabbix_version }}/zabbix_php.conf.j2"
+    dest: /etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf
+    mode: "0644"
+  notify: restart-zabbix-php
