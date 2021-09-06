@@ -1,0 +1,16 @@
+---
+docker_version: 20.10.8
+docker_pkgs:
+  - "docker-ce-{{ docker_version }}"
+  # 以下是依赖包
+  - yum-utils
+  - device-mapper-persistent-data
+  - lvm2
+
+docker_registry_mirrors: ["https://docker.mirrors.ustc.edu.cn"]
+
+docker_insecure_registries: ["https://harbor.freedom.org", "https://docker.freedom.org"]
+
+docker_log_driver: fluentd
+
+docker_fluentd_host: localhost:24224

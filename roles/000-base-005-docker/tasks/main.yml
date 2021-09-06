@@ -1,0 +1,14 @@
+---
+- name: install docker-ce {{ docker_version }}
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ docker_pkgs }}"
+
+- name: generate docker-ce configuration file
+  template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+  notify: restart-docker
