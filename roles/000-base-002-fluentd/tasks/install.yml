@@ -1,0 +1,40 @@
+---
+- name: Optimize the Network Kernel Parameters
+  sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    sysctl_set: yes
+    reload: yes
+    sysctl_file: /etc/sysctl.conf
+  with_items:
+    - { name: "net.core.somaxconn", value: "1024" }
+    - { name: "net.core.netdev_max_backlog", value: "5000" }
+    - { name: "net.core.rmem_max", value: "16777216" }
+    - { name: "net.core.wmem_max", value: "16777216" }
+    - { name: "net.ipv4.tcp_wmem", value: "4096 12582912 16777216" }
+    - { name: "net.ipv4.tcp_rmem", value: "4096 12582912 16777216" }
+    - { name: "net.ipv4.tcp_max_syn_backlog", value: "1024" }
+    - { name: "net.ipv4.tcp_slow_start_after_idle", value: "0" }
+    - { name: "net.ipv4.tcp_tw_reuse", value: "1" }
+    - { name: "net.ipv4.ip_local_port_range", value: "10240 65535" }
+
+- name: install fluentd
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - "{{ fluentd_pkgs }}"
+
+# 使用root用户运行时，才能读取各类日志文件。
+- name: update td-agent running user to be root
+  lineinfile:
+    path: /usr/lib/systemd/system/td-agent.service
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    backrefs: yes
+  with_items:
+    - { regexp: "User=td-agent", line: "User=root" }
+    - { regexp: "Group=td-agent", line: "Group=root" }
+  notify:
+    - systemctl-daemon-reload
+    - restart-td-agent

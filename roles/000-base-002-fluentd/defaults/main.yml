@@ -1,0 +1,4 @@
+---
+fluentd_version: 4.2.0
+fluentd_pkgs:
+  - "td-agent-{{ fluentd_version }}"

@@ -1,8 +1,0 @@
----
-- include: install.yml
-
-- include: httpd_format.yml
-  when: fluentd_app_type == "httpd" or fluentd_app_type == "apache"
-
-- include: haproxy_format.yml
-  when: fluentd_app_type == "haproxy"
