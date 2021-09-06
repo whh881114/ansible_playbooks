@@ -9,6 +9,18 @@
         - common_local_dns: false
         - common_selinux_state: disabled
 
+    - role: 000-base-001-consul
+      tags: consul
+      vars:
+        consul_server_role: True
+        consul_template_role: True
+
+    - role: 000-base-002-fluentd
+      tags: fluentd
+
+    - role: 000-base-005-docker
+      tags: docker
+
     - role: 001-infra-001-bind
       tags: dns
       vars:
@@ -20,12 +32,6 @@
     - role: 001-infra-016-dhcp
       tags: dhcp
 
-    - role: 000-base-001-consul
-      tags: consul
-      vars:
-        consul_server_role: True
-        consul_template_role: True
-
     - role: 001-infra-017-mysql
       tags: mysql
 
@@ -33,3 +39,13 @@
       tags: zabbix
       vars:
         zabbix_server_role: true
+
+    - role: 001-infra-002-elasticstack
+      tags:
+        - es
+        - elastic
+        - elasticstack
+      vars:
+        - elasticstack_elasticsearch: true
+        - elasticstack_kibana: true
+        - elasticstack_filebeat: true
