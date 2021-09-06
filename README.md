@@ -1,6 +1,8 @@
 # ansible_playbooks 更新日志
 
 ## TODO-LIST（日期不定）
+- 创建docker角色。
+
 - foreman服务器部署prometheus，当前仅用于监控虚拟机。
 
 - foreman服务器部署单机的elasticsearch+filebeat+kibana+fluentd。
