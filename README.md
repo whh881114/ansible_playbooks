@@ -1,8 +1,6 @@
 # ansible_playbooks 更新日志
 
 ## TODO-LIST（日期不定）
-- 创建docker角色。
-
 - foreman服务器部署prometheus，当前仅用于监控虚拟机。
 
 - foreman服务器部署单机的elasticsearch+filebeat+kibana+fluentd。
@@ -11,6 +9,11 @@
 
 - 将foreman中的置备模板中初始化主机操作步骤（安装配置基础软件）转为php处理逻辑，即在%post后的过程中执行一条curl请求来完成操作。这样的好处是置备模板以后不会改，php中处理的逻辑会更自由。
 
+
+## TODO-LIST 完成清单
+- 创建docker角色。日期：2021/09/07，进度100%。
+
+- 部署harbor服务器。日期：2021/09/07，进度100%。
 
 ## TODO-LIST 日期：2021/09/02
 - 创建`scripts`目录，用于存放些自动化脚本。
