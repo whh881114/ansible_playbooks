@@ -1,14 +1,14 @@
-- name: install kibana {{ version }}
+- name: install kibana {{ elasticstack_version }}
   yum:
     name: "{{ packages }}"
     state: present
   vars:
     packages:
-      - "{{ pkg_url }}/{{ kibana_pkg }}"
+      - "{{ elasticstack_kibana_pkg }}"
 
 
-- name: config kibana {{ version }}
+- name: config kibana {{ elasticstack_version }}
   template:
-    src: kibana/kibana.yml.j2
+    src: "{{ elasticstack_major_version }}/kibana.yml.j2"
     dest: /etc/kibana/kibana.yml
   notify: restart-kibana

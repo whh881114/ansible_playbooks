@@ -2,10 +2,10 @@
 - include: common.yml
 
 - include: elasticsearch.yml
-  when: elasticsearch
+  when: elasticstack_elasticsearch
+
+- include: filebeat.yml
+  when: elasticstack_filebeat
 
 - include: kibana.yml
-  when: kibana
-
-- include: logstash.yml
-  when: logstash
+  when: elasticstack_kibana

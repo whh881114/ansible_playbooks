@@ -22,10 +22,10 @@ server.host: "0.0.0.0"
 #server.maxPayloadBytes: 1048576
 
 # The Kibana server's name.  This is used for display purposes.
-server.name: {{ server_name }}
+server.name: {{ elasticstack_kibana_server_name }}
 
 # The URLs of the Elasticsearch instances to use for all your queries.
-elasticsearch.hosts: {{ elasticsearch_hosts | to_json }}
+elasticsearch.hosts: {{ elasticstack_elasticsearch_cluster_nodes | to_json }}
 
 # When this setting's value is true Kibana uses the hostname specified in the server.host
 # setting. When the value of this setting is false, Kibana uses the hostname of the host

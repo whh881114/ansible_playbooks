@@ -1,14 +1,13 @@
-- name: install filebeat {{ version }}
+- name: install filebeat {{ elasticstack_version }}
   yum:
     name: "{{ packages }}"
     state: present
   vars:
     packages:
-      - "{{ pkg_url }}/{{ filebeat_pkg }}"
+      - "{{ elasticstack_filebeat_pkg }}"
 
-
-- name: config filebeat {{ version }}
+- name: config filebeat {{ elasticstack_version }}
   template:
-    src: filebeat/filebeat.yml.j2
+    src: "{{ elasticstack_major_version }}/filebeat.yml.j2"
     dest: /etc/filebeat/filebeat.yml
   notify: restart-filebeat
