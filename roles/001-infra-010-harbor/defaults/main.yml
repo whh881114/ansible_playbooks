@@ -1,11 +1,13 @@
 ---
-harbor_docker_pkgs:
-  - docker-ce
-  - docker-compose
+harbor_version: v2.3.2
+
+harbor_url: "http://files.freedom.org/harbor/harbor-offline-installer-{{ harbor_version }}.tgz"
+harbor_pkg_file: "/usr/local/src/harbor-offline-installer-{{ harbor_version }}.tgz"
+
+harbor_pkg_root_dir: "/usr/local"
+harbor_pkg_dir: "{{ harbor_pkg_root_dir }}/harbor"
 
 harbor_data_dir: /data
-
-harbor_version: v2.1.0
 
 harbor_hostname: harbor.freedom.org
 
@@ -14,3 +16,5 @@ harbor_ssl_key: /etc/ssl/certs/freedom.org.key
 
 harbor_admin_password: q+q8tyIloQ3ppopyzv
 harbor_database_password: y4xOrk4}uxhjMentre
+
+# harbor_release_url: https://github.com/goharbor/harbor/releases
