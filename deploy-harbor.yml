@@ -1,0 +1,21 @@
+---
+- name: deploy harbor
+  hosts: harbor.freedom.org
+  user: root
+  roles:
+    - role: 000-base-000-common
+      tags: common
+
+    - role: 000-base-001-consul
+      tags: consul
+      vars:
+        consul_agent_role: True
+
+    - role: 000-base-002-fluentd
+      tags: fluentd
+
+    - role: 000-base-005-docker
+      tags: docker
+
+    - role: 001-infra-010-harbor
+      tags: harbor
