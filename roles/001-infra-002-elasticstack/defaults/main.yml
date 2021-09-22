@@ -20,7 +20,7 @@ elasticstack_elasticsearch_xmx: 4g
 
 # 以下为kibana配置变量
 elasticstack_kibana_server_name: kibana.freedom.org
-elasticstack_kibana_elasticsearch_cluster_nodes: http://elasticsearch.freedom.org
+elasticstack_kibana_elasticsearch_cluster_nodes: http://elasticsearch.freedom.org:9200
 
 # 调优配置
 elasticstack_sysctl_file: /etc/sysctl.d/100-elk.conf     # 系统调优参数
