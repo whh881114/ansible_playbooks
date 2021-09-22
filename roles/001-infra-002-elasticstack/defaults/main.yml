@@ -23,6 +23,10 @@ elasticstack_kibana_server_name: kibana.freedom.org
 elasticstack_kibana_elasticsearch_cluster_nodes:
   - "http://elasticsearch.freedom.org:9200"
 
+# 以下为filebeat配置变量
+elasticstack_filebeat_elasticsearch_cluster_nodes:
+  - "http://elasticsearch.freedom.org:9200"
+
 # 调优配置
 elasticstack_sysctl_file: /etc/sysctl.d/100-elk.conf     # 系统调优参数
 
