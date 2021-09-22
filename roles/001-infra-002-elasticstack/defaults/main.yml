@@ -15,9 +15,12 @@ elasticstack_elasticsearch_node_name: elasticsearch.freedom.org
 elasticstack_elasticsearch_cluster_name: elasticsearch
 elasticstack_elasticsearch_cluster_nodes: [elasticsearch.freedom.org]  # 在写playbook时指定变量值即可，需要写成数组类型的值。
 elasticstack_elasticsearch_cluster_minimum_nodes: 1
+elasticstack_elasticsearch_xms: 4g
+elasticstack_elasticsearch_xmx: 4g
 
 # 以下为kibana配置变量
 elasticstack_kibana_server_name: kibana.freedom.org
+elasticstack_kibana_elasticsearch_cluster_nodes: http://elasticsearch.freedom.org
 
 # 调优配置
 elasticstack_sysctl_file: /etc/sysctl.d/100-elk.conf     # 系统调优参数

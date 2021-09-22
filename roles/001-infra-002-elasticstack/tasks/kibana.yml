@@ -6,7 +6,6 @@
     packages:
       - "{{ elasticstack_kibana_pkg }}"
 
-
 - name: config kibana {{ elasticstack_version }}
   template:
     src: "{{ elasticstack_major_version }}/kibana.yml.j2"

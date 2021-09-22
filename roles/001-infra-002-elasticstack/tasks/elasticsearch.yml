@@ -6,7 +6,7 @@
       {{ item.key }} = {{ item.value }}
     create: yes
   with_items:
-  - { key: vm.max_map_count, value: 655360 }
+    - { key: vm.max_map_count, value: 655360 }
 
 
 # 使用root账号调整系统参数，初始化已经配置过了。
