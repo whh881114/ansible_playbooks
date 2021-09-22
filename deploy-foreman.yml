@@ -49,3 +49,4 @@
         - elasticstack_elasticsearch: true
         - elasticstack_kibana: true
         - elasticstack_filebeat: true
+        - elasticstack_client_type: foreman

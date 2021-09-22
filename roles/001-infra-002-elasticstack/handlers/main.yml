@@ -16,3 +16,9 @@
     name: filebeat
     state: restarted
     enabled: yes
+
+- name: reload-httpd
+  service:
+    name: httpd
+    state: reloaded
+    enabled: yes

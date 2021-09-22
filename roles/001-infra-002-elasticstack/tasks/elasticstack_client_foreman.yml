@@ -1,0 +1,13 @@
+---
+- name: config log format
+  copy:
+    src: "elasticstack_client_{{ elasticstack_client_type }}/{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { src: httpd.conf, dest: /etc/httpd/conf/httpd.conf }
+    - { src: 05-foreman.conf, dest: /etc/httpd/conf.d/05-foreman.conf }
+    - { src: 05-foreman-ssl.conf, dest: /etc/httpd/conf.d/05-foreman-ssl.conf }
+    - { src: 99-yum.conf, dest: /etc/httpd/conf.d/99-yum.conf }
+    - { src: 100-files.conf, dest: /etc/httpd/conf.d/100-files.conf }
+    - { src: zabbix.conf, dest: /etc/httpd/conf.d/zabbix.conf }
+  notify: reload-httpd
