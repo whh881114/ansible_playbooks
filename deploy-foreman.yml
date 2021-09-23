@@ -50,3 +50,26 @@
         - elasticstack_kibana: true
         - elasticstack_filebeat: true
         - elasticstack_client_type: foreman
+
+    - role: 000-base-010-node_exporter
+      tags:
+        - node_exporter
+
+    - role: 001-infra-011-prometheus
+      tags:
+        - prometheus
+        - prom
+
+    - role: 001-infra-012-alertmanager
+      tags:
+        - alertmanager
+        - am
+
+    - role: 001-infra-013-pushgateway
+      tags:
+        - pushgateway
+        - pg
+
+    - role: 001-infra-014-grafana
+      tags:
+        - grafana
