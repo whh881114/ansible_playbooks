@@ -1,12 +1,13 @@
 ---
 - name: Configure the kernel parameters
-  blockinfile:
-    path: "{{ elasticstack_sysctl_file }}"
-    block: |
-      {{ item.key }} = {{ item.value }}
-    create: yes
+  sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    sysctl_set: yes
+    reload: yes
+    sysctl_file: "{{ elasticstack_sysctl_file }}"
   with_items:
-    - { key: vm.max_map_count, value: 655360 }
+    - { name: "vm.max_map_count", value: 655360 }
 
 
 # 使用root账号调整系统参数，初始化已经配置过了。
