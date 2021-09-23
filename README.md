@@ -1,6 +1,8 @@
 # ansible_playbooks 更新日志
 
 ## TODO-LIST（日期不定）
+- foreman服务器部署Rocky-8.4-x86_64操作系统，此操作系统用于k8s主机。
+
 - foreman服务器部署prometheus，当前仅用于监控虚拟机。
 
 - docker日志引擎改为fluentd，fluentd并上报到elasticsearch中。
