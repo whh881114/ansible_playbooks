@@ -3,7 +3,7 @@
 ## TODO-LIST（日期不定）
 - foreman服务器部署prometheus，当前仅用于监控虚拟机。
 
-- foreman服务器部署单机的elasticsearch+filebeat+kibana+fluentd。
+- docker日志引擎改为fluentd，fluentd并上报到elasticsearch中。
 
 - 创建mysql_exporter角色，用于监控虚拟机上部署的mysql。
 
@@ -11,6 +11,8 @@
 
 
 ## TODO-LIST 完成清单
+- foreman服务器部署单机的elasticsearch+filebeat+kibana，改造apache日志为json格式，filebeat收集并上报到elasticsearch。日期：2021/09/23，进度100%。
+
 - 创建docker角色。日期：2021/09/07，进度100%。
 
 - 部署harbor服务器。日期：2021/09/07，进度100%。
