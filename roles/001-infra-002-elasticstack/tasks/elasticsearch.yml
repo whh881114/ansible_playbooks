@@ -9,13 +9,19 @@
   with_items:
     - { name: "vm.max_map_count", value: 655360 }
 
-
-# 使用root账号调整系统参数，初始化已经配置过了。
-#- name: Apply the limits and kernel settings.
-#  shell: |
-#    source /etc/profile
-#    /sbin/sysctl -p "{{ elasticstack_sysctl_file }}"
-#    ulimit -n 65535
+# 系统重启后，elasticsearch启动超问题的解决方法。
+- name: update systemd elasticsearch service
+  lineinfile:
+    path: /usr/lib/systemd/system/elasticsearch.service
+    regexp: "{{item.regexp }}"
+    line: "{{ item.line }}"
+    insertafter: "{{ item.insertafter }}"
+  with_items:
+    - { regexp: '^RestartSec=', line: 'RestartSec=1s', insertafter: '^KillMode=' }
+    - { regexp: '^Restart=', line: 'Restart=on-failure', insertafter: '^KillMode=' }
+  notify:
+    - systemctl-daemon-reload
+    - restart-elasticsearch
 
 - name: install elasticsearch {{ elasticstack_version }}
   yum:
