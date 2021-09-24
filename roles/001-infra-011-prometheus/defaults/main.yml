@@ -89,6 +89,11 @@ prometheus_scrape_configs:
     static_configs:
       - targets:
           - "{{ ansible_fqdn | default(ansible_host) | default('localhost') }}:9091"
+  # 添加node_exporter静态服务列表。
+  - job_name: "000_static_node_exporter"
+    static_configs:
+      - targets:
+          - "prometheus.freedom.org:9100"
 
 
 # Alternative config file name, searched in ansible templates path.
