@@ -1,14 +1,16 @@
 ---
 - name: deploy haproxy
-  hosts: 192.168.2.2
+  hosts: haproxy.freedom.org
   user: root
   roles:
     - role: 000-base-000-common
       tags: common
-      vars:
-        - common_local_dns: false
 
     - role: 001-infra-001-bind
       tags: dns
       vars:
         - bind_slave_role: true
+
+    - role: 001-infra-019-haproxy
+      tags:
+        - haproxy
