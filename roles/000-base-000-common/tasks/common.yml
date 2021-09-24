@@ -34,14 +34,6 @@
     - { src: vimrc, dest: /root/.vimrc }
     - { src: vimrc, dest: "/{{ common_user }}/.vimrc" }
 
-- name: install common packages
-  yum:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages: "{{ common_pkgs }}"
-
-
 - name: unlimit the system limitations
   shell: ulimit -SHn 65535 && ulimit -n
 
