@@ -9,42 +9,27 @@ official_imgs:
   - docker.io/mysql:5.7.29
   - docker.io/php:7.4.2
   - docker.io/redis:5.0.7
-  - docker.io/tomcat:7.0.107-jdk8-corretto
-  - docker.io/tomcat:8.5.61-jdk8-corretto
-  - docker.io/tomcat:9.0.41-jdk8-corretto
   - docker.io/busybox:1.31.1
-  - docker.io/consul:1.7.11
-  - docker.io/consul:1.8.7
-  - docker.io/consul:1.9.1
-  - docker.io/jenkins/jenkins:lts
+  - docker.io/consul:1.10.2
 
-  - zabbix/zabbix-agent:centos-4.0.17
-  - zabbix/zabbix-java-gateway:centos-4.0.17
-  - zabbix/zabbix-server-mysql:centos-4.0.17
-  - zabbix/zabbix-web-apache-mysql:centos-4.0.17
+  - jenkins/jenkins:lts
 
-  - prom/alertmanager:v0.20.0
-  - prom/prometheus:v2.15.2
-  - prom/pushgateway:v1.1.0
-  - prom/bind-exporter:master
-  - prom/blackbox-exporter:master
-  - prom/collectd-exporter:master
-  - prom/consul-exporter:master
-  - prom/haproxy-exporter:master
-  - prom/mysqld-exporter:master
-  - prom/node-exporter:master
-  - prom/statsd-exporter:master
+  - zabbix/zabbix-agent:centos-5.0.12
+  - zabbix/zabbix-java-gateway:centos-5.0.12
+  - zabbix/zabbix-server-mysql:centos-5.0.12
+  - zabbix/zabbix-web-apache-mysql:centos-5.0.12
 
-  - elastic/apm-server:7.9.2
-  - elastic/auditbeat:7.9.2
-  - elastic/elasticsearch:7.9.2
-  - elastic/filebeat:7.9.2
-  - elastic/heartbeat:7.9.2
-  - elastic/journalbeat:7.9.2
-  - elastic/kibana:7.9.2
-  - elastic/logstash:7.9.2
-  - elastic/metricbeat:7.9.2
-  - elastic/packetbeat:7.9.2
+  - prom/prometheus:v2.30.0
+  - prom/alertmanager:v0.23.0
+  - prom/pushgateway:v1.4.1
+  - prom/mysqld-exporter:v0.13.0
+  - prom/node-exporter:v1.2.2
+
+  - elastic/elasticsearch:7.14.1
+  - elastic/filebeat:7.14.1
+  - elastic/kibana:7.14.1
+  - elastic/logstash:7.14.1
+  - elastic/metricbeat:7.14.1
 
 k8s_v1_16_2_imgs:
   - k8s.gcr.io/coredns:1.6.2
