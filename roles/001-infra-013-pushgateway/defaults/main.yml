@@ -1,5 +1,5 @@
 ---
-pushgateway_version: 1.4.0
+pushgateway_version: 1.4.1
 pushgateway_pkg: "ftp://foreman.freedom.org/pub/tools/pushgateway-{{ pushgateway_version }}.linux-amd64/pushgateway"
 pushgateway_bin: /usr/local/bin/pushgateway
 
