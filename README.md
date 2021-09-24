@@ -1,6 +1,8 @@
 # ansible_playbooks 更新日志
 
 ## TODO-LIST（日期不定）
+- 需要写个cgi，要求其主机上安装了kubeadm软件包。完成功能：根据传入的k8s版本，查询到k8s所需要容器的名称。然后，通过阿里镜像源下载，上传到本地harbor服务器中，最后请求的主机再去下载。
+
 - 配置prometheus/zabbix服务器，完成一套流程：监控主机--配置触发器--告警。此外，foreman服务器上部署的prometheus需要监控k8s集群。
 
 - docker日志引擎改为fluentd，fluentd并上报到elasticsearch中。
