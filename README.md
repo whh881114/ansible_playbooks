@@ -1,7 +1,7 @@
 # ansible_playbooks 更新日志
 
 ## TODO-LIST（日期不定）
-- 配置prometheus/zabbix服务器，完成一套流程：监控主机--配置触发器--告警。
+- 配置prometheus/zabbix服务器，完成一套流程：监控主机--配置触发器--告警。此外，foreman服务器上部署的prometheus需要监控k8s集群。
 
 - docker日志引擎改为fluentd，fluentd并上报到elasticsearch中。
 
