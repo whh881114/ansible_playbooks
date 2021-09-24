@@ -1,7 +1,7 @@
 # ansible_playbooks 更新日志
 
 ## TODO-LIST（日期不定）
-- foreman服务器部署prometheus，当前仅用于监控虚拟机。
+- 配置prometheus/zabbix服务器，完成一套流程：监控主机--配置触发器--告警。
 
 - docker日志引擎改为fluentd，fluentd并上报到elasticsearch中。
 
@@ -11,6 +11,8 @@
 
 
 ## TODO-LIST 完成清单
+- foreman服务器部署prometheus，当前仅用于监控虚拟机。日期：2021/09/24，进度100%。
+
 - foreman服务器部署Rocky-8.4-x86_64操作系统，此操作系统用于k8s主机。日期：2021/09/23，进度100%。
 
 - foreman服务器部署单机的elasticsearch+filebeat+kibana，改造apache日志为json格式，filebeat收集并上报到elasticsearch。日期：2021/09/23，进度100%。
