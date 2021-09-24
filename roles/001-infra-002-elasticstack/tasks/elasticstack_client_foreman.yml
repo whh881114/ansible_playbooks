@@ -7,7 +7,7 @@
     - { src: httpd.conf, dest: /etc/httpd/conf/httpd.conf }
     - { src: 05-foreman.conf, dest: /etc/httpd/conf.d/05-foreman.conf }
     - { src: 05-foreman-ssl.conf, dest: /etc/httpd/conf.d/05-foreman-ssl.conf }
-    - { src: 99-yum.conf, dest: /etc/httpd/conf.d/99-yum.conf }
-    - { src: 100-files.conf, dest: /etc/httpd/conf.d/100-files.conf }
+    - { src: yum.conf, dest: /etc/httpd/conf.d/yum.conf }
+    - { src: files.conf, dest: /etc/httpd/conf.d/files.conf }
     - { src: zabbix.conf, dest: /etc/httpd/conf.d/zabbix.conf }
   notify: reload-httpd
