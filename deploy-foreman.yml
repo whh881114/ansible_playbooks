@@ -22,7 +22,9 @@
       tags: docker
 
     - role: 001-infra-001-bind
-      tags: dns
+      tags:
+        - dns
+        - bind
       vars:
         - bind_master_role: true
 
