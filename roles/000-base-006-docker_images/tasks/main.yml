@@ -1,11 +1,6 @@
 ---
-- name: copy the docker images list
-  copy:
-    src: "{{ docker_images_list_file }}"
-    dest: "{{ docker_images_list_file }}"
+- include: harbor.yml
+  when: docker_images_role == "harbor"
 
-- include: pull.yml
-  when: docker_images_pull
-
-- include: push.yml
-  when: docker_images_push
+- include: client.yml
+  when: docker_images_role == "client"
