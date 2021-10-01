@@ -28,4 +28,9 @@
     dest: /etc/docker/daemon.json
     owner: root
     group: root
-  notify: restart-docker
+
+- name: restart docker service
+  service:
+    name: docker
+    state: restarted
+    enabled: yes
