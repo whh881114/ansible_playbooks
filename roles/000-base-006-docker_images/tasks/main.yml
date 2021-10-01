@@ -1,0 +1,11 @@
+---
+- name: copy the docker images list
+  copy:
+    src: "{{ docker_images_list_file }}"
+    dest: "{{ docker_images_list_file }}"
+
+- include: pull.yml
+  when: docker_images_pull
+
+- include: push.yml
+  when: docker_images_push

@@ -1,0 +1,12 @@
+---
+- name: push docker images
+  script: docker_images.py -f "{{ docker_images_list_file }}" -v "{{ docker_images_k8s_version }}" -a "push" -l {{ docker_images_local_register }}
+  register: result
+
+- name: show push docker images stdout
+  debug:
+    msg: "{{ result.stdout }}"
+
+- name: show push docker images stderr
+  debug:
+    msg: "{{ result.stderr }}"
