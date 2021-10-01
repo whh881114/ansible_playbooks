@@ -20,8 +20,7 @@
     - role: 000-base-006-docker_images
       tags: docker_images
       vars:
-        - docker_images_pull: true
-        - docker_images_push: true
+        - docker_images_role: harbor
 
     - role: 001-infra-010-harbor
       tags: harbor
