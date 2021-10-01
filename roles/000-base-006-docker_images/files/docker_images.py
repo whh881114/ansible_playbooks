@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 
-def pull_images(image):
+def pull_image(image):
     if LOCAL_REGISTER:
         image = HARBOR_SERVER + "/" + image
     try:
@@ -24,7 +24,7 @@ def pull_images(image):
         logger.error("Pull docker image \"%s\" failed. The error is %s." % (image, e))
 
 
-def push_images(image):
+def push_image(image):
     try:
         local_register_image = HARBOR_SERVER + "/" + image
         cmd = subprocess.Popen("docker tag %s %s" % (image, local_register_image), stdout=subprocess.PIPE,
@@ -41,10 +41,10 @@ def push_images(image):
 def action_images(images, action):
     if action == "push":
         for image in images:
-            push_images(image)
+            push_image(image)
     else:
         for image in images:
-            pull_images(image)
+            pull_image(image)
 
 
 def file_images(files, action):
@@ -80,13 +80,13 @@ def k8s_images(k8s_versions, action):
             original_img = img.split("/")
             ali_img = ALI_REGISTER + "/" + original_img[-1]
             if action == "pull":
-                pull_images(ali_img)
+                pull_image(ali_img)
                 # 下载k8s镜像后，还需要重新打个tag
                 cmd = subprocess.Popen("docker tag %s %s" % (ali_img, original_img), stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
                 cmd.wait()
             else:
                 harbor_img = HARBOR_SERVER + "/k8s.gcr.io" + original_img[-1]
-                push_images(harbor_img)
+                push_image(harbor_img)
 
 
 def main():
