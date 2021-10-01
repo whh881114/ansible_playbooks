@@ -1,6 +1,0 @@
----
-- name: configurate dns
-  template:
-    src:  resolv.conf.j2
-    dest: /etc/resolv.conf
-  when: common_local_dns

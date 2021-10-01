@@ -5,11 +5,3 @@ common_selinux_state: disabled
 common_register_org: Default_Organization
 common_register_activationkey: "CentOS-7-x86_64"
 common_pkgs:
-  - tcl
-  - openssl-devel
-  - zlib-devel
-  - lrzsz
-  - tree
-  - nc
-  - telnet
-  - python2-pip

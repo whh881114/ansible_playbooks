@@ -21,7 +21,15 @@
     name: "{{ packages }}"
     state: present
   vars:
-    packages: "{{ common_pkgs }}"
+    packages:
+      - tcl
+      - openssl-devel
+      - zlib-devel
+      - lrzsz
+      - tree
+      - nc
+      - telnet
+      - python2-pip
 
 - name: install katello-ca-consumer-latest.noarch.rpm
   yum:

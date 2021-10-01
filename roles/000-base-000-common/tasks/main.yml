@@ -1,4 +1,4 @@
 ---
-- include: dns.yml
-- include: repo.yml
 - include: common.yml
+
+- include: "el{{ ansible_distribution_major_version  }}.yml"

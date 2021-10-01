@@ -1,0 +1,20 @@
+---
+- name: install common packages
+  yum:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - tcl
+      - openssl-devel
+      - zlib-devel
+      - lrzsz
+      - tree
+      - nc
+      - telnet
+      - python2
+      - python3
+
+# https://blog.csdn.net/weixin_39992199/article/details/110554034
+- name: set default python version to 3.6.8
+  shell: alternatives --set python /usr/bin/python3
