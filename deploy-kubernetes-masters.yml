@@ -10,7 +10,8 @@
       tags:
         - common
 
-    - role: 001-infra-009-kubernetes
-      tags:
-        - kubernetes
-        - k8s
+    - role: 000-base-005-docker
+      tags: docker
+
+    - role: 000-base-006-docker_images
+      tags: docker_images
