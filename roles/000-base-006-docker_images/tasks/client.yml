@@ -1,1 +1,22 @@
 ---
+- name: copy the docker images list
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { src: "{{ docker_images_list_file }}", dest: "{{ docker_images_list_file }}" }
+    - { src: "{{ docker_images_k8s_list_file }}", dest: "{{ docker_images_k8s_list_file }}" }
+
+- name: generate scripts
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "0755"
+  with_items:
+    - { src: pull_images.sh.j2, dest: pull_images.sh }
+    - { src: pull_k8s_images.sh.j2, dest: pull_k8s_images.sh }
+
+- name: download docker images
+  shell: |
+    ./pull_images.sh "{{ docker_images_list_file }}"
+    ./pull_k8s_images.sh "{{ docker_images_k8s_list_file }}"

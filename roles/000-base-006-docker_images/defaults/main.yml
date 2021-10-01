@@ -1,8 +1,9 @@
 ---
-docker_images_k8s_version: v1.22.2
+docker_images_k8s_version: 1.22.2
 
 docker_images_register: "harbor.freedom.org"
 
 docker_images_list_file: docker_images_list
+docker_images_k8s_list_file: docker_images_k8s_list
 
 docker_images_role: "client"

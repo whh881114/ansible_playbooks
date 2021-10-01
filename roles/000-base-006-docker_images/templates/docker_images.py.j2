@@ -71,7 +71,7 @@ def file_images(files, action):
 
 def k8s_images(k8s_versions, action):
     for version in k8s_versions:
-        ret = subprocess.Popen("kubeadm config images list --kubernetes-version %s" % version,
+        ret = subprocess.Popen("kubeadm config images list --kubernetes-version v%s" % version,
                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         for img in ret.stdout:
             img = img.replace("\n", "").replace("\r", "")

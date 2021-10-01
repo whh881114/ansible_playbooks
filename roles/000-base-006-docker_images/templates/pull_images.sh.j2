@@ -1,0 +1,6 @@
+#!/bin/bash
+
+while read line
+do
+    docker pull "{{ docker_images_register }}/$line"
+done < {{ docker_images_list_file }}

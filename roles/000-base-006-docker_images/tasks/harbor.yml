@@ -1,7 +1,7 @@
 ---
 - name: install kubeadm
   yum:
-    name: kubeadm
+    name: "kubeadm-{{ docker_images_k8s_version }}"
     state: present
 
 - name: copy the docker images list

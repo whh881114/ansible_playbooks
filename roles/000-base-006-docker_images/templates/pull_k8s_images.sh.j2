@@ -1,0 +1,9 @@
+#!/bin/bash
+
+while read line
+do
+    original_image=`echo $line | awk -F'#' '{print $1}'`
+    new_image=`echo $line | awk -F'#' '{print "{{ docker_images_register }}/"$2}'`
+    docker pull $new_image
+    docker tag $new_image $original_image
+done < {{ docker_images_k8s_list_file }}
