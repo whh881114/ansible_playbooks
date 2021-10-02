@@ -1,0 +1,17 @@
+---
+- name: update kernel
+  yum:
+    name: "kernel-ml-{{ kubernetes_kernel_version }}"
+    state: present
+
+- name: set default boot kernel to kernel-ml-{{ kubernetes_kernel_version }}
+  shell: |
+    grub2-set-default 0
+
+- name: install k8s packages
+  yum:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages: "{{ kubernetes_pkgs }}"
+  notify: restart-kubelet

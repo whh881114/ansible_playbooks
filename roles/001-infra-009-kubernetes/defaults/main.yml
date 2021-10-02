@@ -1,46 +1,17 @@
-k8s_version: "1.16.2"
-docker_ce_version: "18.09.9-3.el7"  # k8s版本为1.16.2时，支持docker-ce版本最大是18.09。
+kubernetes_version: "1.22.2"
 
-docker_registry: harbor.freedom.org
+kubernetes_kernel_version: "5.14.9"
 
-official_imgs:
-  - docker.io/nginx:1.17.8
-  - docker.io/httpd:2.4.41
-  - docker.io/mysql:5.7.29
-  - docker.io/php:7.4.2
-  - docker.io/redis:5.0.7
-  - docker.io/busybox:1.31.1
-  - docker.io/consul:1.10.2
+kubernetes_pkgs:
+  - "kubeadm-{{ kubernetes_version }}"
+  - "kubectl-{{ kubernetes_version }}"
+  - "kubelet-{{ kubernetes_version }}"
 
-  - jenkins/jenkins:lts
+# 2021-10-02，kubernetes与docker版本有关联关系，目前我使用了1.22.2版本，这个是支持了最新docker版本，即20.10.8。此变量先注释。
+#kubernetes_docker_ce_version: "20.10.8"
 
-  - zabbix/zabbix-agent:centos-5.0.12
-  - zabbix/zabbix-java-gateway:centos-5.0.12
-  - zabbix/zabbix-server-mysql:centos-5.0.12
-  - zabbix/zabbix-web-apache-mysql:centos-5.0.12
-
-  - prom/prometheus:v2.30.0
-  - prom/alertmanager:v0.23.0
-  - prom/pushgateway:v1.4.1
-  - prom/mysqld-exporter:v0.13.0
-  - prom/node-exporter:v1.2.2
-
-  - elastic/elasticsearch:7.14.1
-  - elastic/filebeat:7.14.1
-  - elastic/kibana:7.14.1
-  - elastic/logstash:7.14.1
-  - elastic/metricbeat:7.14.1
-
-k8s_v1_16_2_imgs:
-  - k8s.gcr.io/coredns:1.6.2
-  - k8s.gcr.io/etcd:3.3.15-0
-  - k8s.gcr.io/kube-apiserver:v1.16.2
-  - k8s.gcr.io/kube-controller-manager:v1.16.2
-  - k8s.gcr.io/kube-proxy:v1.16.2
-  - k8s.gcr.io/kube-scheduler:v1.16.2
-  - k8s.gcr.io/pause:3.1
-
-quay_v1_16_2_imgs:
-  - quay.io/coreos/flannel:v0.11.0-amd64
-  - quay.io/external_storage/nfs-client-provisioner:latest
-  - quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.28.0
+# 镜像相关下载已转移至docker_images角色中了，此变量先注释。
+#quay_v1_16_2_imgs:
+#  - quay.io/coreos/flannel:v0.11.0-amd64
+#  - quay.io/external_storage/nfs-client-provisioner:latest
+#  - quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.28.0

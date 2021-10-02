@@ -1,24 +1,6 @@
 ---
-- name: restart docker
-  service:
-    name: docker
-    state: restarted
-    enabled: yes
-
-- name: restart docker-distribution
-  service:
-    name: docker-distribution
-    state: restarted
-    enabled: yes
-
-- name: restart kubelet
+- name: restart-kubelet
   service:
     name: kubelet
-    state: restarted
-    enabled: yes
-
-- name: restart-network
-  service:
-    name: network
     state: restarted
     enabled: yes
