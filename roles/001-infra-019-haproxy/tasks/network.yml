@@ -1,0 +1,10 @@
+---
+- name: generate script -- configurate mutil-ip on {{ haproxy_nic_name }} nic
+  template:
+    src: conf_network_ips.sh.j2
+    dest: conf_network_ips.sh
+    mode: "0755"
+
+- name: configurate mutil-ip on {{ haproxy_nic_name }} nic
+  shell: |
+    ./conf_network_ips.sh

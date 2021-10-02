@@ -1,27 +1,5 @@
 ---
-- include: roles/000-base-000-common/handlers/main.yml
-
-- include: roles/000-base-001-consul/handlers/main.yml
-
-- name: restart-haproxy
+- name: restart-network
   service:
-    name: haproxy
+    name: network
     state: restarted
-    enabled: yes
-
-- name: reload-haproxy
-  service:
-    name: haproxy
-    state: reloaded
-    enabled: yes
-
-- name: restart-rsyslog
-  service:
-    name: rsyslog
-    state: restarted
-    enabled: yes
-
-- name: systemctl-enable-haproxy
-  systemd:
-    name: haproxy
-    enabled: yes
