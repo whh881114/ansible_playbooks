@@ -1,0 +1,28 @@
+---
+- name: install haproxy
+  yum:
+    name: haproxy
+    state: present
+
+- name: install haproxy cert file
+  copy:
+    src: haproxy.crt
+    dest: /etc/ssl/certs/haproxy.crt
+
+- name: configure rsyslog for haproxy step 1
+  lineinfile: 
+    path: /etc/rsyslog.conf
+    line: "{{ item.line }}"
+    insertafter: "{{ item.insertafter }}"
+  with_items:
+    - { line: '$ModLoad imudp', insertafter: '^\#\$ModLoad imudp' }
+    - { line: '$UDPServerRun 514', insertafter: '^\#\$UDPServerRun 514' }
+    - { line: 'local2.*  /var/log/haproxy.log', insertafter: None }
+  notify: restart-rsyslog
+
+- name: generate haproxy.cfg main part
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+    mode: 0644
+  notify: restart-haproxy

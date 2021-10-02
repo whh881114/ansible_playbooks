@@ -1,5 +1,10 @@
 ---
-- name: restart-network
+- name: systemctl-daemon-reload
+  systemd:
+    daemon_reload: yes
+
+- name: restart-haproxy
   service:
-    name: network
+    name: haproxy
     state: restarted
+    enabled: yes

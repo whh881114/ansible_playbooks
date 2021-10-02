@@ -1,8 +1,13 @@
 ---
 haproxy_nic_name: ens192
 
+haproxy_nic_ipaddr: 192.168.2.2
 haproxy_nic_netmask: 24
 haproxy_nic_gateway: 192.168.2.254
+
+# haproxy_auth_username最好不要使用"@"字符。
+haproxy_auth_username: freedom
+haproxy_auth_password: freedom
 
 # 在haproxy上配置单网卡多ip，ip地址规划为192.168.2.111-192.168.2.130。
 haproxy_ip_list:

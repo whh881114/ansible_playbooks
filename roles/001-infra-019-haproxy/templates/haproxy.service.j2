@@ -1,0 +1,15 @@
+[Unit]
+Description=HAProxy Load Balancer
+After=syslog.target network.target
+
+[Service]
+LimitNOFILE=100000
+EnvironmentFile=/etc/sysconfig/haproxy
+ExecStart=/usr/sbin/haproxy-systemd-wrapper -f /etc/haproxy/haproxy.cfg -p /run/haproxy.pid $OPTIONS
+ExecReload=/bin/kill -USR2 $MAINPID
+KillMode=mixed
+Restart=on-failure
+RestartSec=1s
+
+[Install]
+WantedBy=multi-user.target
