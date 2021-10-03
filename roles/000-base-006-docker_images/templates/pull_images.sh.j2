@@ -2,5 +2,9 @@
 
 while read line
 do
+{% if docker_images_role == "harbor" %}
+    docker pull "$line"
+{% else %}
     docker pull "{{ docker_images_register }}/$line"
+{% endif %}
 done < {{ docker_images_list_file }}
