@@ -14,3 +14,5 @@ docker_insecure_registries: ["https://harbor.freedom.org", "https://docker.freed
 docker_log_driver: fluentd
 
 docker_fluentd_host: localhost:24224
+
+docker_cgroupdriver: cgroupfs
