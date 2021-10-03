@@ -44,6 +44,9 @@ worker01.k8s        IN      A           192.168.2.14
 worker02.k8s        IN      A           192.168.2.15
 worker03.k8s        IN      A           192.168.2.16
 
+; 安装k8s-v1.22.2高可用集群时，前端有一个haproxy，而安装此版本时失败了，之前安装v1.16.2时则没有，所以使用域名替代ip。
+apiserver.k8s       IN      A           192.168.2.2
+
 node01.ceph         IN      A           192.168.2.21
 node02.ceph         IN      A           192.168.2.22
 node03.ceph         IN      A           192.168.2.23
