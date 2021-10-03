@@ -18,8 +18,8 @@
 
 - name: pull docker images
   shell: |
-    ./pull_images.sh "{{ docker_images_list_file }}"
-    ./pull_k8s_images.sh "{{ docker_images_k8s_list_file }}"
+    ./pull_images.sh
+    ./pull_k8s_images.sh
   register: result
 
 - name: show pull docker images stdout
