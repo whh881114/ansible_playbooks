@@ -1,9 +1,10 @@
 ---
 - name: install cilium pkg
-  get_url:
-    url: "{{cilium_pkg_url }}"
-    dest: /usr/local/bin/cilium
+  unarchive:
+    src: "{{cilium_pkg_url }}"
+    dest: /usr/local/bin
     mode: "0755"
+    remote_src: yes
 
 - name: install cilium
   shell: cilium install

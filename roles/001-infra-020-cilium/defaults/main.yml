@@ -1,2 +1,3 @@
 ---
-cilium_pkg_url: http://files.freedom.org/cilium/cilium
+cilium_version: v0.9.1
+cilium_pkg_url: "{{ files_server }}"/cilium/{{ cilium_version }}/cilium-linux-amd64.tar.gz"
