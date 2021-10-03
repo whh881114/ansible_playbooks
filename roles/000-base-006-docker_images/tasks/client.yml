@@ -16,7 +16,16 @@
     - { src: pull_images.sh.j2, dest: pull_images.sh }
     - { src: pull_k8s_images.sh.j2, dest: pull_k8s_images.sh }
 
-- name: download docker images
+- name: pull docker images
   shell: |
     ./pull_images.sh "{{ docker_images_list_file }}"
     ./pull_k8s_images.sh "{{ docker_images_k8s_list_file }}"
+  register: result
+
+- name: show pull docker images stdout
+  debug:
+    msg: "{{ result.stdout_lines }}"
+
+- name: show pull docker images stderr
+  debug:
+    msg: "{{ result.stdout_lines }}"

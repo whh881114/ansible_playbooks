@@ -26,8 +26,8 @@
 
 - name: show pull docker images stdout
   debug:
-    msg: "{{ result.stdout }}"
+    msg: "{{ result.stdout_lines }}"
 
 - name: show pull docker images stderr
   debug:
-    msg: "{{ result.stderr }}"
+    msg: "{{ result.stdout_lines }}"
