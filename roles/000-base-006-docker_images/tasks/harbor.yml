@@ -30,4 +30,4 @@
 
 - name: show pull docker images stderr
   debug:
-    msg: "{{ result.stdout_lines }}"
+    msg: "{{ result.stderr_lines }}"
