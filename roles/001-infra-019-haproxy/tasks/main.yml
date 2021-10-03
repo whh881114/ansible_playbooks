@@ -1,5 +1,3 @@
 ---
-- include: network.yml
-- include: install.yml
-- include: config.yml
-- include: service.yml
+- include: ip_pool.yml
+- include: haproxy.yml

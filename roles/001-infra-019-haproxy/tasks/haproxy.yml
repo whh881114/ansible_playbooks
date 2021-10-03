@@ -25,4 +25,13 @@
     src: haproxy.cfg.j2
     dest: /etc/haproxy/haproxy.cfg
     mode: 0644
-  notify: restart-haproxy
+  notify: reload-haproxy
+
+- name: generate haproxy.service
+  template:
+    src: haproxy.service.j2
+    dest: "{{ systemd_conf_dir }}/haproxy.service"
+  notify:
+    - systemctl-daemon-reload
+    - reload-haproxy
+  when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and ansible_distribution_major_version == "7"

@@ -31,3 +31,38 @@ haproxy_ip_list:
   - 192.168.2.128
   - 192.168.2.129
   - 192.168.2.130
+
+haproxy_service_items:
+  - name: kubernetes-apiserver
+    mode: tcp
+    listen_ip: "{{ haproxy_nic_ipaddr }}"
+    listen_port: 6443
+    backend_server_mode: static
+    backend_server_items:
+      - master01.k8s.freedom.org
+      - master02.k8s.freedom.org
+      - master03.k8s.freedom.org
+  - name: kubernetes_ingress_http
+    mode: tcp
+    listen_ip: "{{ haproxy_nic_ipaddr }}"
+    listen_port: 32080
+    backend_server_mode: static
+    backend_server_items:
+      - master01.k8s.freedom.org
+      - master02.k8s.freedom.org
+      - master03.k8s.freedom.org
+      - worker01.k8s.freedom.org
+      - worker02.k8s.freedom.org
+      - worker03.k8s.freedom.org
+  - name: kubernetes_ingress_https
+    mode: tcp
+    listen_ip: "{{ haproxy_nic_ipaddr }}"
+    listen_port: 32443
+    backend_server_mode: static
+    backend_server_items:
+      - master01.k8s.freedom.org
+      - master02.k8s.freedom.org
+      - master03.k8s.freedom.org
+      - worker01.k8s.freedom.org
+      - worker02.k8s.freedom.org
+      - worker03.k8s.freedom.org
