@@ -10,6 +10,9 @@
       tags:
         - common
 
+    - role: 000-base-002-fluentd
+      tags: fluentd
+
     - role: 000-base-005-docker
       tags: docker
       vars:
