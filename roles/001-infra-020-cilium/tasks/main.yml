@@ -1,0 +1,28 @@
+---
+- name: install cilium pkg
+  get_url:
+    url: "{{cilium_pkg_url }}"
+    dest: /usr/local/bin/cilium
+    mode: "0755"
+
+- name: install cilium
+  shell: cilium install
+  ignore_errors: yes
+  register: cilium_install_result
+
+- name: show install cilium log
+  debug:
+    msg:
+      - "{{ cilium_install_result.stdout_lines }}"
+      - "{{ cilium_install_result.stderr_lines }}"
+
+- name: show cilium status
+  shell: cilium status
+  ignore_errors: yes
+  register: cilium_status_result
+
+- name: show install cilium status log
+  debug:
+    msg:
+      - "{{ cilium_status_result.stdout_lines }}"
+      - "{{ cilium_status_result.stderr_lines }}"
