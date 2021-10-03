@@ -10,3 +10,5 @@ registry.aliyuncs.com/google_containers/coredns:v1.8.4#k8s.gcr.io/coredns/coredn
 
 willdockerhub/ingress-nginx-controller:v0.49.0#k8s.gcr.io/ingress-nginx-controller:v0.49.0#k8s.gcr.io/ingress-nginx-controller:v0.49.0
 liangjw/ingress-nginx-controller:v0.49.2#k8s.gcr.io/ingress-nginx-controller:v0.49.2#k8s.gcr.io/ingress-nginx-controller:v0.49.2
+liangjw/ingress-nginx-controller:v1.0.2#k8s.gcr.io/ingress-nginx-controller:v1.0.2#k8s.gcr.io/ingress-nginx-controller:v1.0.2
+liangjw/kube-webhook-certgen:v1.0#k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.0#k8s.gcr.io/kube-webhook-certgen:v1.0
