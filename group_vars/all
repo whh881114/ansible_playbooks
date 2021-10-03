@@ -22,7 +22,7 @@ bind_master_ip: 192.168.2.1
 bind_slave_ip: 192.168.2.2
 
 # 文件服务器地址
-file_server:
+files_server: http://files.freedom.org
 
 consul_ver: 1.8.0
 consul_template_ver: 0.25.1
