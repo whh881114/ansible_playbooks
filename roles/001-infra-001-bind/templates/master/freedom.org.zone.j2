@@ -45,7 +45,11 @@ worker02.k8s        IN      A           192.168.2.15
 worker03.k8s        IN      A           192.168.2.16
 
 ; 安装k8s-v1.22.2高可用集群时，前端有一个haproxy，而安装此版本时失败了，之前安装v1.16.2时则没有，所以使用域名替代ip。
+; 最后发现，安装失败的原因是docker中配置的logdriver的服务没有安装。
 apiserver.k8s       IN      A           192.168.2.2
+
+; 配置泛域名解析，为k8s集群7层导流。
+*.k8s               IN      A           192.168.2.2
 
 node01.ceph         IN      A           192.168.2.21
 node02.ceph         IN      A           192.168.2.22
@@ -58,3 +62,4 @@ vcenter             IN      A           192.168.2.252
 
 node01.test         IN      A           192.168.2.101
 node02.test         IN      A           192.168.2.102
+
