@@ -9,3 +9,4 @@ registry.aliyuncs.com/google_containers/etcd:3.5.0-0#k8s.gcr.io/etcd:3.5.0-0#k8s
 registry.aliyuncs.com/google_containers/coredns:v1.8.4#k8s.gcr.io/coredns/coredns:v1.8.4#k8s.gcr.io/coredns:v1.8.4
 
 willdockerhub/ingress-nginx-controller:v0.49.0#k8s.gcr.io/ingress-nginx-controller:v0.49.0#k8s.gcr.io/ingress-nginx-controller:v0.49.0
+liangjw/ingress-nginx-controller:v0.49.2#k8s.gcr.io/ingress-nginx-controller:v0.49.2#k8s.gcr.io/ingress-nginx-controller:v0.49.2
