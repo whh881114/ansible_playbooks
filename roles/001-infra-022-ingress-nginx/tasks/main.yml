@@ -1,0 +1,27 @@
+---
+- name: install ingress-nginx pkg
+  unarchive:
+    src: "{{ ingress_nginx_pkg_url }}"
+    dest: "{{ resource_dir }}"
+    remote_src: yes
+
+- name: generate ingress-nginx values.yaml
+  template:
+    src: "values-{{ ingress_nginx_version }}.yaml.j2"
+    dest: "{{ resource_dir }}/ingress-nginx/values.yaml"
+
+- name: install ingress-nginx
+  shell: |
+    kubectl create namespace ingress-nginx
+    helm uninstall ingress-nginx -n ingress-nginx
+    helm install ingress-nginx . -n ingress-nginx
+  args:
+    chdir: "{{ resource_dir }}/ingress-nginx"
+  ignore_errors: yes
+  register: ingress_nginx_status_result
+
+- name: show install ingress-nginx log
+  debug:
+    msg:
+      - "{{ ingress_nginx_status_result.stdout_lines }}"
+      - "{{ ingress_nginx_status_result.stderr_lines }}"
