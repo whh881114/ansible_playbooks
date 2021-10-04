@@ -32,3 +32,11 @@
     msg:
       - "{{ cilium_status_result.stdout_lines }}"
       - "{{ cilium_status_result.stderr_lines }}"
+
+- name: generate hubble service
+  template:
+    src: hubble.service.j2
+    dest: "{{ systemd_conf_dir }}/hubble.service"
+  notify:
+    - systemctl-daemon-reload
+    - restart-hubble

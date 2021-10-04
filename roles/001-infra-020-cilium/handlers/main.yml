@@ -1,0 +1,10 @@
+---
+- name: systemctl-daemon-reload
+  systemd:
+    daemon_reload: yes
+
+- name: restart-hubble
+  service:
+    name: hubble
+    state: restarted
+    enabled: yes
