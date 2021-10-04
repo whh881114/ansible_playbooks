@@ -3,10 +3,9 @@
   hosts: master01.k8s.freedom.org
   user: root
   roles:
-    # cilium安装是要等到k8s集群部署完成后才能执行
-#    - role: 001-infra-020-cilium
-#      tags:
-#        - cilium
+    - role: 001-infra-023-calico
+      tags:
+        - calico
 
     - role: 001-infra-021-helm
       tags:

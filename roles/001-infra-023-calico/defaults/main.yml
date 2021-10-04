@@ -1,0 +1,9 @@
+---
+# calico与etcd通信时使用http协议，不使用https，这样就不用配置以下变量和证书了。
+calico_version: v3.20.1
+calico_pkg_url: "{{ files_server }}/kubernetes/calico/release-{{ calico_version }}/bin/calicoctl"
+
+calico_etcd_endpoints: http://192.168.2.11:2379,http://192.168.2.12:2379,http://192.168.2.13:2379
+calico_cluster_cidr: 10.244.0.0/16
+calico_k8s_apiserver_host: apiserver.k8s.freedom.org
+calico_k8s_apiserver_port: 6443
