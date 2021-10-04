@@ -1,13 +1,18 @@
 ---
-- name: install cilium pkg
+- name: install cilium and hubble pkg
   unarchive:
-    src: "{{cilium_pkg_url }}"
+    src: "{{ item.src }}"
     dest: /usr/local/bin
     mode: "0755"
     remote_src: yes
+  with_items:
+    - {src: "{{cilium_pkg_url }}" }
+    - {src: "{{cilium_hubble_pkg_url }}" }
 
-- name: install cilium
-  shell: cilium install
+- name: install cilium and enable hubble
+  shell: |
+    cilium install
+    cilium hubble enable
   ignore_errors: yes
   register: cilium_install_result
 
