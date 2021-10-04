@@ -33,14 +33,15 @@
       - "{{ cilium_status_result.stdout_lines }}"
       - "{{ cilium_status_result.stderr_lines }}"
 
-- name: generate hubble service
-  template:
-    src: "{{ item.src }}"
-    dest: "{{ systemd_conf_dir }}/{{ item.dest }}"
-  with_items:
-    - { src: hubble.service.j2, dest: hubble.service }
-    - { src: hubble-ui.service.j2, dest: hubble-ui.service }
-  notify:
-    - systemctl-daemon-reload
-    - restart-hubble
-    - restart-hubble-ui
+# 取消service，因为hubble-ui是以容器运行，所以不需要配置，访问hubble-ui只需要配置ingress即可。
+#- name: generate hubble service
+#  template:
+#    src: "{{ item.src }}"
+#    dest: "{{ systemd_conf_dir }}/{{ item.dest }}"
+#  with_items:
+#    - { src: hubble.service.j2, dest: hubble.service }
+#    - { src: hubble-ui.service.j2, dest: hubble-ui.service }
+#  notify:
+#    - systemctl-daemon-reload
+#    - restart-hubble
+#    - restart-hubble-ui
