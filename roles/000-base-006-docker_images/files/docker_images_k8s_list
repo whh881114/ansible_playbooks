@@ -8,7 +8,18 @@ registry.aliyuncs.com/google_containers/pause:3.5#k8s.gcr.io/pause:3.5#k8s.gcr.i
 registry.aliyuncs.com/google_containers/etcd:3.5.0-0#k8s.gcr.io/etcd:3.5.0-0#k8s.gcr.io/etcd:3.5.0-0
 registry.aliyuncs.com/google_containers/coredns:v1.8.4#k8s.gcr.io/coredns/coredns:v1.8.4#k8s.gcr.io/coredns:v1.8.4
 
-willdockerhub/ingress-nginx-controller:v0.49.0#k8s.gcr.io/ingress-nginx-controller:v0.49.0#k8s.gcr.io/ingress-nginx-controller:v0.49.0
+
+registry.aliyuncs.com/google_containers/kube-apiserver:v1.18.20#k8s.gcr.io/kube-apiserver:v1.18.20#k8s.gcr.io/kube-apiserver:v1.18.20
+registry.aliyuncs.com/google_containers/kube-controller-manager:v1.18.20#k8s.gcr.io/kube-controller-manager:v1.18.20#k8s.gcr.io/kube-controller-manager:v1.18.20
+registry.aliyuncs.com/google_containers/kube-scheduler:v1.18.20#k8s.gcr.io/kube-scheduler:v1.18.20#k8s.gcr.io/kube-scheduler:v1.18.20
+registry.aliyuncs.com/google_containers/kube-proxy:v1.18.20#k8s.gcr.io/kube-proxy:v1.18.20#k8s.gcr.io/kube-proxy:v1.18.20
+registry.aliyuncs.com/google_containers/pause:3.2#k8s.gcr.io/pause:3.2#k8s.gcr.io/pause:3.2
+registry.aliyuncs.com/google_containers/etcd:3.4.3-0#k8s.gcr.io/etcd:3.4.3-0#k8s.gcr.io/etcd:3.4.3-0
+registry.aliyuncs.com/google_containers/coredns:1.6.7#k8s.gcr.io/coredns:1.6.7#k8s.gcr.io/coredns:1.6.7
+
+
 liangjw/ingress-nginx-controller:v0.49.2#k8s.gcr.io/ingress-nginx-controller:v0.49.2#k8s.gcr.io/ingress-nginx-controller:v0.49.2
 liangjw/ingress-nginx-controller:v1.0.2#k8s.gcr.io/ingress-nginx-controller:v1.0.2#k8s.gcr.io/ingress-nginx-controller:v1.0.2
 liangjw/kube-webhook-certgen:v1.0#k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.0#k8s.gcr.io/kube-webhook-certgen:v1.0
+
+
