@@ -21,6 +21,7 @@
     ./pull_images.sh
     ./pull_k8s_images.sh
   register: result
+  ignore_errors: yes
 
 - name: show pull/push docker images log
   debug:
