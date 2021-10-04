@@ -15,6 +15,8 @@
 
     - role: 000-base-005-docker
       tags: docker
+      vars:
+        - docker_cgroupdriver: systemd
 
     - role: 000-base-006-docker_images
       tags: docker_images
@@ -23,3 +25,5 @@
       tags:
         - k8s
         - kubernetes
+      vars:
+        - kubernetes_version: 1.21.5

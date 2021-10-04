@@ -25,3 +25,5 @@
       tags:
         - k8s
         - kubernetes
+      vars:
+        - kubernetes_version: 1.21.5
