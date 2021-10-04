@@ -8,3 +8,9 @@
     name: hubble
     state: restarted
     enabled: yes
+
+- name: restart-hubble-ui
+  service:
+    name: hubble-ui
+    state: restarted
+    enabled: yes

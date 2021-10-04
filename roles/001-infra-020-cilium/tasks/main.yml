@@ -12,7 +12,7 @@
 - name: install cilium and enable hubble
   shell: |
     cilium install
-    cilium hubble enable
+    cilium hubble enable --ui
   ignore_errors: yes
   register: cilium_install_result
 
@@ -35,8 +35,12 @@
 
 - name: generate hubble service
   template:
-    src: hubble.service.j2
-    dest: "{{ systemd_conf_dir }}/hubble.service"
+    src: "{{ item.src }}"
+    dest: "{{ systemd_conf_dir }}/{{ item.dest }}"
+  with_items:
+    - { src: hubble.service.j2, dest: hubble.service }
+    - { src: hubble-ui.service.j2, dest: hubble-ui.service }
   notify:
     - systemctl-daemon-reload
     - restart-hubble
+    - restart-hubble-ui
