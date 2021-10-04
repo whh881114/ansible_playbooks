@@ -61,14 +61,6 @@ controller:
   # Ingress status was blank because there is no Service exposing the NGINX Ingress controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply
   reportNodeInternalIp: false
 
-  # Process Ingress objects without ingressClass annotation/ingressClassName field
-  # Overrides value for --watch-ingress-without-class flag of the controller binary
-  # Defaults to false
-  watchIngressWithoutClass: false
-
-  # Process IngressClass per name (additionally as per spec.controller)
-  ingressClassByName: false
-
   # This configuration defines if Ingress Controller should allow users to set
   # their own *-snippet annotations, otherwise this is forbidden / dropped
   # when users add those annotations.
@@ -93,13 +85,15 @@ controller:
   ##
   electionID: ingress-controller-leader
 
+  ## Name of the ingress class to route through this controller
+  ##
+  ingressClass: nginx
+
   # This section refers to the creation of the IngressClass resource
-  # IngressClass resources are supported since k8s >= 1.18 and required since k8s >= 1.19
+  # IngressClass resources are supported since k8s >= 1.18
   ingressClassResource:
-    name: nginx
-    enabled: true
+    enabled: false
     default: false
-    controllerValue: "k8s.io/ingress-nginx"
 
     # Parameters is a link to a custom resource containing additional
     # configuration for the controller. This is optional if the controller
@@ -136,23 +130,23 @@ controller:
   ##
   scope:
     enabled: false
-    namespace: ""   # defaults to $(POD_NAMESPACE)
+    namespace: ""   # defaults to .Release.Namespace
 
   ## Allows customization of the configmap / nginx-configmap namespace
   ##
-  configMapNamespace: ""   # defaults to $(POD_NAMESPACE)
+  configMapNamespace: ""   # defaults to .Release.Namespace
 
   ## Allows customization of the tcp-services-configmap
   ##
   tcp:
-    configMapNamespace: ""   # defaults to $(POD_NAMESPACE)
+    configMapNamespace: ""   # defaults to .Release.Namespace
     ## Annotations to be added to the tcp config configmap
     annotations: {}
 
   ## Allows customization of the udp-services-configmap
   ##
   udp:
-    configMapNamespace: ""   # defaults to $(POD_NAMESPACE)
+    configMapNamespace: ""   # defaults to .Release.Namespace
     ## Annotations to be added to the udp config configmap
     annotations: {}
 
@@ -320,11 +314,6 @@ controller:
   # the healthz-port parameter are forwarded internally to this path.
   healthCheckPath: "/healthz"
 
-  # Address to bind the health check endpoint.
-  # It is better to set this option to the internal node address
-  # if the ingress nginx controller is running in the hostNetwork: true mode.
-  healthCheckHost: ""
-
   ## Annotations to be added to controller pods
   ##
   podAnnotations: {}
@@ -352,19 +341,6 @@ controller:
     maxReplicas: 11
     targetCPUUtilizationPercentage: 50
     targetMemoryUtilizationPercentage: 50
-    behavior: {}
-      # scaleDown:
-      #   stabilizationWindowSeconds: 300
-      #  policies:
-      #   - type: Pods
-      #     value: 1
-      #     periodSeconds: 180
-      # scaleUp:
-      #   stabilizationWindowSeconds: 300
-      #   policies:
-      #   - type: Pods
-      #     value: 2
-      #     periodSeconds: 60
 
   autoscalingTemplate: []
   # Custom or additional autoscaling metrics
@@ -476,8 +452,10 @@ controller:
     #     8080: 32808
     type: NodePort
     nodePorts:
-      http: 32080
-      https: 32443
+      http: "{{ ingress_nginx_http_port }}"
+      https: "{{ ingress_nginx_https_port }}"
+      tcp: {}
+      udp: {}
 
     ## Enables an additional internal load balancer (besides the external one).
     ## Annotations are mandatory for the load balancer to come up. Varies with the cloud service.
@@ -573,13 +551,12 @@ controller:
     patch:
       enabled: true
       image:
-        registry: {{ registry_server }}
-        image: {{ ingress_nginx_patch_image }}
+        registry: docker.io
+        image: jettech/kube-webhook-certgen
         # for backwards compatibility consider setting the full image url via the repository value below
         # use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
         # repository:
-        tag: "{{ ingress_nginx_patch_tag }}"
-        digest: {{ ingress_nginx_patch_digest }}
+        tag: v1.5.1
         pullPolicy: IfNotPresent
       ## Provide a priority class name to the webhook patching job
       ##
