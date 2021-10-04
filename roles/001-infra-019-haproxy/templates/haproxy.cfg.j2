@@ -45,7 +45,7 @@ listen statistics
     stats admin if TRUE # 启用管理员模式，可以控制后端服务器。
 
 {% for haproxy_service_item in haproxy_service_items %}
-listen {{ haproxy_service_item.name }}-{{ haproxy_service_item.listen_port }}
+listen {{ haproxy_service_item.name }}-{{ haproxy_service_item.listen_port }}-{{ haproxy_service_item.backend_server_listen_port }}
 {% if haproxy_service_item.mode == "tcp" %}
     mode tcp
     # log-format %ci:%cp\ [%t]\ %ft\ %b/%s\ %Tw/%Tc/%Tt\ %B\ %ts\ %ac/%fc/%bc/%sc/%rc\ %sq/%bq
@@ -61,7 +61,7 @@ listen {{ haproxy_service_item.name }}-{{ haproxy_service_item.listen_port }}
     balance roundrobin
 {% if haproxy_service_item.backend_server_mode == "static" %}
 {% for item in haproxy_service_item.backend_server_items %}
-    server {{ item }} {{ item }}:{{ haproxy_service_item.listen_port }} check
+    server {{ item }} {{ item }}:{{ haproxy_service_item.backend_server_listen_port }} check
 {% endfor %}
 {% endif %}
 
