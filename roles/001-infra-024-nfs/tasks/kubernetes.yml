@@ -9,5 +9,4 @@
   loop:
     - /data/kubernetes-nfs-pvc/infra
     - /data/kubernetes-nfs-pvc/mysql
-    - /data/kubernetes-nfs-pvc/redis-standalone
-    - /data/kubernetes-nfs-pvc/redis-cluster
+    - /data/kubernetes-nfs-pvc/redis

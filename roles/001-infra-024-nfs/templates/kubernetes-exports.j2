@@ -12,16 +12,9 @@
                                         192.168.2.15/32(insecure,rw,sync,no_root_squash) \
                                         192.168.2.16/32(insecure,rw,sync,no_root_squash)
 
-/data/kubernetes-nfs-pvc/redis-standalone   192.168.2.11/32(insecure,rw,sync,no_root_squash) \
-                                            192.168.2.12/32(insecure,rw,sync,no_root_squash) \
-                                            192.168.2.13/32(insecure,rw,sync,no_root_squash) \
-                                            192.168.2.14/32(insecure,rw,sync,no_root_squash) \
-                                            192.168.2.15/32(insecure,rw,sync,no_root_squash) \
-                                            192.168.2.16/32(insecure,rw,sync,no_root_squash)
-
 # redis-standalone 暂时还不用，因为使用非calico网络插件时，还不支持pod固定ip，当所有的redis-cluster节点重启后，集群状态则失败。
 # 创建redis-cluster时，不能使用域名，所以退而求其次的方法是，为每一个redis-cluster实例单独创建一个statefulset实例。
-/data/kubernetes-nfs-pvc/redis-cluster  192.168.2.11/32(insecure,rw,sync,no_root_squash) \
+/data/kubernetes-nfs-pvc/redis          192.168.2.11/32(insecure,rw,sync,no_root_squash) \
                                         192.168.2.12/32(insecure,rw,sync,no_root_squash) \
                                         192.168.2.13/32(insecure,rw,sync,no_root_squash) \
                                         192.168.2.14/32(insecure,rw,sync,no_root_squash) \
