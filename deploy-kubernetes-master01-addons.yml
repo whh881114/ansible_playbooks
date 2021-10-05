@@ -16,6 +16,4 @@
       tags:
         - ingress-nginx
       vars:
-        - ingress_nginx_version: 4.0.3
-        - ingress_nginx_image_tag: v1.0.2
-        - ingress_nginx_image_digest: sha256:db1ebc59737b564ecdda4d2185c7b0b9ede7c4ef11572f0980e2ca568ca2b0bd
+        - ingress_nginx_enable_hubble_ui: true

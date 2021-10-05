@@ -1,14 +1,23 @@
 ---
-ingress_nginx_version: 3.38.0
+ingress_nginx_version: 4.0.3
 ingress_nginx_pkg_url: "{{ files_server }}/kubernetes/ingress-nginx/ingress-nginx-{{ ingress_nginx_version }}.tgz"
-
-ingress_nginx_image: k8s.gcr.io/ingress-nginx-controller
-ingress_nginx_image_tag: v0.49.2
-ingress_nginx_image_digest: sha256:75ef293a956296c262c45e2aceccda11f3393bbdda161812be90704b223acc06
 
 ingress_nginx_http_port: 32080
 ingress_nginx_https_port: 32443
 
+ingress_nginx_image: k8s.gcr.io/ingress-nginx-controller
+
+# 4.0.3版本变量
+ingress_nginx_image_tag: v1.0.2
+ingress_nginx_image_digest: sha256:db1ebc59737b564ecdda4d2185c7b0b9ede7c4ef11572f0980e2ca568ca2b0bd
 ingress_nginx_patch_image: k8s.gcr.io/kube-webhook-certgen
 ingress_nginx_patch_tag: v1.0
 ingress_nginx_patch_digest: sha256:a0f92f5f828e9bf8e3a4c672080067e0079e95f9af8583059eab0c11f4dc7cfe
+
+ingress_nginx_enable_hubble_ui: false
+
+
+# 3.38.0版本变量
+# ingress_nginx_version: 3.38.0
+# ingress_nginx_image_tag: v0.49.2
+# ingress_nginx_image_digest: sha256:75ef293a956296c262c45e2aceccda11f3393bbdda161812be90704b223acc06
