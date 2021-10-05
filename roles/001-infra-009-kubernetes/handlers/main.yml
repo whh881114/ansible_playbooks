@@ -4,3 +4,9 @@
     name: kubelet
     state: restarted
     enabled: yes
+
+- name: restart-NetworkManager
+  service:
+    name: NetworkManager
+    state: restarted
+    enabled: yes

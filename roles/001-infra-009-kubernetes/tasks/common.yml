@@ -15,3 +15,10 @@
   vars:
     packages: "{{ kubernetes_pkgs }}"
   notify: restart-kubelet
+
+# 当使用calico网络插件时需要配置此项，其他的暂时没有提到，所以可以默认就安装。
+- name: configure NetworkManager
+  template:
+    src: calico.conf.j2
+    dest: /etc/NetworkManager/conf.d/calico.conf
+  notify: restart-NetworkManager
