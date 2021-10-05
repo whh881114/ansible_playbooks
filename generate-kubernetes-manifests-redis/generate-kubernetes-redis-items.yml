@@ -1,0 +1,15 @@
+---
+- name: generate kubernetes redis items
+  hosts: localhost
+  user: root
+  tasks:
+    - name: generate kubernetes redis items
+      template:
+        src: redis.j2
+        dest: "{{ redis_output_dir }}/deploy-kubernetes-redis-{{ item.name }}.yaml"
+      with_items:
+        - name: public
+          password: zuzo0qyiedklvsb7iudeuvydl&tkGQux
+          maxmemory: 2GB
+          limits_memory: 2Gi
+          storageclass_capacity: 2G
