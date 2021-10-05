@@ -3,9 +3,10 @@
   hosts: master01.k8s.freedom.org
   user: root
   roles:
-    - role: 001-infra-023-calico
+    # cilium安装是要等到k8s集群部署完成后才能执行
+    - role: 001-infra-020-cilium
       tags:
-        - calico
+        - cilium
 
     - role: 001-infra-021-helm
       tags:
@@ -14,3 +15,7 @@
     - role: 001-infra-022-ingress-nginx
       tags:
         - ingress-nginx
+      vars:
+        - ingress_nginx_version: 4.0.3
+        - ingress_nginx_image_tag: v1.0.2
+        - ingress_nginx_image_digest: sha256:db1ebc59737b564ecdda4d2185c7b0b9ede7c4ef11572f0980e2ca568ca2b0bd
