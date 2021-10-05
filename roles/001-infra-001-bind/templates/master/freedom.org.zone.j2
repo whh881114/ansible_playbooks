@@ -63,3 +63,12 @@ vcenter             IN      A           192.168.2.252
 node01.test         IN      A           192.168.2.101
 node02.test         IN      A           192.168.2.102
 
+; 定义不同的nfs解析，来模拟k8s使用不同的storageclass来应对不同的场景，当然这些后端的存储都要求做数据保护，如raid，ceph或glusterfs
+;，或者是公有云厂商提供的服务，再或者是私有云中全SSD存储。
+; infra，用来存放基础服务数据，这些对io要求不高。
+; redis，则对网络稳定性要求高，毕竟redis开启了aof后，需要实时写磁盘，如果网络拥塞了则redis不可用。
+; mysql，则对网络和磁盘io要求更高。
+infra.nfs           IN      A           192.168.2.1
+redis.nfs           IN      A           192.168.2.1
+mysql.nfs           IN      A           192.168.2.1
+
