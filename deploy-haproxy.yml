@@ -6,6 +6,17 @@
     - role: 000-base-000-common
       tags: common
 
+    - role: 000-base-001-consul
+      tags: consul-agent
+      vars:
+        consul_agent_role: true
+        consul_agent_items:
+          services:
+            - { name: hubernetes-apiserver, port: 6443 }
+            - { name: hubernetes-ingress-http, port: 32080 }
+            - { name: hubernetes-ingress-https, port: 32443 }
+            - { name: consul-agent, port: 8500 }
+
     - role: 001-infra-001-bind
       tags: dns
       vars:
