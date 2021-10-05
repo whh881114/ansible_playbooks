@@ -1,0 +1,19 @@
+---
+- name: generate kubernetes storageclass items
+  hosts: localhost
+  user: root
+  tasks:
+    - name: generate kubernetes storageclass items
+      template:
+        src: storageclass-nfs.j2
+        dest: "{{ storagecalss_output_dir }}/deploy-kubernetes-storageclass-{{ item.name }}.yaml"
+      with_items:
+          - name: infra
+            nfs_server: infra.nfs.freedom.org
+            nfs_server_shared_dir: /data/kubernetes-nfs-pvc/infra
+          - name: redis
+            nfs_server: redis.nfs.freedom.org
+            nfs_server_shared_dir: /data/kubernetes-nfs-pvc/redis
+          - name: mysql
+            nfs_server: mysql.nfs.freedom.org
+            nfs_server_shared_dir: /data/kubernetes-nfs-pvc/mysql

@@ -1,0 +1,6 @@
+---
+storagecalss_output_dir: /opt/ansible_playbooks
+
+storagecalss_namespace: kube-system
+
+storagecalss_nfs_image: harbor.freedom.org/quay.io/nfs-client-provisioner:v3.1.0-k8s1.11

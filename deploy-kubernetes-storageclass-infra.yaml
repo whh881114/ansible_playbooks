@@ -1,0 +1,94 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: storageclass-nfs-infra
+  namespace: kube-system
+
+
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: storageclass-nfs-infra
+  namespace: kube-system
+rules:
+  - apiGroups: [""]
+    resources: ["persistentvolumes"]
+    verbs: ["get", "list", "watch", "create", "delete"]
+  - apiGroups: [""]
+    resources: ["persistentvolumeclaims"]
+    verbs: ["get", "list", "watch", "update"]
+  - apiGroups: ["storage.k8s.io"]
+    resources: ["storageclasses"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["list", "watch", "create", "update", "patch"]
+  - apiGroups: [""]
+    resources: ["endpoints"]
+    verbs: ["create", "delete", "get", "list", "watch", "patch", "update"]
+
+
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: storageclass-nfs-infra
+  namespace: kube-system
+subjects:
+  - kind: ServiceAccount
+    name: storageclass-nfs-infra
+    namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: storageclass-nfs-infra
+  apiGroup: rbac.authorization.k8s.io
+
+
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: storageclass-nfs-infra
+  namespace: kube-system
+provisioner: fuseim.pri/storageclass-nfs-infra
+
+
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: storageclass-nfs-infra
+  namespace: kube-system
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: storageclass-nfs-infra
+  template:
+    metadata:
+      labels:
+        app: storageclass-nfs-infra
+    spec:
+      serviceAccountName: storageclass-nfs-infra
+      containers:
+        - name: infra
+          image: harbor.freedom.org/quay.io/nfs-client-provisioner:v3.1.0-k8s1.11
+          volumeMounts:
+            - name: nfs-client-root
+              mountPath: /persistentvolumes
+          env:
+            - name: PROVISIONER_NAME
+              value: fuseim.pri/storageclass-nfs-infra
+            - name: NFS_SERVER
+              value: infra.nfs.freedom.org
+            - name: NFS_PATH
+              value: /data/kubernetes-nfs-pvc/infra
+      volumes:
+        - name: nfs-client-root
+          nfs:
+            server: infra.nfs.freedom.org
+            path: /data/kubernetes-nfs-pvc/infra
