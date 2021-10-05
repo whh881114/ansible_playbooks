@@ -7,3 +7,5 @@ calico_etcd_endpoints: http://192.168.2.11:2379,http://192.168.2.12:2379,http://
 calico_cluster_cidr: 10.244.0.0/16
 calico_k8s_apiserver_host: apiserver.k8s.freedom.org
 calico_k8s_apiserver_port: 6443
+
+calico_ip_autodetection_method: interface=ens.*

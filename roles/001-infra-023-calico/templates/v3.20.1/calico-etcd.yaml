@@ -294,6 +294,8 @@ spec:
               name: kubernetes-services-endpoint
               optional: true
           env:
+            - name: IP_AUTODETECTION_METHOD
+              value: "{{ calico_ip_autodetection_method }}"
             - name: KUBERNETES_SERVICE_HOST
               value: "{{ calico_k8s_apiserver_host }}"
             - name: KUBERNETES_SERVICE_PORT
