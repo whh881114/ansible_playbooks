@@ -7,9 +7,13 @@
       tags: common
 
     - role: 000-base-001-consul
-      tags: consul
+      tags: consul-agent
       vars:
         consul_agent_role: True
+        consul_agent_items:
+          services:
+            - { name: harbor, port: 80 }
+            - { name: consul-agent, port: 8500 }
 
     - role: 000-base-002-fluentd
       tags: fluentd
