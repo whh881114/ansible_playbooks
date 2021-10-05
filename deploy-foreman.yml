@@ -75,3 +75,9 @@
     - role: 001-infra-014-grafana
       tags:
         - grafana
+
+    - role: 001-infra-024-nfs
+      tags:
+        - nfs
+      vars:
+        - nfs_app: kubernetes

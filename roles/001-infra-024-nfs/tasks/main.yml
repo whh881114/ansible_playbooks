@@ -1,0 +1,17 @@
+---
+- name: install nfs packages
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - nfs-utils
+      - nfs4-acl-tools
+
+- include: "{{ nfs_app }}.yml"
+
+- name: generate nfs exports file
+  template:
+    src: "{{ nfs_app }}-exports.j2"
+    dest: /etc/exports
+  notify:
+    - restart-nfs-server
