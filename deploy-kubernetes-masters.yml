@@ -10,6 +10,24 @@
       tags:
         - common
 
+    - role: 000-base-001-consul
+      tags: consul-agent
+      vars:
+        consul_agent_role: True
+        consul_agent_items:
+          services:
+            - { name: kube-apiserver, port: 6443 }
+            - { name: kube-scheduler, port: 10259 }
+            - { name: kube-controlle, port: 10257 }
+            - { name: kubelet, port: 10250 }
+            - { name: kube-proxy-ingress-nginx-http-nodeport, port: 32080 }
+            - { name: kube-proxy-ingress-nginx-https-nodeport, port: 32443 }
+            - { name: consul-agent, port: 8500 }
+
+    - role: 000-base-003-puppet
+      tags:
+        - puppet
+
     - role: 000-base-002-fluentd
       tags: fluentd
 

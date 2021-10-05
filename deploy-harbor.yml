@@ -18,6 +18,10 @@
     - role: 000-base-002-fluentd
       tags: fluentd
 
+    - role: 000-base-003-puppet
+      tags:
+        - puppet
+
     - role: 000-base-005-docker
       tags: docker
 
