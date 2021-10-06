@@ -1389,6 +1389,24 @@ metadata:
   labels:
     name: {{ item.name }}
 spec:
+  type: ClusterIP
+  ports:
+    - port: 6379        # 服务访问端口
+      targetPort: 6379  # 容器端口
+  selector:
+    name: {{ item.name }}
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ item.name }}-nodeport
+  namespace: {{ redis_namespace }}
+  labels:
+    name: {{ item.name }}
+spec:
   type: NodePort
   ports:
     - port: 6379        # 服务访问端口

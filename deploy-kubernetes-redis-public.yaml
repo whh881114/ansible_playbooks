@@ -1389,6 +1389,24 @@ metadata:
   labels:
     name: public
 spec:
+  type: ClusterIP
+  ports:
+    - port: 6379        # 服务访问端口
+      targetPort: 6379  # 容器端口
+  selector:
+    name: public
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: public-nodeport
+  namespace: redis
+  labels:
+    name: public
+spec:
   type: NodePort
   ports:
     - port: 6379        # 服务访问端口
@@ -1466,7 +1484,7 @@ spec:
     - metadata:
         name: data
         annotations:
-          volume.beta.kubernetes.io/storage-class: storageclass-nfs-infra
+          volume.beta.kubernetes.io/storage-class: fuseim.pri/storageclass-nfs-infra
       spec:
         accessModes: ["ReadWriteOnce"]
         resources:
