@@ -7,6 +7,6 @@
     owner: polkitd
     group: nfsnobody
   loop:
-    - /data/kubernetes-nfs-pvc/infra
-    - /data/kubernetes-nfs-pvc/mysql
-    - /data/kubernetes-nfs-pvc/redis
+    - /kubernetes-datastorage-pvc/infra
+    - /kubernetes-datastorage-pvc/mysql
+    - /kubernetes-datastorage-pvc/redis
