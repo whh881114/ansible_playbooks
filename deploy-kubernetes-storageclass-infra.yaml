@@ -86,9 +86,9 @@ spec:
             - name: NFS_SERVER
               value: infra.nfs.freedom.org
             - name: NFS_PATH
-              value: /data/kubernetes-nfs-pvc/infra
+              value: /kubernetes-datastorage-pvc/infra
       volumes:
         - name: nfs-client-root
           nfs:
             server: infra.nfs.freedom.org
-            path: /data/kubernetes-nfs-pvc/infra
+            path: /kubernetes-datastorage-pvc/infra

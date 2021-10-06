@@ -86,9 +86,9 @@ spec:
             - name: NFS_SERVER
               value: mysql.nfs.freedom.org
             - name: NFS_PATH
-              value: /data/kubernetes-nfs-pvc/mysql
+              value: /kubernetes-datastorage-pvc/mysql
       volumes:
         - name: nfs-client-root
           nfs:
             server: mysql.nfs.freedom.org
-            path: /data/kubernetes-nfs-pvc/mysql
+            path: /kubernetes-datastorage-pvc/mysql

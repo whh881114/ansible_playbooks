@@ -86,9 +86,9 @@ spec:
             - name: NFS_SERVER
               value: redis.nfs.freedom.org
             - name: NFS_PATH
-              value: /data/kubernetes-nfs-pvc/redis
+              value: /kubernetes-datastorage-pvc/redis
       volumes:
         - name: nfs-client-root
           nfs:
             server: redis.nfs.freedom.org
-            path: /data/kubernetes-nfs-pvc/redis
+            path: /kubernetes-datastorage-pvc/redis

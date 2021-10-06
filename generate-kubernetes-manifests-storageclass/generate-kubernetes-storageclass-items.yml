@@ -10,10 +10,10 @@
       with_items:
           - name: infra
             nfs_server: infra.nfs.freedom.org
-            nfs_server_shared_dir: /data/kubernetes-nfs-pvc/infra
+            nfs_server_shared_dir: /kubernetes-datastorage-pvc/infra
           - name: redis
             nfs_server: redis.nfs.freedom.org
-            nfs_server_shared_dir: /data/kubernetes-nfs-pvc/redis
+            nfs_server_shared_dir: /kubernetes-datastorage-pvc/redis
           - name: mysql
             nfs_server: mysql.nfs.freedom.org
-            nfs_server_shared_dir: /data/kubernetes-nfs-pvc/mysql
+            nfs_server_shared_dir: /kubernetes-datastorage-pvc/mysql
