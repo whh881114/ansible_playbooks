@@ -42,3 +42,9 @@
         - kubernetes
       vars:
         - kubernetes_version: 1.21.5
+
+    - role: 001-infra-025-ceph
+      tags:
+        - ceph
+      vars:
+        - ceph_type: kubernetes
