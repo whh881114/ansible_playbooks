@@ -1,0 +1,24 @@
+---
+- name: deploy ceph
+  hosts:
+    - node01.ceph.freedom.org
+    - node02.ceph.freedom.org
+    - node03.ceph.freedom.org
+  user: root
+  roles:
+    - role: 000-base-000-common
+      tags: common
+
+    - role: 000-base-001-consul
+      tags: consul-agent
+      vars:
+        consul_agent_role: True
+        consul_agent_items:
+          services:
+            - { name: ceph-mon, port: 6789 }
+            - { name: ceph-osd, port: 6800 }
+            - { name: consul-agent, port: 8500 }
+
+    - role: 000-base-003-puppet
+      tags:
+        - puppet
