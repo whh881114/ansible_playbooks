@@ -1484,7 +1484,7 @@ spec:
     - metadata:
         name: data
         annotations:
-          volume.beta.kubernetes.io/storage-class: fuseim.pri/storageclass-nfs-infra
+          volume.beta.kubernetes.io/storage-class: fuseim.pri/storageclass-nfs-redis
       spec:
         accessModes: ["ReadWriteOnce"]
         resources:

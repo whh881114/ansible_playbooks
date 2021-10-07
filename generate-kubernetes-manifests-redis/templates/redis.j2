@@ -1476,7 +1476,7 @@ spec:
       volumes:
         - name: conf
           configMap:
-            name: common
+            name: {{ item.name }}
         - name: host-sys
           hostPath:
             path: /sys
