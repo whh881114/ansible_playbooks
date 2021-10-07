@@ -1,12 +1,23 @@
 ---
-- name: create kubernetes pvc directories
+# 如果在创建的目录不存在时，并且再加上权限设定，则会递归改变目录owner/group。
+#    owner: polkitd
+#    group: nfsnobody
+- name: create kubernetes nfs pvc directories
   file:
     path: "{{ item }}"
     state: directory
     recurse: yes
+  loop:
+    - /data/kubernetes-datastorage-nfs-pvc/infra
+    - /data/kubernetes-datastorage-nfs-pvc/mysql
+    - /data/kubernetes-datastorage-nfs-pvc/redis
+
+- name: chown kubernetes nfs pvc directories
+  file:
+    path: "{{ item }}"
     owner: polkitd
     group: nfsnobody
   loop:
-    - /kubernetes-datastorage-pvc/infra
-    - /kubernetes-datastorage-pvc/mysql
-    - /kubernetes-datastorage-pvc/redis
+    - /data/kubernetes-datastorage-nfs-pvc/infra
+    - /data/kubernetes-datastorage-nfs-pvc/mysql
+    - /data/kubernetes-datastorage-nfs-pvc/redis
