@@ -31,5 +31,8 @@
       with_items:
         # rbd
         - name: infra
+          pool: kubernetes-datastorage-rbd-infra
         - name: redis
+          pool: kubernetes-datastorage-rbd-redis
         - name: mysql
+          pool: kubernetes-datastorage-rbd-mysql
