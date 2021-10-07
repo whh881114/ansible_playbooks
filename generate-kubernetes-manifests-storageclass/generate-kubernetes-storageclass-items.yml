@@ -1,5 +1,5 @@
 ---
-- name: generate kubernetes storageclass items
+- name: generate kubernetes storageclass items for nfs
   hosts: localhost
   user: root
   tasks:
@@ -8,12 +8,28 @@
         src: nfs.j2
         dest: "{{ storagecalss_output_dir }}/deploy-kubernetes-storageclass-nfs-{{ item.name }}.yaml"
       with_items:
-          - name: infra
-            nfs_server: infra.nfs.freedom.org
-            nfs_server_shared_dir: /data/kubernetes-datastorage-nfs-pvc/infra
-          - name: redis
-            nfs_server: redis.nfs.freedom.org
-            nfs_server_shared_dir: /data/kubernetes-datastorage-nfs-pvc/redis
-          - name: mysql
-            nfs_server: mysql.nfs.freedom.org
-            nfs_server_shared_dir: /data/kubernetes-datastorage-nfs-pvc/mysql
+        # nfs
+        - name: infra
+          nfs_server: infra.nfs.freedom.org
+          nfs_server_shared_dir: /data/kubernetes-datastorage-nfs-pvc/infra
+        - name: redis
+          nfs_server: redis.nfs.freedom.org
+          nfs_server_shared_dir: /data/kubernetes-datastorage-nfs-pvc/redis
+        - name: mysql
+          nfs_server: mysql.nfs.freedom.org
+          nfs_server_shared_dir: /data/kubernetes-datastorage-nfs-pvc/mysql
+
+
+- name: generate kubernetes storageclass items for rbd
+  hosts: localhost
+  user: root
+  tasks:
+    - name: generate kubernetes storageclass items
+      template:
+        src: rbd.j2
+        dest: "{{ storagecalss_output_dir }}/deploy-kubernetes-storageclass-rbd-{{ item.name }}.yaml"
+      with_items:
+        # rbd
+        - name: infra
+        - name: redis
+        - name: mysql
