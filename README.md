@@ -1,11 +1,9 @@
 # ansible_playbooks 更新日志
 
 ## TODO-LIST（日期不定）
-- 需要写个cgi，要求其主机上安装了kubeadm软件包。完成功能：根据传入的k8s版本，查询到k8s所需要容器的名称。然后，通过阿里镜像源下载，上传到本地harbor服务器中，最后请求的主机再去下载。
+- docker日志引擎改为fluentd，fluentd并上报到elasticsearch中。
 
 - 配置prometheus/zabbix服务器，完成一套流程：监控主机--配置触发器--告警。此外，foreman服务器上部署的prometheus需要监控k8s集群。
-
-- docker日志引擎改为fluentd，fluentd并上报到elasticsearch中。
 
 - 创建mysql_exporter角色，用于监控虚拟机上部署的mysql。
 
@@ -13,6 +11,8 @@
 
 
 ## TODO-LIST 完成清单
+- 需要写个cgi，要求其主机上安装了kubeadm软件包。完成功能：根据传入的k8s版本，查询到k8s所需要容器的名称。然后，通过阿里镜像源下载，上传到本地harbor服务器中，最后请求的主机再去下载。写过python脚本完成，但是每个版本查询到的镜像列表都不一样，没有规律，反而查询后，然后再定不同的tag，最后用shell完成来得更快。现在`docker_images`角色中完成。日期：2021/10/05，进度100%。
+
 - foreman服务器部署prometheus，当前仅用于监控虚拟机。日期：2021/09/24，进度100%。
 
 - foreman服务器部署Rocky-8.4-x86_64操作系统，此操作系统用于k8s主机。日期：2021/09/23，进度100%。
