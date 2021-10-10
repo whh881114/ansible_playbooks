@@ -114,7 +114,7 @@ LogFileSize=0
 # Default:
 # Server=
 
-Server=127.0.0.1
+Server={{ zabbix_server }}
 
 ### Option: ListenPort
 #	Agent will listen on this port for connections from the server.
@@ -155,7 +155,7 @@ Server=127.0.0.1
 # Default:
 # ServerActive=
 
-ServerActive=127.0.0.1
+ServerActive={{ zabbix_active_server }}
 
 ### Option: Hostname
 #	Unique, case sensitive hostname.
@@ -166,7 +166,7 @@ ServerActive=127.0.0.1
 # Default:
 # Hostname=
 
-Hostname=Zabbix server
+Hostname={{ ansible_fqdn }}
 
 ### Option: HostnameItem
 #	Item used for generating Hostname if it is undefined. Ignored if Hostname is defined.
@@ -197,6 +197,7 @@ Hostname=Zabbix server
 # Mandatory: no
 # Default:
 # HostMetadataItem=
+HostMetadataItem=system.uname
 
 ### Option: HostInterface
 #	Optional parameter that defines host interface.
@@ -278,6 +279,7 @@ Hostname=Zabbix server
 # Range: 1-30
 # Default:
 # Timeout=3
+Timeout=30
 
 ### Option: AllowRoot
 #	Allow the agent to run as 'root'. If disabled and the agent is started by 'root', the agent
@@ -289,6 +291,7 @@ Hostname=Zabbix server
 # Mandatory: no
 # Default:
 # AllowRoot=0
+AllowRoot=1
 
 ### Option: User
 #	Drop privileges to a specific, existing user on the system.
@@ -326,6 +329,7 @@ Include=/etc/zabbix/zabbix_agentd.d/*.conf
 # Range: 0-1
 # Default:
 # UnsafeUserParameters=0
+UnsafeUserParameters=1
 
 ### Option: UserParameter
 #	User-defined parameter to monitor. There can be several user-defined parameters.

@@ -14,8 +14,8 @@ zabbix_agent_pkgs:
   - "zabbix-get-{{ zabbix_version }}.*"
   - "zabbix-sender-{{ zabbix_version }}.*"
 
-zabbix_server: "192.168.1.0/24,192.168.2.0/24"
-zabbix_active_server: ""
+zabbix_server: "zabbix.freedom.org"
+zabbix_active_server: "zabbix.freedom.org"
 
 zabbix_db_host: localhost
 zabbix_db_port: 3306
