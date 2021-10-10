@@ -3,6 +3,14 @@
     "insecure-registries": {{ docker_insecure_registries | to_json }},
     "exec-opts": ["native.cgroupdriver={{ docker_cgroupdriver }}"],
     "log-driver": "{{ docker_log_driver }}",
+{% if docker_log_driver == "fluentd" %}
+    "log-opts": {
+        "fluentd-address": "localhost:24224",
+{%- raw %}
+        "tag": "docker.{{.Name}}"
+{% endraw %}
+    }
+{% else %}
     "log-opts": {
 {% for log_opt in docker_log_opts %}
         "{{ log_opt.key }}": "{{ log_opt.value }}"
@@ -10,4 +18,5 @@
 
 {% endfor %}
    }
+{% endif %}
 }
