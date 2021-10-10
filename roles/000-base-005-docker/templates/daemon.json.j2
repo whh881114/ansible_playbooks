@@ -4,9 +4,10 @@
     "exec-opts": ["native.cgroupdriver={{ docker_cgroupdriver }}"],
     "log-driver": "{{ docker_log_driver }}",
     "log-opts": {
-        "fluentd-address": "{{ docker_fluentd_host }}",
-{%- raw %}
-        "tag": "docker.{{.Name}}"
-{% endraw %}
+{% for log_opt in docker_log_opts %}
+        "{{ log_opt.key }}": "{{ log_opt.value }}"
+{%- if not loop.last %},{% endif %}
+
+{% endfor %}
    }
 }
