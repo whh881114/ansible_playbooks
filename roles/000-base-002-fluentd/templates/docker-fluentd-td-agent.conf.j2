@@ -1,0 +1,33 @@
+<source>
+  @type tail
+  path /var/lib/docker/containers/*/*-json.log
+  pos_file /var/log/td-agent/docker_container.log.pos
+  tag docker.*
+  refresh_interval 10
+  read_from_head true
+  <parse>
+    @type json
+    time_type string
+  </parse>
+</source>
+
+# 这个match格式要是这样的，因为日志里有提示。
+# 2021-10-10 14:56:35 +0800 [warn]: #0 no patterns matched tag="docker.var.lib.docker.containers.24c0fc00b73a79d1865f6295541dee862f7fd2fd1aca8606155998393a90dc24.24c0fc00b73a79d1865f6295541dee862f7fd2fd1aca8606155998393a90dc24-json.log"
+# 2021-10-10 14:56:37 +0800 [warn]: #0 no patterns matched tag="docker.var.lib.docker.containers.24c0fc00b73a79d1865f6295541dee862f7fd2fd1aca8606155998393a90dc24.24c0fc00b73a79d1865f6295541dee862f7fd2fd1aca8606155998393a90dc24-json.log"
+# 2021-10-10 14:56:41 +0800 [warn]: #0 no patterns matched tag="docker.var.lib.docker.containers.24c0fc00b73a79d1865f6295541dee862f7fd2fd1aca8606155998393a90dc24.24c0fc00b73a79d1865f6295541dee862f7fd2fd1aca8606155998393a90dc24-json.log"
+# 2021-10-10 14:56:49 +0800 [warn]: #0 no patterns matched tag="docker.var.lib.docker.containers.24c0fc00b73a79d1865f6295541dee862f7fd2fd1aca8606155998393a90dc24.24c0fc00b73a79d1865f6295541dee862f7fd2fd1aca8606155998393a90dc24-json.log"
+# 2021-10-10 14:57:05 +0800 [warn]: #0 no patterns matched tag="docker.var.lib.docker.containers.24c0fc00b73a79d1865f6295541dee862f7fd2fd1aca8606155998393a90dc24.24c0fc00b73a79d1865f6295541dee862f7fd2fd1aca8606155998393a90dc24-json.log"
+# 2021-10-10 14:57:37 +0800 [warn]: #0 no patterns matched tag="docker.var.lib.docker.containers.24c0fc00b73a79d1865f6295541dee862f7fd2fd1aca8606155998393a90dc24.24c0fc00b73a79d1865f6295541dee862f7fd2fd1aca8606155998393a90dc24-json.log"
+<match docker.var.lib.docker.containers.*.*.log>
+  @type elasticsearch
+  host {{ fluentd_elasticsearch_host }}
+  port {{ fluentd_elasticsearch_port }}
+  logstash_prefix {{ fluentd_logstash_prefix }}
+  logstash_dateformat "{{ fluentd_logstash_dateformat }}"
+  logstash_format {{ fluentd_logstash_format }}
+  flush_interval {{ fluentd_flush_interval }}
+{% if fluented_elasticsearch_auth %}
+  user {{ fluented_elasticsearch_username }}
+  password {{ fluented_elasticsearch_password }}
+{% endif %}
+</match>
