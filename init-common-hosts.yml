@@ -6,3 +6,6 @@
     - role: 000-base-000-common
       tags:
         - common
+
+    - role: 001-infra-018-zabbix
+      tags: zabbix

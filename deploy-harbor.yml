@@ -30,5 +30,8 @@
       vars:
         - docker_images_role: harbor
 
+    - role: 001-infra-018-zabbix
+      tags: zabbix
+
     - role: 001-infra-010-harbor
       tags: harbor

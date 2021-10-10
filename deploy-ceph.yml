@@ -22,3 +22,6 @@
     - role: 000-base-003-puppet
       tags:
         - puppet
+
+    - role: 001-infra-018-zabbix
+      tags: zabbix

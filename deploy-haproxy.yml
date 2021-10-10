@@ -26,6 +26,9 @@
       vars:
         - bind_slave_role: true
 
+    - role: 001-infra-018-zabbix
+      tags: zabbix
+
     - role: 001-infra-019-haproxy
       tags:
         - haproxy
