@@ -52,19 +52,24 @@
   notify: restart-zabbix-server
 
 
-
-- name: config zabbix web
-  template:
-    src: "{{ zabbix_version }}/zabbix_web.conf.j2"
-    dest: /etc/httpd/conf.d/zabbix.conf
-    mode: "0644"
-  notify: restart-zabbix-web
-
-
-
 - name: config zabbix php
   template:
     src: "{{ zabbix_version }}/zabbix_php.conf.j2"
     dest: /etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf
     mode: "0644"
   notify: restart-zabbix-php
+
+
+- name: config zabbix web to support Chinese step 1
+  copy:
+    src: msyh.ttf
+    dest: /usr/share/fonts
+
+- name: config zabbix web to support Chinese step 2
+  lineinfile:
+    path: /usr/share/zabbix/include/defines.inc.php
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - {regexp: "ZBX_FONTPATH", line: "define('ZBX_FONTPATH',              realpath('/usr/share/fonts')); // where to search for font (GD > 2.0.18)"}
+    - {regexp: "ZBX_GRAPH_FONT_NAME", line: "define('ZBX_GRAPH_FONT_NAME',       'msyh'); // font file name"}
