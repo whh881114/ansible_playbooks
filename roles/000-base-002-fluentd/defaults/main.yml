@@ -1,4 +1,17 @@
 ---
 fluentd_version: 4.2.0
+
 fluentd_pkgs:
   - "td-agent-{{ fluentd_version }}"
+
+fluentd_type: docker
+fluentd_elasticsearch_host: elasticsearch.freedom.org
+fluentd_elasticsearch_port: 9200
+fluentd_logstash_prefix: docker
+fluentd_logstash_dateformat: "%Y.%m.%d"
+fluentd_logstash_format: "true"
+fluentd_flush_interval: 10s
+fluented_elasticsearch_auth: true
+fluented_elasticsearch_username: elastic
+fluented_elasticsearch_password: 3ziosbgTkvrpxfQ|e5
+
