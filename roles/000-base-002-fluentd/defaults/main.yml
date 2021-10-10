@@ -14,4 +14,3 @@ fluentd_flush_interval: 10s
 fluented_elasticsearch_auth: true
 fluented_elasticsearch_username: elastic
 fluented_elasticsearch_password: 3ziosbgTkvrpxfQ|e5
-
