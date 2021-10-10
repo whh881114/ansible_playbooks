@@ -4,6 +4,9 @@
     "exec-opts": ["native.cgroupdriver={{ docker_cgroupdriver }}"],
     "log-driver": "{{ docker_log_driver }}",
     "log-opts": {
-        "fluentd-address": "{{ docker_fluentd_host }}"
+        "fluentd-address": "{{ docker_fluentd_host }}",
+{%- raw %}
+        "tag": "docker.{{.Name}}"
+{% endraw %}
    }
 }

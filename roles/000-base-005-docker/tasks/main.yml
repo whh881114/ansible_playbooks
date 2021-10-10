@@ -16,11 +16,9 @@
     state: present
   loop: "{{ docker_pkgs }}"
 
-- name: start docker service
-  service:
-    name: docker
-    state: started
-    enabled: yes
+- name: mkdir /etc/docker directory
+  file:
+    path: /etc/docker
 
 - name: generate docker-ce configuration file
   template:
