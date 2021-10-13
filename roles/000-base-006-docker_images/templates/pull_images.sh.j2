@@ -4,6 +4,8 @@ while read line
 do
 {% if docker_images_role == "harbor" %}
     docker pull "$line"
+    docker tag  ""$line" "{{ docker_images_register }}/$line"
+    docker pull "{{ docker_images_register }}/$line"
 {% else %}
     docker pull "{{ docker_images_register }}/$line"
 {% endif %}

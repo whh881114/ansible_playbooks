@@ -18,8 +18,10 @@
 
 - name: pull/push docker images
   shell: |
-    ./pull_images.sh
-    ./pull_k8s_images.sh
+    dos2unix "{{ docker_images_list_file }}"
+    dos2unix "{{ docker_images_k8s_list_file }}"
+    sh -x ./pull_images.sh
+    sh -x ./pull_k8s_images.sh
   register: result
   ignore_errors: yes
 
