@@ -3,6 +3,7 @@ zabbix_version: 5.0
 
 zabbix_server_role: False
 zabbix_agent_role: True
+zabbix_agent2_role: False
 
 zabbix_server_pkgs:
   - "zabbix-server-mysql-{{ zabbix_version }}.*"
@@ -11,6 +12,7 @@ zabbix_server_pkgs:
 
 zabbix_agent_pkgs:
   - "zabbix-agent-{{ zabbix_version }}.*"
+  - "zabbix-agent2-{{ zabbix_version }}.*"
   - "zabbix-get-{{ zabbix_version }}.*"
   - "zabbix-sender-{{ zabbix_version }}.*"
 

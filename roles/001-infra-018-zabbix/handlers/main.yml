@@ -11,6 +11,12 @@
     state: restarted
     enabled: yes
 
+- name: restart-zabbix-agent2
+  service:
+    name: zabbix-agent2
+    state: restarted
+    enabled: yes
+
 - name: restart-zabbix-web
   service:
     name: httpd
