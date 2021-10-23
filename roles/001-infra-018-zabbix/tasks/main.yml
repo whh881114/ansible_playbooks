@@ -4,3 +4,6 @@
 
 - include: "agent-{{ zabbix_version }}.yml"
   when: zabbix_agent_role
+
+- include: "agent2-{{ zabbix_version }}.yml"
+  when: zabbix_agent2_role

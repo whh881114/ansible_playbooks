@@ -1,4 +1,11 @@
 ---
+- name: uninstall zabbix_agent2 packages
+  yum:
+    name: "{{ item }}"
+    state: absent
+  loop:
+    - "{{ zabbix_agent2_pkgs }}"
+
 - name: install zabbix_agent
   yum:
     name: "{{ item }}"
@@ -14,13 +21,3 @@
     - {src: "{{ zabbix_version }}/zabbix_agentd.conf.j2", dest: /etc/zabbix/zabbix_agentd.conf }
   notify:
     - restart-zabbix-agent
-
-- name: update zabbix agentd config
-  template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-  with_items:
-    - {src: "{{ zabbix_version }}/zabbix_agent2.conf.j2", dest: /etc/zabbix/zabbix_agent2.conf }
-  notify:
-    - restart-zabbix-agent2
-  when: zabbix_agent2_role
