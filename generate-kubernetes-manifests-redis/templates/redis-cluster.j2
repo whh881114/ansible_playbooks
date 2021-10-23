@@ -1,0 +1,181 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ item.name }}
+  namespace: {{ redis_namespace }}
+data:
+  update_node.sh: |
+    #!/bin/bash
+    REDIS_NODES="/data/nodes.conf"
+    sed -i -e "/myself/ s/[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/${POD_IP}/" ${REDIS_NODES}
+    exec "$@"
+
+  redis.conf: |
+    dir /data
+    bind 0.0.0.0
+    cluster-enabled yes
+    cluster-config-file nodes.conf
+    logfile redis.log
+    cluster-node-timeout 5000
+    appendonly yes
+    daemonize no
+    pidfile redis.pid
+    appendfilename appendonly.aof
+    protected-mode yes
+
+    maxmemory {{ item.maxmemory }}
+    maxmemory-policy volatile-ttl
+
+    requirepass {{ item.password }}
+    masterauth  {{ item.password }}
+
+    timeout 60
+    tcp-keepalive 300
+    loglevel notice
+
+    appendfsync everysec
+    no-appendfsync-on-rewrite no
+    auto-aof-rewrite-percentage 100
+    auto-aof-rewrite-min-size 64mb
+    aof-load-truncated yes
+
+    lua-time-limit 5000
+    slowlog-log-slower-than 10000
+    slowlog-max-len 128
+    latency-monitor-threshold 0
+    notify-keyspace-events ""
+    hash-max-ziplist-entries 512
+    hash-max-ziplist-value 64
+    list-max-ziplist-entries 512
+    list-max-ziplist-value 64
+    set-max-intset-entries 512
+    zset-max-ziplist-entries 128
+    zset-max-ziplist-value 64
+    hll-sparse-max-bytes 3000
+    activerehashing yes
+    client-output-buffer-limit normal 0 0 0
+    client-output-buffer-limit slave 256mb 64mb 60
+    client-output-buffer-limit pubsub 32mb 8mb 60
+    hz 10
+    aof-rewrite-incremental-fsync yes
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ item.name }}
+  namespace: {{ redis_namespace }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 6379
+      targetPort: 6379
+      name: client
+    - port: 16379
+      targetPort: 16379
+      name: gossip
+  selector:
+    app: {{ item.name }}
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ item.name }}-nodeport
+  namespace: {{ redis_namespace }}
+spec:
+  type: NodePort
+  ports:
+    - port: 6379
+      targetPort: 6379
+      name: client
+    - port: 16379
+      targetPort: 16379
+      name: gossip
+  selector:
+    app: {{ item.name }}
+
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ item.name }}
+  namespace: {{ redis_namespace }}
+spec:
+  serviceName: {{ item.name }}
+  replicas: {{ item.replicas }}
+  selector:
+    matchLabels:
+      app: {{ item.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ item.name }}
+    spec:
+      initContainers:
+        - name: sysctl
+          image: harbor.freedom.org/docker.io/busybox:1.31.1
+          command: ["sysctl"]
+          args: ["-w", "net.core.somaxconn=65535"]
+          securityContext:
+            privileged: true
+        - name: disable-transparent-hugepage
+          image: harbor.freedom.org/docker.io/busybox:1.31.1
+          command: ["sh", "-c", "echo never > /host-sys/kernel/mm/transparent_hugepage/enabled"]
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: host-sys
+              mountPath: /host-sys
+      containers:
+        - name: common
+          image: harbor.freedom.org/docker.io/redis:5.0.7
+          ports:
+            - containerPort: 6379
+              name: client
+            - containerPort: 16379
+              name: gossip
+          command: ["/conf/update_node.sh", "redis-server", "/conf/redis.conf"]
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          volumeMounts:
+            - name: conf
+              mountPath: /conf
+              readOnly: false
+            - name: data
+              mountPath: /data
+              readOnly: false
+          resources:
+            requests:
+              cpu: {{ item.requests_cpu | default("100m") }}
+              memory: {{ item.requests_memory | default("128Mi") }}
+            limits:
+              cpu: {{ item.limits_cpu | default("1000m") }}
+              memory: {{ item.limits_memory | default("2048Mi") }}
+      volumes:
+        - name: conf
+          configMap:
+            name: {{ item.name }}
+            defaultMode: 0755
+        - name: host-sys
+          hostPath:
+            path: /sys
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+        annotations:
+          volume.beta.kubernetes.io/storage-class: {{ redis_storageclass }}
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: {{ item.storageclass_capacity }}
