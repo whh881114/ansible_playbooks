@@ -1,0 +1,37 @@
+---
+- name: install haproxy
+  yum:
+    name: haproxy18
+    state: present
+
+- name: install haproxy cert file
+  copy:
+    src: haproxy.crt
+    dest: /etc/ssl/certs/haproxy.crt
+
+- name: configure rsyslog for haproxy step 1
+  lineinfile: 
+    path: /etc/rsyslog.conf
+    line: "{{ item.line }}"
+    insertafter: "{{ item.insertafter }}"
+  with_items:
+    - { line: '$ModLoad imudp', insertafter: '^\#\$ModLoad imudp' }
+    - { line: '$UDPServerRun 514', insertafter: '^\#\$UDPServerRun 514' }
+    - { line: 'local2.*  /var/log/haproxy18.log', insertafter: None }
+  notify: restart-rsyslog
+
+- name: generate haproxy.cfg main part
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy18/haproxy.cfg
+    mode: 0644
+  notify: reload-haproxy18
+
+- name: generate haproxy.service
+  template:
+    src: haproxy18.service.j2
+    dest: "{{ systemd_conf_dir }}/haproxy18.service"
+  notify:
+    - systemctl-daemon-reload
+    - reload-haproxy18
+  when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and ansible_distribution_major_version == "7"

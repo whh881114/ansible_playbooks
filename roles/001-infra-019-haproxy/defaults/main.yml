@@ -1,4 +1,5 @@
 ---
+haproxy_version: 1.8.27
 haproxy_nic_name: ens192
 
 haproxy_nic_ipaddr: 192.168.2.2

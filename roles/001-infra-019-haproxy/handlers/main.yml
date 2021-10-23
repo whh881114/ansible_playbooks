@@ -3,6 +3,12 @@
   systemd:
     daemon_reload: yes
 
+- name: restart-rsyslog
+  service:
+    name: rsyslog
+    state: restarted
+    enabled: yes
+
 - name: reload-haproxy
   service:
     name: haproxy
@@ -12,5 +18,17 @@
 - name: restart-haproxy
   service:
     name: haproxy
+    state: restarted
+    enabled: yes
+
+- name: reload-haproxy18
+  service:
+    name: haproxy18
+    state: reloaded
+    enabled: yes
+
+- name: restart-haproxy18
+  service:
+    name: haproxy18
     state: restarted
     enabled: yes

@@ -1,0 +1,21 @@
+[Unit]
+Description=HAProxy Load Balancer
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+LimitNOFILE=100000
+Environment="CONFIG=/etc/haproxy18/haproxy.cfg" "PIDFILE=/run/haproxy18.pid"
+EnvironmentFile=/etc/sysconfig/haproxy18
+ExecStartPre=/usr/sbin/haproxy18 -f $CONFIG -c -q $OPTIONS
+ExecStart=/usr/sbin/haproxy18 -Ws -f $CONFIG -p $PIDFILE $OPTIONS
+ExecReload=/usr/sbin/haproxy18 -f $CONFIG -c -q $OPTIONS
+ExecReload=/bin/kill -USR2 $MAINPID
+SuccessExitStatus=143
+KillMode=mixed
+Type=notify
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
