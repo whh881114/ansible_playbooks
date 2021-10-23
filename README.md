@@ -11,7 +11,9 @@
 
 
 ## TODO-LIST 完成清单
-- - 配置prometheus/zabbix服务器，完成一套流程：监控主机--配置触发器--告警。日期：2021/10/17，进度100%。
+- zabbix完成监控haproxy服务器。日期：2021/10/23，进度100%。
+
+- 配置prometheus/zabbix服务器，完成一套流程：监控主机--配置触发器--告警。日期：2021/10/17，进度100%。
 
 - docker日志引擎改为fluentd，fluentd并上报到elasticsearch中。日期：2021/10/10，进度100%。
 
