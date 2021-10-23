@@ -1,6 +1,8 @@
 # ansible_playbooks 更新日志
 
 ## TODO-LIST（日期不定）
+- ceph主机上安装zabbix-agent2并且配置监控。
+
 - foreman服务器上完善其他基本监控，监控项目暂时未定。
 
 - foreman服务器上部署的prometheus需要监控k8s集群。
