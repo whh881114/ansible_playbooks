@@ -41,7 +41,8 @@ listen statistics
     stats uri /stats
     stats realm "Private lands"
     stats auth {{ haproxy_auth_username }}:{{ haproxy_auth_password }}
-    stats hide-version
+    # 显示版本号，用于zabbix监控。
+    # stats hide-version
     stats admin if TRUE # 启用管理员模式，可以控制后端服务器。
 
 {% for haproxy_service_item in haproxy_service_items %}
