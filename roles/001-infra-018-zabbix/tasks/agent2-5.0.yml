@@ -24,11 +24,13 @@
   notify:
     - restart-zabbix-agent2
 
-- name: update zabbix agentd sub-config
-  template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-  with_items:
-    - {src: "{{ zabbix_version }}/zabbix_agentd.d/template_db_mysql.conf.j2", dest: /etc/zabbix/zabbix_agent2.d/template_db_mysql.conf }
-  notify:
-    - restart-zabbix-agent2
+# 临时取消mysql配置，有以下报错，可能使用zabbix-agent2时，不需要配置此项。
+# zabbix_agent2 [7167]: ERROR: cannot initialize user parameters: cannot register user parameter "mysql.ping[*], mysqladmin -h"$1" -P"$2" ping": key already used
+#- name: update zabbix agentd sub-config
+#  template:
+#    src: "{{ item.src }}"
+#    dest: "{{ item.dest }}"
+#  with_items:
+#    - {src: "{{ zabbix_version }}/zabbix_agentd.d/template_db_mysql.conf.j2", dest: /etc/zabbix/zabbix_agent2.d/template_db_mysql.conf }
+#  notify:
+#    - restart-zabbix-agent2
