@@ -10,4 +10,5 @@
     - { src: yum.conf, dest: /etc/httpd/conf.d/yum.conf }
     - { src: files.conf, dest: /etc/httpd/conf.d/files.conf }
     - { src: zabbix.conf, dest: /etc/httpd/conf.d/zabbix.conf }
+    - { src: status.conf, dest: /etc/httpd/conf.d/status.conf }
   notify: reload-httpd
