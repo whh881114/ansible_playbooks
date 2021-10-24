@@ -25,3 +25,6 @@
 
     - role: 001-infra-018-zabbix
       tags: zabbix
+      vars:
+        - zabbix_agent_role: False
+        - zabbix_agent2_role: True
