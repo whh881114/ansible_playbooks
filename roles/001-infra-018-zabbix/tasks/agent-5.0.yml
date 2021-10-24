@@ -12,6 +12,8 @@
     state: present
   loop:
     - "{{ zabbix_agent_pkgs }}"
+    - "zabbix-get-{{ zabbix_version }}.*"
+    - "zabbix-sender-{{ zabbix_version }}.*"
 
 - name: update zabbix agentd config
   template:
