@@ -42,6 +42,7 @@
       vars:
         zabbix_server_role: true
 
+    # 涉及到修改httpd日志格式，所以httpd的子配置文件存放在此角色中。
     - role: 001-infra-002-elasticstack
       tags:
         - es
