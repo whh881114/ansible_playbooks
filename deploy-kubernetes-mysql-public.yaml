@@ -1,0 +1,149 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: public
+  namespace: mysql
+data:
+  MYSQL_ROOT_PASSWORD: "kz2zv&eoynpneQbyeowebyu0beGxkgvy"
+
+  my.cnf: |
+    # For advice on how to change settings please see
+    # http://dev.mysql.com/doc/refman/5.7/en/server-configuration-defaults.html
+
+    [mysqld]
+    #
+    # Remove leading # and set to the amount of RAM for the most important data
+    # cache in MySQL. Start at 70% of total RAM for dedicated server, else 10%.
+    # innodb_buffer_pool_size = 128M
+    #
+    # Remove leading # to turn on a very important data integrity option: logging
+    # changes to the binary log between backups.
+    # log_bin
+    #
+    # Remove leading # to set options mainly useful for reporting servers.
+    # The server defaults are faster for transactions and fast SELECTs.
+    # Adjust sizes as needed, experiment to find the optimal values.
+    # join_buffer_size = 128M
+    # sort_buffer_size = 2M
+    # read_rnd_buffer_size = 2M
+    datadir=/var/lib/mysql
+    socket=/var/lib/mysql/mysql.sock
+
+    # Disabling symbolic-links is recommended to prevent assorted security risks
+    symbolic-links=0
+
+    log-error=/var/lib/mysql/mysqld.log
+    pid-file=/var/lib/mysql/mysqld.pid
+
+    # Roy Wong added those lines. 2020-01-09
+    character_set_server = utf8mb4
+    collation_server = utf8mb4_unicode_ci
+
+    server-id = 1
+    log-bin = /var/lib/mysql/mysql-bin
+    binlog-format = ROW
+    expire_logs_days = 15
+    lower_case_table_names = 1
+    sql_mode = NO_ENGINE_SUBSTITUTION
+
+    [mysql]
+    default_character_set = utf8
+
+    [client]
+    default_character_set = utf8
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: public
+  namespace: mysql
+  labels:
+    name: public
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3306
+      targetPort: 3306
+  selector:
+    name: public
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: public-nodeport
+  namespace: mysql
+  labels:
+    name: public
+spec:
+  type: NodePort
+  ports:
+    - port: 3306
+      targetPort: 3306
+  selector:
+    name: public
+
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: public
+  namespace: mysql
+  labels:
+    name: public
+spec:
+  serviceName: public
+  replicas: 1
+  selector:
+    matchLabels:
+      name: public
+  template:
+    metadata:
+      labels:
+        name: public
+    spec:
+      containers:
+        - name: public
+          image: harbor.freedom.org/docker.io/mysql:5.7.29
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: public
+                  key: MYSQL_ROOT_PASSWORD
+          ports:
+            - containerPort: 3306
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              cpu: 4000m
+              memory: 8192Mi
+          volumeMounts:
+            - name: mysql-conf
+              mountPath: /etc/mysql/conf.d
+              readOnly: true
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-conf
+          configMap:
+            name: public
+  volumeClaimTemplates:
+    - metadata:
+        name: mysql-data
+        annotations:
+          volume.beta.kubernetes.io/storage-class: storageclass-nfs-mysql
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 50G

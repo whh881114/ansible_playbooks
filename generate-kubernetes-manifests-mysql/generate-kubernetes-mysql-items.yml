@@ -1,0 +1,13 @@
+---
+- name: generate kubernetes mysql items
+  hosts: localhost
+  user: root
+  tasks:
+    - name: generate kubernetes mysql items
+      template:
+        src: mysql.j2
+        dest: "{{ mysql_output_dir }}/deploy-kubernetes-mysql-{{ item.name }}.yaml"
+      with_items:
+        - name: public
+          password: kz2zv&eoynpneQbyeowebyu0beGxkgvy
+          storageclass_capacity: 50G
