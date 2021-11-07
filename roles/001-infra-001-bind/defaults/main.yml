@@ -29,6 +29,9 @@ bind_slave_zone_dir: "{{ bind_dir }}/slaves"
 
 bind_zones:
   - freedom.org
+  - ceph.freedom.org
+  - k8s.freedom.org
+  - nfs.freedom.org
 
 bind_rev_zones:
   - {ip: "{{ bind_foreman_rev_net }}", domain_name: "freedom.org"}
