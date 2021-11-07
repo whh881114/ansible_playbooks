@@ -1,0 +1,17 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: consul-server-bj
+  namespace: consul
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - host: consul-bj.k8s.freedom.org
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: consul-server-bj
+            servicePort: 8500
