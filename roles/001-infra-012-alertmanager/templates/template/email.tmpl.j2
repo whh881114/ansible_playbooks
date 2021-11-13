@@ -8,7 +8,7 @@
 告警类型：{{ index $alert.Labels "alertname" }}
 告警主题：{{ index $alert.Annotations "summary" }}
 告警详情：{{ index $alert.Annotations "description" }}
-告警时间：{{ ($alert.StartsAt.Format "2021-11-14 00:00:21" }}
+告警时间：{{ ($alert.StartsAt).Format "2021-11-14 00:00:21" }}
 
 </pre>
 {{ end }}
