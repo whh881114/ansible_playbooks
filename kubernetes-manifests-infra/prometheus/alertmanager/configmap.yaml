@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alertmanager-config
+  namespace: prometheus
+  labels:
+    kubernetes.io/cluster-service: "true"
+    addonmanager.kubernetes.io/mode: EnsureExists
+data:
+  alertmanager.yml: |
+    global:
+      resolve_timeout: 5m
+      smtp_smarthost: "smtp.163.com:465"
+      smtp_from: "roy_wong_20210324@163.com"
+      smtp_auth_username: "roy_wong_20210324@163.com"
+      smtp_auth_password: "Iam1234567890."
+      smtp_require_tls: false
+
+    route:
+      group_by: ["alertname"]
+      group_wait: 10s
+      group_interval: 10s
+      repeat_interval: 1h
+      receiver: "email"
+
+    receivers:
+      - name: "email"
+        email_configs:
+          - to: "roy_wong_20210324@163.com"
+
+    inhibit_rules:
+      - source_match:
+          severity: "critical"
+        target_match:
+          severity: "warning"
+        equal: ['alertname', 'dev', 'instance']

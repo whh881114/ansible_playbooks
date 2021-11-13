@@ -1,0 +1,57 @@
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: grafana
+  namespace: prometheus
+  labels:
+    name: grafana
+spec:
+  serviceName: grafana
+  replicas: 1
+  selector:
+    matchLabels:
+      name: grafana
+  template:
+    metadata:
+      labels:
+        name: grafana
+    spec:
+      containers:
+        - name: grafana
+          image: harbor.freedom.org/grafana/grafana:7.3.6
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+          resources:
+            requests:
+              memory: 256M
+              cpu: 200m
+            limits:
+              memory: 4096M
+              cpu: 1000m
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: grafana-data
+              mountPath: /var/lib/grafana
+            - name: grafana-logs
+              mountPath: /var/log/grafana
+  volumeClaimTemplates:
+    - metadata:
+        name: grafana-data
+        annotations:
+          volume.beta.kubernetes.io/storage-class: nfs-infra
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 50Gi
+    - metadata:
+        name: grafana-logs
+        annotations:
+          volume.beta.kubernetes.io/storage-class: nfs-infra
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi

@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pushgateway
+  namespace: prometheus
+  labels:
+    kubernetes.io/cluster-service: "true"
+    addonmanager.kubernetes.io/mode: Reconcile
+    kubernetes.io/name: "pushgateway"
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 9091
+      targetPort: 9091
+  selector:
+    k8s-app: pushgateway
+  type: "ClusterIP"
