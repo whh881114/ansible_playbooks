@@ -9,3 +9,7 @@
 
     - role: 001-infra-018-zabbix
       tags: zabbix
+
+    - role: 000-base-010-node_exporter
+      tags:
+        - node_exporter

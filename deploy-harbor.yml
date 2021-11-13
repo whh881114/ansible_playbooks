@@ -22,6 +22,10 @@
       tags:
         - puppet
 
+    - role: 000-base-010-node_exporter
+      tags:
+        - node_exporter
+
     - role: 000-base-005-docker
       tags: docker
 
