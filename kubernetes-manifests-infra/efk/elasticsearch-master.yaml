@@ -1,0 +1,153 @@
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: elasticsearch-master
+  namespace: elasticsearch
+  labels:
+    app: elasticsearch-master
+
+
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: elasticsearch-master
+  namespace: elasticsearch
+  labels:
+    app: elasticsearch-master
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: elasticsearch-master
+subjects:
+  - kind: ServiceAccount
+    name: elasticsearch-master
+    namespace: elasticsearch
+
+
+---
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: elasticsearch-master
+  namespace: elasticsearch
+  labels:
+    component: elasticsearch
+    role: master
+spec:
+  serviceName: elasticsearch-master
+  replicas: 3
+  selector:
+    matchLabels:
+      component: elasticsearch
+      role: master
+  template:
+    metadata:
+      labels:
+        component: elasticsearch
+        role: master
+    spec:
+      serviceAccountName: elasticsearch-master
+      initContainers:
+        - name: init-sysctl
+          image: harbor.freedom.org/docker.io/busybox:1.31.1
+          command:
+            - sysctl
+            - -w
+            - vm.max_map_count=262144
+          securityContext:
+            privileged: true
+      containers:
+        - name: elasticsearch-master
+          image: harbor.freedom.org/elastic/elasticsearch:7.9.2
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+            - name: "ES_JAVA_OPTS"
+              value: "-Xms512m -Xmx512m"
+            - name: "cluster.name"
+              value: "elasticsearch"
+            - name: "discovery.seed_hosts"        # 这里用服务发现
+              value: "elasticsearch-master"
+            - name: "cluster.initial_master_nodes"  # 这里要使用statefulset的pod名称，不要使用服务发现。
+              value: "elasticsearch-master-0, elasticsearch-master-1, elasticsearch-master-2"
+            - name: "node.master"
+              value: "true"
+            - name: "node.data"
+              value: "false"
+            - name: "node.ingest"
+              value: "false"
+            - name: "node.ml"
+              value: "false"
+            - name: "node.remote_cluster_client"  # 各个角色介绍：https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html
+              value: "false"
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 4096Mi
+            requests:
+              cpu: 100m
+              memory: 1024Mi
+          ports:
+            - containerPort: 9300
+              name: transport
+              protocol: TCP
+          volumeMounts:
+            - name: elasticsearch-master
+              mountPath: /usr/share/elasticsearch/data
+  volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-master
+        annotations:
+          volume.beta.kubernetes.io/storage-class: nfs-infra
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch-master
+  namespace: elasticsearch
+  labels:
+    component: elasticsearch
+    role: master
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    component: elasticsearch
+    role: master
+  ports:
+    - name: transport
+      port: 9300
+      protocol: TCP
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch-master-nodeport
+  namespace: elasticsearch
+  labels:
+    component: elasticsearch
+    role: master
+spec:
+  type: NodePort
+  selector:
+    component: elasticsearch
+    role: master
+  ports:
+    - name: http
+      port: 9200
+      protocol: TCP
+    - name: transport
+      port: 9300
+      protocol: TCP
