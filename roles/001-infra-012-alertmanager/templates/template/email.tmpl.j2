@@ -6,9 +6,10 @@
 <pre>
 告警节点：{{ index $alert.Labels "instance" }}
 告警类型：{{ index $alert.Labels "alertname" }}
+告警级别: {{ index $alert.Labels "severity" }}
 告警主题：{{ index $alert.Annotations "summary" }}
 告警详情：{{ index $alert.Annotations "description" }}
-告警时间：{{ $alert.StartsAt.Format "2021-11-14 00:00:21" }}
+告警时间：{{ $alert.StartsAt.Local }}
 
 </pre>
 {{ end }}
@@ -22,10 +23,11 @@
 <pre>
 恢复节点：{{ index $alert.Labels "instance" }}
 恢复类型：{{ index $alert.Labels "alertname" }}
+恢复级别: {{ index $alert.Labels "severity" }}
 恢复主题：{{ index $alert.Annotations "summary" }}
 恢复详情：{{ index $alert.Annotations "description" }}
-告警时间：{{ $alert.StartsAt.Format "2021-11-14 00:00:21" }}
-恢复时间：{{ $alert.EndsAt.Format "2021-11-14 00:00:21" }}
+告警时间：{{ $alert.StartsAt.Local }}
+恢复时间：{{ $alert.EndsAt.Local }}
 
 </pre>
 {{ end }}
