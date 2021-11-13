@@ -2,6 +2,8 @@
 
 
 ## TODO-LIST（日期不定）
+- foreman服务器上部署prometheus，先完成监控虚拟机，实现告警。
+
 - foreman服务器上完善其他基本监控，监控项目暂时未定。
 
 - foreman服务器上部署的prometheus需要监控k8s集群。
