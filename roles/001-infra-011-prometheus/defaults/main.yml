@@ -28,7 +28,7 @@ prometheus_config_flags_extra: {}
 
 prometheus_alertmanager_config:
   - scheme: http
-    path_prefix: alertmanager/
+    path_prefix: /
     static_configs:
       - targets:
           - "127.0.0.1:9093"
@@ -119,14 +119,6 @@ prometheus_static_targets_files:
   - prometheus/targets/*.json
 
 prometheus_alert_rules:
-  - alert: Watchdog
-    expr: vector(1)
-    for: 10m
-    labels:
-      severity: warning
-    annotations:
-      description: "This is an alert meant to ensure that the entire alerting pipeline is functional.\nThis alert is always firing, therefore it should always be firing in Alertmanager\nand always fire against a receiver. There are integrations with various notification\nmechanisms that send a notification when this alert is not firing. For example the\n\"DeadMansSnitch\" integration in PagerDuty."
-      summary: 'Ensure entire alerting pipeline is functional'
   - alert: InstanceDown
     expr: 'up == 0'
     for: 5m
