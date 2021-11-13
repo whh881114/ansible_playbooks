@@ -19,6 +19,7 @@
   loop:
     - "{{ alertmanager_config_dir }}"
     - "{{ alertmanager_data_dir }}"
+    - "{{ alertmanager_template_dir }}"
 
 - name: install alertmanager configuration file
   template:
@@ -27,13 +28,12 @@
     owner: prometheus
     group: prometheus
     mode: "0644"
+    variable_start_string: "[["
+    variable_end_string: "]]"
   with_items:
     - { src: alertmanager.yml.j2, dest: "{{ alertmanager_config_dir }}/alertmanager.yml" }
-
-- name: create alertmanager service
-  template:
-    src: alertmanager.service.j2
-    dest: "{{ systemd_conf_dir }}/alertmanager.service"
+    - { src: template/email.tmpl.j2, dest: "{{ alertmanager_template_dir }}/email.tmpl" }
+    - { src: alertmanager.service.j2, dest: "{{ systemd_conf_dir }}/alertmanager.service" }
   notify:
     - systemctl-daemon-reload
     - enable-alertmanager
