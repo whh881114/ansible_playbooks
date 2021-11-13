@@ -4,10 +4,11 @@
 [{{ .Status | toUpper }}:{{ .Alerts.Firing | len }}]
 {{ range $1, $alert := .Alerts }}
 <pre>
-告警节点：{{ index $alert.Labels "nodename" }}
-告警服务：{{ index $alert.Labels "alertname" }}
-告警详情：{{ index $alert.Annotations "summary" }}
-告警时间：{{ ($alert.StartsAt.Add 28800e9).Format "2021/11/14-00:00:21" }}
+告警节点：{{ index $alert.Labels "instance" }}
+告警类型：{{ index $alert.Labels "alertname" }}
+告警主题：{{ index $alert.Annotations "summary" }}
+告警详情：{{ index $alert.Annotations "description" }}
+告警时间：{{ ($alert.StartsAt.Format "2021-11-14 00:00:21" }}
 
 </pre>
 {{ end }}
@@ -19,11 +20,12 @@
 [{{ .Status | toUpper}}:{{ .Alerts.Firing | len }}]
 {{ range $i, $alert := .Alerts }}
 <pre>
-恢复节点：{{ index $alert.Labels "nodename" }}
-恢复服务：{{ index $alert.Labels "alertname" }}
-恢复详情：{{ index $alert.Annotations "summary" }}
-告警时间：{{ ($alert.StartsAt.Add 28800e9).Format "2021/11/14-00:00:21" }}
-恢复时间：{{ ($alert.EndsAt.Add 28800e9).Format "2021/11/14-00:00:21" }}
+恢复节点：{{ index $alert.Labels "instance" }}
+恢复类型：{{ index $alert.Labels "alertname" }}
+恢复主题：{{ index $alert.Annotations "summary" }}
+恢复详情：{{ index $alert.Annotations "description" }}
+告警时间：{{ ($alert.StartsAt).Format "2021-11-14 00:00:21" }}
+恢复时间：{{ ($alert.EndsAt).Format "2021-11-14 00:00:21" }}
 
 </pre>
 {{ end }}
