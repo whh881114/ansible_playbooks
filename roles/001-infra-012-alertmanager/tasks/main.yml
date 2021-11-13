@@ -15,7 +15,6 @@
     recurse: yes
     owner: prometheus
     group: prometheus
-    mode: '0755'
   loop:
     - "{{ alertmanager_config_dir }}"
     - "{{ alertmanager_data_dir }}"
@@ -27,12 +26,24 @@
     dest: "{{ item.dest }}"
     owner: prometheus
     group: prometheus
-    mode: "0644"
     variable_start_string: "[["
     variable_end_string: "]]"
   with_items:
     - { src: alertmanager.yml.j2, dest: "{{ alertmanager_config_dir }}/alertmanager.yml" }
     - { src: template/email.tmpl.j2, dest: "{{ alertmanager_template_dir }}/email.tmpl" }
+  notify:
+    - systemctl-daemon-reload
+    - enable-alertmanager
+    - restart-alertmanager
+
+- name: install alertmanager service file
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: "0644"
+  with_items:
     - { src: alertmanager.service.j2, dest: "{{ systemd_conf_dir }}/alertmanager.service" }
   notify:
     - systemctl-daemon-reload
