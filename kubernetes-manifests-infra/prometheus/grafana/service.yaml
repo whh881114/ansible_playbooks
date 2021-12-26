@@ -6,6 +6,22 @@ metadata:
   labels:
     name: grafana
 spec:
+  type: ClusterIP
+  ports:
+    - port: 3000        # 服务访问端口
+      targetPort: 3000
+  selector:
+    name: grafana
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-nodeport
+  namespace: prometheus
+  labels:
+    name: grafana
+spec:
   type: NodePort
   ports:
     - port: 3000        # 服务访问端口

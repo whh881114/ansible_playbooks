@@ -22,10 +22,12 @@ spec:
       labels:
         k8s-app: prometheus
     spec:
+      imagePullSecrets:
+        - name: qcloudregistry
       serviceAccountName: prometheus-k8s
       initContainers:
       - name: "init-chown-data"
-        image: "harbor.freedom.org/docker.io/busybox:1.31.1"
+        image: "ccr.ccs.tencentyun.com/k8s-infra/busybox:1.31.1"
         imagePullPolicy: "IfNotPresent"
         command: ["chown", "-R", "65534:65534", "/data"]
         volumeMounts:
@@ -34,31 +36,33 @@ spec:
           subPath: ""
       containers:
         - name: prometheus-server
-          image: "harbor.freedom.org/docker.io/prom/prometheus:v2.25.2"
+          image: "ccr.ccs.tencentyun.com/k8s-infra/prometheus:v2.25.2"
           imagePullPolicy: "IfNotPresent"
           env:
             - name: TZ
               value: Asia/Shanghai
           args:
             - --config.file=/etc/config/prometheus.yml
+            - --web.config.file=/etc/config/web.yml
             - --storage.tsdb.path=/data
             - --web.console.libraries=/etc/prometheus/console_libraries
             - --web.console.templates=/etc/prometheus/consoles
             - --web.enable-lifecycle
           ports:
             - containerPort: 9090
-          readinessProbe:
-            httpGet:
-              path: /-/ready
-              port: 9090
-            initialDelaySeconds: 30
-            timeoutSeconds: 30
-          livenessProbe:
-            httpGet:
-              path: /-/healthy
-              port: 9090
-            initialDelaySeconds: 30
-            timeoutSeconds: 30
+          # 添加认证后，心跳检查失效。
+          # readinessProbe:
+          #   httpGet:
+          #     path: /-/ready
+          #     port: 9090
+          #   initialDelaySeconds: 30
+          #   timeoutSeconds: 30
+          # livenessProbe:
+          #   httpGet:
+          #     path: /-/healthy
+          #     port: 9090
+          #   initialDelaySeconds: 30
+          #   timeoutSeconds: 30
           # based on 10 running nodes with 30 pods each
           resources:
             limits:
@@ -71,6 +75,9 @@ spec:
             - name: config-volume
               mountPath: /etc/config/prometheus.yml
               subPath: prometheus.yml
+            - name: web-config-volume
+              mountPath: /etc/config/web.yml
+              subPath: web.yml
             - name: prometheus-data
               mountPath: /data
               subPath: ""
@@ -79,14 +86,17 @@ spec:
         - name: config-volume
           configMap:
             name: prometheus-config
+        - name: web-config-volume
+          configMap:
+            name: prometheus-web-config
   volumeClaimTemplates:
   - metadata:
       name: prometheus-data
       annotations:
-        volume.beta.kubernetes.io/storage-class: nfs-infra
+        volume.beta.kubernetes.io/storage-class: storageclass-nfs-infra-pagoda
     spec:
       accessModes:
         - ReadWriteOnce
       resources:
         requests:
-          storage: "50Gi"
+          storage: "100Gi"

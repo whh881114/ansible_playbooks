@@ -17,8 +17,10 @@ spec:
         app.kubernetes.io/name: kube-state-metrics
         app.kubernetes.io/version: 2.0.0
     spec:
+      imagePullSecrets:
+        - name: qcloudregistry
       containers:
-      - image: harbor.freedom.org/quay.io/coreos/kube-state-metrics:v2.0.0-rc.0
+      - image: harbor.freedom.org/quay.io/kube-state-metrics:v2.0.0-rc.0
         livenessProbe:
           httpGet:
             path: /healthz

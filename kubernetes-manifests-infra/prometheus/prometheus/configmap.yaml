@@ -1,4 +1,20 @@
 # Prometheus configuration format https://prometheus.io/docs/prometheus/latest/configuration/configuration/
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-web-config
+  namespace: prometheus
+  labels:
+    kubernetes.io/cluster-service: "true"
+    addonmanager.kubernetes.io/mode: EnsureExists
+data:
+  web.yml: |
+    basic_auth_users:
+      prometheus: $2y$05$8edW5DusO/3koIhpSubbLeMmc8Z2QIec5wLCw6J.jiQgVe3.oWZT6
+
+
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -14,18 +30,21 @@ data:
       scrape_interval: 15s
       scrape_timeout: 10s
       external_labels:
-        environment: prometheus.ingress-nginx.freedom.org
+        environment: pagoda-k8s-idc-private-cloud
 
     rule_files:
       - /data/rules/*.rules
 
     alerting:
       alertmanagers:
-        - path_prefix: alertmanager/
+        - path_prefix: /
           scheme: http
           static_configs:
             - targets:
-              - alertmanager:9093
+              - alertmanager.prometheus.svc.cluster.local:9093
+          basic_auth:
+            username: alertmanager
+            password: "m1mnhgbmbEmqeidrkjdpqvaeYphf1]vp"
 
     scrape_configs:
       # 系统组件配置
@@ -34,27 +53,40 @@ data:
         static_configs:
           - targets:
             - prometheus:9090
+        basic_auth:
+          username: prometheus
+          password: "2izx454h/h&elpw.b8R|@Ems<6k17}d^"
 
       - job_name: alertmanager
         static_configs:
           - targets:
             - alertmanager:9093
+        basic_auth:
+          username: alertmanager
+          password: "m1mnhgbmbEmqeidrkjdpqvaeYphf1]vp"
 
       - job_name: pushgateway
         static_configs:
           - targets:
             - pushgateway:9091
+        basic_auth:
+          username: pushgateway
+          password: "dGumxcql3|apSbinjojywcllq2xwjyww"
 
-      # consul自动发现配置
+
+
+      # consul自动发现配置，检查注册中心中的consul服务名。
       - job_name: consul_sd_node_exporter
         consul_sd_configs:
-          - server: http://consul.ingress-nginx.freedom.org
+          - server: server01.consul.freedom.org:8500    # prometheus部署在容器中，所以不能localhost:8500
             services:
               - node-exporter
         relabel_configs:
           - source_labels:
               - __meta_consul_node
             target_label: hostname
+
+
 
       # k8s自动发现配置：
       # https://github.com/prometheus/prometheus/blob/release-2.25/documentation/examples/prometheus-kubernetes.yml
@@ -167,25 +199,15 @@ data:
           target_label: kubernetes_name
 
       - job_name: kubernetes-pods
+        metrics_path: /metrics
         kubernetes_sd_configs:
         - role: pod
         relabel_configs:
-        - action: keep
-          regex: true
-          source_labels:
-          - __meta_kubernetes_pod_annotation_prometheus_io_scrape
         - action: replace
           regex: (.+)
           source_labels:
           - __meta_kubernetes_pod_annotation_prometheus_io_path
           target_label: __metrics_path__
-        - action: replace
-          regex: ([^:]+)(?::\d+)?;(\d+)
-          replacement: $1:$2
-          source_labels:
-          - __address__
-          - __meta_kubernetes_pod_annotation_prometheus_io_port
-          target_label: __address__
         - action: labelmap
           regex: __meta_kubernetes_pod_label_(.+)
         - action: replace
@@ -196,3 +218,49 @@ data:
           source_labels:
           - __meta_kubernetes_pod_name
           target_label: kubernetes_pod_name
+
+
+#      # blackbox 静态配置
+#      - job_name: kubernetes-http-pods
+#        metrics_path: /probe
+#        params:
+#          module: [http_2xx]
+#        kubernetes_sd_configs:
+#          - role: pod
+#        relabel_configs:
+#          # 过滤出wild-goose下的http容器
+#          - source_labels: [__meta_kubernetes_namespace]
+#            regex: "wild-goose"
+#            action: keep
+#          - source_labels: [__meta_kubernetes_pod_container_port_number]
+#            regex: (^80$)
+#            action: keep
+#          - source_labels: [__meta_kubernetes_pod_container_name]
+#            target_label: kubernetes_pod_container_name
+#          # 配置blackbox
+#          - source_labels: [__address__]
+#            target_label: __param_target
+#          - source_labels: [__param_target]
+#            target_label: instance
+#          - target_label: __address__
+#            replacement: blackbox-exporter.prometheus.svc.cluster.local:9115  # The blackbox exporter's real hostname:port.
+
+
+# 优鲜业务pod监控示例，匹配namespace和pod的port，重写label。
+#        - source_labels: [__meta_kubernetes_namespace]
+#          regex: "wild-goose"
+#          action: keep
+#        - source_labels: [__meta_kubernetes_pod_container_port_number]
+#          target_label: kubernetes_pod_container_prometheus_port_number
+#        - target_label: kubernetes_pod_container_prometheus_port_number
+#          replacement: "60030"
+#        - action: replace
+#          regex: ([^:]+)(?::\d+)?;(\d+)
+#          replacement: $1:60030
+#          source_labels:
+#          - __address__
+#          - kubernetes_pod_container_prometheus_port_number
+#          target_label: __address__
+#        - source_labels: [__meta_kubernetes_pod_container_port_number]
+#          regex: (^80$|^8012$)
+#          action: drop

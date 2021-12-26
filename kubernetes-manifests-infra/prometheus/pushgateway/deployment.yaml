@@ -20,19 +20,21 @@ spec:
       priorityClassName: system-cluster-critical
       containers:
         - name: prometheus-pushgateway
-          image: "harbor.freedom.org/docker.io/prom/pushgateway:master"
+          image: "harbor.freedom.org/prom/pushgateway:master"
           imagePullPolicy: "Always"
           env:
             - name: TZ
               value: Asia/Shanghai
+          args:
+            - --web.config.file=/pushgateway/web.yml
           ports:
             - containerPort: 9091
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 9091
-            initialDelaySeconds: 30
-            timeoutSeconds: 30
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 9091
+          #   initialDelaySeconds: 30
+          #   timeoutSeconds: 30
           resources:
             limits:
               cpu: 1000m
@@ -40,3 +42,11 @@ spec:
             requests:
               cpu: 10m
               memory: 50Mi
+          volumeMounts:
+            - name: pushgateway-web-config
+              mountPath: /pushgateway/web.yml
+              subPath: web.yml
+      volumes:
+        - name: pushgateway-web-config
+          configMap:
+            name: pushgateway-web-config

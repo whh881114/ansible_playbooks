@@ -1,16 +1,16 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: prometheus
+  name: blackbox-exporter
   namespace: prometheus
   annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-    - host: prometheus.k8s.freedom.org
+    - host: blackbox-exporter.k8s.freedom.org
       http:
         paths:
         - path: /
           backend:
-            serviceName: prometheus
-            servicePort: 9090
+            serviceName: blackbox-exporter
+            servicePort: 9115
