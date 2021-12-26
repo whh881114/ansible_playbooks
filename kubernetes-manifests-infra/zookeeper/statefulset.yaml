@@ -62,7 +62,7 @@ spec:
     - metadata:
         name: zookeeper-data
         annotations:
-          volume.beta.kubernetes.io/storage-class: nfs-infra
+          volume.beta.kubernetes.io/storage-class: storageclass-nfs-infra
       spec:
         accessModes: ["ReadWriteOnce"]
         resources:
