@@ -14,6 +14,12 @@ zabbix/zabbix-server-mysql:centos-5.0.12
 zabbix/zabbix-web-apache-mysql:centos-5.0.12
 
 prom/prometheus:v2.30.0
+prom/alertmanager:master
+prom/pushgateway:master
+prom/mysqld-exporter:master
+prom/node-exporter:master
+prom/blackbox-exporter:master
+
 prom/alertmanager:v0.23.0
 prom/pushgateway:v1.4.1
 prom/mysqld-exporter:v0.13.0
