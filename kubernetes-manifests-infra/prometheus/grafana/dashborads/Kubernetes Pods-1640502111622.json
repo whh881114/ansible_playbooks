@@ -1,0 +1,900 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 12,
+  "iteration": 1640501027660,
+  "links": [],
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(rate(container_cpu_cfs_throttled_seconds_total{container!=\"POD\",namespace=~\"$namespace\",pod=~\"$pod\", container!=\"\"}[$__rate_interval])) by (container)",
+          "interval": "",
+          "legendFormat": "CFS throttled ({{container}})",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(rate(container_cpu_system_seconds_total{container!=\"POD\",namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container) OR sum(rate(windows_container_cpu_usage_seconds_kernelmode{container!=\"POD\",namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container)",
+          "interval": "",
+          "legendFormat": "System ({{container}})",
+          "refId": "B"
+        },
+        {
+          "expr": "sum(rate(container_cpu_usage_seconds_total{container!=\"POD\",namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container) OR sum(rate(windows_container_cpu_usage_seconds_total{container!=\"POD\",namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container)",
+          "interval": "",
+          "legendFormat": "Total ({{container}})",
+          "refId": "C"
+        },
+        {
+          "expr": "sum(rate(container_cpu_user_seconds_total{container!=\"POD\",namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container) OR sum(rate(windows_container_cpu_usage_seconds_usermode{container!=\"POD\",namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container)",
+          "interval": "",
+          "legendFormat": "User ({{container}})",
+          "refId": "D"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "CPU Utilization",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:529",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:530",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 4,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(container_memory_working_set_bytes{container!=\"POD\",namespace=~\"$namespace\",pod=~\"$pod\", container!=\"\"} OR windows_container_memory_usage_commit_bytes{container!=\"POD\",namespace=~\"$namespace\",pod=~\"$pod\", container!=\"\"}) by (container)",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Memory Utilization",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 7
+      },
+      "hiddenSeries": false,
+      "id": 6,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(rate(container_network_receive_packets_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container) OR sum(rate(windows_container_network_receive_packets_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container)",
+          "interval": "",
+          "legendFormat": "Receive Total ({{container}})",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(rate(container_network_transmit_packets_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container) OR sum(rate(windows_container_network_transmit_packets_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container)",
+          "interval": "",
+          "legendFormat": "Transmit Total ({{container}})",
+          "refId": "B"
+        },
+        {
+          "expr": "sum(rate(container_network_receive_packets_dropped_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container) OR sum(rate(windows_container_network_receive_packets_dropped_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container)",
+          "interval": "",
+          "legendFormat": "Receive Dropped ({{container}})",
+          "refId": "C"
+        },
+        {
+          "expr": "sum(rate(container_network_receive_errors_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container)",
+          "interval": "",
+          "legendFormat": "Receive Errors ({{container}})",
+          "refId": "D"
+        },
+        {
+          "expr": "sum(rate(container_network_transmit_errors_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container)",
+          "interval": "",
+          "legendFormat": "Transmit Errors ({{container}})",
+          "refId": "E"
+        },
+        {
+          "expr": "sum(rate(container_network_transmit_packets_dropped_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container) OR sum(rate(windows_container_network_transmit_packets_dropped_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container)",
+          "interval": "",
+          "legendFormat": "Transmit Dropped ({{container}})",
+          "refId": "F"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Network Traffic",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 7
+      },
+      "hiddenSeries": false,
+      "id": 8,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(rate(container_network_receive_bytes_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container) OR sum(rate(windows_container_network_receive_bytes_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container)",
+          "interval": "",
+          "legendFormat": "Receive Total ({{container}})",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(rate(container_network_transmit_bytes_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container) OR sum(rate(windows_container_network_transmit_bytes_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container)",
+          "interval": "",
+          "legendFormat": "Transmit Total ({{container}})",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Network I/O",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 15
+      },
+      "hiddenSeries": false,
+      "id": 10,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(rate(container_fs_writes_bytes_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container)",
+          "interval": "",
+          "legendFormat": "Write ({{container}})",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(rate(container_fs_reads_bytes_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container)",
+          "interval": "",
+          "legendFormat": "Read ({{container}})",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Disk I/O",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    }
+  ],
+  "schemaVersion": 26,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "prometheus",
+          "value": "prometheus"
+        },
+        "datasource": "http://prometheus.k8s-flannel.freedom.org",
+        "definition": "label_values(namespace)",
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "namespace",
+        "options": [
+          {
+            "selected": false,
+            "text": "autoops",
+            "value": "autoops"
+          },
+          {
+            "selected": false,
+            "text": "cattle-dashboards",
+            "value": "cattle-dashboards"
+          },
+          {
+            "selected": false,
+            "text": "cattle-fleet-clusters-system",
+            "value": "cattle-fleet-clusters-system"
+          },
+          {
+            "selected": false,
+            "text": "cattle-fleet-local-system",
+            "value": "cattle-fleet-local-system"
+          },
+          {
+            "selected": false,
+            "text": "cattle-fleet-system",
+            "value": "cattle-fleet-system"
+          },
+          {
+            "selected": false,
+            "text": "cattle-global-data",
+            "value": "cattle-global-data"
+          },
+          {
+            "selected": false,
+            "text": "cattle-global-nt",
+            "value": "cattle-global-nt"
+          },
+          {
+            "selected": false,
+            "text": "cattle-impersonation-system",
+            "value": "cattle-impersonation-system"
+          },
+          {
+            "selected": false,
+            "text": "cattle-monitoring-system",
+            "value": "cattle-monitoring-system"
+          },
+          {
+            "selected": false,
+            "text": "cattle-system",
+            "value": "cattle-system"
+          },
+          {
+            "selected": false,
+            "text": "cert-manager",
+            "value": "cert-manager"
+          },
+          {
+            "selected": false,
+            "text": "cluster-fleet-local-local-1a3d67d0a899",
+            "value": "cluster-fleet-local-local-1a3d67d0a899"
+          },
+          {
+            "selected": false,
+            "text": "default",
+            "value": "default"
+          },
+          {
+            "selected": false,
+            "text": "fleet-default",
+            "value": "fleet-default"
+          },
+          {
+            "selected": false,
+            "text": "fleet-local",
+            "value": "fleet-local"
+          },
+          {
+            "selected": false,
+            "text": "ingress-nginx",
+            "value": "ingress-nginx"
+          },
+          {
+            "selected": false,
+            "text": "kube-node-lease",
+            "value": "kube-node-lease"
+          },
+          {
+            "selected": false,
+            "text": "kube-public",
+            "value": "kube-public"
+          },
+          {
+            "selected": false,
+            "text": "kube-system",
+            "value": "kube-system"
+          },
+          {
+            "selected": false,
+            "text": "local",
+            "value": "local"
+          },
+          {
+            "selected": false,
+            "text": "p-8zj9s",
+            "value": "p-8zj9s"
+          },
+          {
+            "selected": false,
+            "text": "p-mc67c",
+            "value": "p-mc67c"
+          },
+          {
+            "selected": false,
+            "text": "p-ns2nz",
+            "value": "p-ns2nz"
+          },
+          {
+            "selected": false,
+            "text": "p-txt8m",
+            "value": "p-txt8m"
+          },
+          {
+            "selected": false,
+            "text": "p-xzdq2",
+            "value": "p-xzdq2"
+          },
+          {
+            "selected": false,
+            "text": "platform",
+            "value": "platform"
+          },
+          {
+            "selected": true,
+            "text": "prometheus",
+            "value": "prometheus"
+          },
+          {
+            "selected": false,
+            "text": "user-5slnh",
+            "value": "user-5slnh"
+          }
+        ],
+        "query": "label_values(namespace)",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": "prometheus-node-exporter",
+          "value": "prometheus-node-exporter"
+        },
+        "datasource": "http://prometheus.k8s-flannel.freedom.org",
+        "definition": "label_values({namespace=~\"$namespace\"}, container)",
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "",
+        "multi": false,
+        "name": "container",
+        "options": [
+          {
+            "selected": false,
+            "text": "POD",
+            "value": "POD"
+          },
+          {
+            "selected": false,
+            "text": "alertmanager",
+            "value": "alertmanager"
+          },
+          {
+            "selected": false,
+            "text": "blackbox-exporter",
+            "value": "blackbox-exporter"
+          },
+          {
+            "selected": false,
+            "text": "grafana",
+            "value": "grafana"
+          },
+          {
+            "selected": false,
+            "text": "kube-state-metrics",
+            "value": "kube-state-metrics"
+          },
+          {
+            "selected": true,
+            "text": "prometheus-node-exporter",
+            "value": "prometheus-node-exporter"
+          },
+          {
+            "selected": false,
+            "text": "prometheus-pushgateway",
+            "value": "prometheus-pushgateway"
+          },
+          {
+            "selected": false,
+            "text": "prometheus-server",
+            "value": "prometheus-server"
+          },
+          {
+            "selected": false,
+            "text": "init-chown-data",
+            "value": "init-chown-data"
+          }
+        ],
+        "query": "label_values({namespace=~\"$namespace\"}, container)",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "tags": [],
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "http://prometheus.k8s-flannel.freedom.org",
+        "definition": "label_values({namespace=~\"$namespace\",container=~\"$container\"},pod)",
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": null,
+        "multi": true,
+        "name": "pod",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "node-exporter-tlmxl",
+            "value": "node-exporter-tlmxl"
+          },
+          {
+            "selected": false,
+            "text": "node-exporter-77nsm",
+            "value": "node-exporter-77nsm"
+          },
+          {
+            "selected": false,
+            "text": "node-exporter-xdhlj",
+            "value": "node-exporter-xdhlj"
+          },
+          {
+            "selected": false,
+            "text": "node-exporter-b5xnk",
+            "value": "node-exporter-b5xnk"
+          },
+          {
+            "selected": false,
+            "text": "node-exporter-r7qcj",
+            "value": "node-exporter-r7qcj"
+          },
+          {
+            "selected": false,
+            "text": "node-exporter-bj6ws",
+            "value": "node-exporter-bj6ws"
+          },
+          {
+            "selected": false,
+            "text": "node-exporter-p8jvk",
+            "value": "node-exporter-p8jvk"
+          },
+          {
+            "selected": false,
+            "text": "node-exporter-rgq66",
+            "value": "node-exporter-rgq66"
+          },
+          {
+            "selected": false,
+            "text": "node-exporter-tp76z",
+            "value": "node-exporter-tp76z"
+          }
+        ],
+        "query": "label_values({namespace=~\"$namespace\",container=~\"$container\"},pod)",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-3h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Kubernetes Pods",
+  "uid": "XhySDuonz",
+  "version": 19
+}
