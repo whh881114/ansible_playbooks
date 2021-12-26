@@ -40,3 +40,6 @@ calico/flannel-migration-controller:v3.20.1#calico/flannel-migration-controller:
 calico/kube-controllers:v3.20.1#calico/kube-controllers:v3.20.1#calico/kube-controllers:v3.20.1
 calico/typha:v3.20.1#calico/kube-controllers:v3.20.1#calico/kube-controllers:v3.20.1
 
+
+quay.io/coreos/kube-state-metrics:v2.0.0-alpha.3#quay.io/coreos/kube-state-metrics:v2.0.0-alpha.3#quay.io/kube-state-metrics:v2.0.0-alpha.3
+quay.io/coreos/kube-state-metrics:v2.0.0-rc.0#quay.io/coreos/kube-state-metrics:v2.0.0-rc.0#harbor.freedom.org/quay.io/kube-state-metrics:v2.0.0-rc.0
