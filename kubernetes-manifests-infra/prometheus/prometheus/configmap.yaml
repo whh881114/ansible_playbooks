@@ -73,6 +73,11 @@ data:
           username: pushgateway
           password: "dGumxcql3|apSbinjojywcllq2xwjyww"
 
+      # foreman服务部署consul-server角色，无法注册本地服务，所以增加静态配置。
+      - job_name: consul_servers_node_exporter
+        static_configs:
+          - targets:
+            - erver01.consul.freedom.org:9100
 
 
       # consul自动发现配置，检查注册中心中的consul服务名。
@@ -85,7 +90,6 @@ data:
           - source_labels:
               - __meta_consul_node
             target_label: hostname
-
 
 
       # k8s自动发现配置：
