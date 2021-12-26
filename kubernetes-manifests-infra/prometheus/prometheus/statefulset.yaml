@@ -27,7 +27,7 @@ spec:
       serviceAccountName: prometheus-k8s
       initContainers:
       - name: "init-chown-data"
-        image: "ccr.ccs.tencentyun.com/k8s-infra/busybox:1.31.1"
+        image: "harbor.freedom.org/docker.io/busybox:1.31.1"
         imagePullPolicy: "IfNotPresent"
         command: ["chown", "-R", "65534:65534", "/data"]
         volumeMounts:
@@ -36,7 +36,7 @@ spec:
           subPath: ""
       containers:
         - name: prometheus-server
-          image: "ccr.ccs.tencentyun.com/k8s-infra/prometheus:v2.25.2"
+          image: "harbor.freedom.org/prom/prometheus:v2.30.0"
           imagePullPolicy: "IfNotPresent"
           env:
             - name: TZ
@@ -93,7 +93,7 @@ spec:
   - metadata:
       name: prometheus-data
       annotations:
-        volume.beta.kubernetes.io/storage-class: storageclass-nfs-infra-pagoda
+        volume.beta.kubernetes.io/storage-class: storageclass-nfs-infra
     spec:
       accessModes:
         - ReadWriteOnce
