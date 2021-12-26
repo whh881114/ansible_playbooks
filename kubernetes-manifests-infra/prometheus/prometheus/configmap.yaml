@@ -80,7 +80,7 @@ data:
         consul_sd_configs:
           - server: server01.consul.freedom.org:8500    # prometheus部署在容器中，所以不能localhost:8500
             services:
-              - consul-agent
+              - node-exporter
         relabel_configs:
           - source_labels:
               - __meta_consul_node
