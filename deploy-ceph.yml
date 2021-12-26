@@ -18,6 +18,7 @@
             - { name: ceph-mon, port: 6789 }
             - { name: ceph-osd, port: 6800 }
             - { name: consul-agent, port: 8500 }
+            - { name: node-exporter, port: 9100 }
 
     - role: 000-base-003-puppet
       tags:
