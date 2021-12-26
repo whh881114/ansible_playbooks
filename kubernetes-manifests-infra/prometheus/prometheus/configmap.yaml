@@ -77,7 +77,7 @@ data:
       - job_name: consul_servers_node_exporter
         static_configs:
           - targets:
-            - erver01.consul.freedom.org:9100
+            - server01.consul.freedom.org:9100
 
 
       # consul自动发现配置，检查注册中心中的consul服务名。
