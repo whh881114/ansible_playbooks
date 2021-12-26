@@ -10,9 +10,6 @@ spec:
     - name: tcp8080
       port: 8080
       targetPort: 8080
-    - name: tcp50000
-      port: 50000
-      targetPort: 50000
   selector:
     k8s-app: jenkins
 
@@ -28,9 +25,6 @@ spec:
     - name: tcp8080
       port: 8080
       targetPort: 8080
-    - name: tcp50000
-      port: 50000
-      targetPort: 50000
   selector:
     k8s-app: jenkins
 
@@ -46,8 +40,5 @@ spec:
     - name: tcp8080
       port: 8080
       targetPort: 8080
-    - name: tcp50000
-      port: 50000
-      targetPort: 50000
   selector:
     k8s-app: jenkins

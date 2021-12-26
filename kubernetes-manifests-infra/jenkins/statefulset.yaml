@@ -17,13 +17,11 @@ spec:
     spec:
       containers:
         - name: jenkins
-          image: harbor.freedom.org/roy/jenkins-centos7:latest
+          image: harbor.freedom.org/freedom/jenkins-centos7:latest
           imagePullPolicy: Always
           ports:
             - name: tcp8080
               containerPort: 8080
-            - name: tcp50000
-              containerPort: 50000
           env:
             - name: TZ
               value: Asia/Shanghai
@@ -49,7 +47,7 @@ spec:
     - metadata:
         name: jenkins-data
         annotations:
-          volume.beta.kubernetes.io/storage-class: nfs-infra
+          volume.beta.kubernetes.io/storage-class: storageclass-nfs-infra
       spec:
         accessModes: ["ReadWriteOnce"]
         resources:
