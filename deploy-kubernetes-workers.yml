@@ -36,10 +36,6 @@
     - role: 000-base-006-docker_images
       tags: docker_images
 
-    - role: 000-base-010-node_exporter
-      tags:
-        - node_exporter
-
     - role: 001-infra-009-kubernetes
       tags:
         - k8s
