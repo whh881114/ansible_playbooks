@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 12,
-  "iteration": 1640501027660,
+  "iteration": 1640586072727,
   "links": [],
   "panels": [
     {
@@ -27,7 +27,24 @@
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
         },
         "overrides": []
       },
@@ -113,7 +130,7 @@
         {
           "$$hashKey": "object:529",
           "format": "short",
-          "label": null,
+          "label": "cpu",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -182,9 +199,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(container_memory_working_set_bytes{container!=\"POD\",namespace=~\"$namespace\",pod=~\"$pod\", container!=\"\"} OR windows_container_memory_usage_commit_bytes{container!=\"POD\",namespace=~\"$namespace\",pod=~\"$pod\", container!=\"\"}) by (container)",
+          "expr": "sum(container_memory_working_set_bytes{container!=\"POD\",namespace=~\"$namespace\",pod=~\"$pod\", container!=\"\"} / 1024 /1024 OR windows_container_memory_usage_commit_bytes{container!=\"POD\",namespace=~\"$namespace\",pod=~\"$pod\", container!=\"\"} / 1024 /1024) by (container)",
+          "instant": false,
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "({{container}})",
           "refId": "A"
         }
       ],
@@ -208,14 +226,17 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:134",
+          "decimals": null,
           "format": "short",
-          "label": null,
+          "label": "MB",
           "logBase": 1,
           "max": null,
           "min": null,
           "show": true
         },
         {
+          "$$hashKey": "object:135",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -333,14 +354,16 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:510",
           "format": "short",
-          "label": null,
+          "label": "p/s",
           "logBase": 1,
           "max": null,
           "min": null,
           "show": true
         },
         {
+          "$$hashKey": "object:511",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -402,13 +425,13 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_network_receive_bytes_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container) OR sum(rate(windows_container_network_receive_bytes_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container)",
+          "expr": "sum(rate(container_network_receive_bytes_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container) / 1024 OR sum(rate(windows_container_network_receive_bytes_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container) / 1024",
           "interval": "",
           "legendFormat": "Receive Total ({{container}})",
           "refId": "A"
         },
         {
-          "expr": "sum(rate(container_network_transmit_bytes_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container) OR sum(rate(windows_container_network_transmit_bytes_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container)",
+          "expr": "sum(rate(container_network_transmit_bytes_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container) / 1024 OR sum(rate(windows_container_network_transmit_bytes_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container) / 1024",
           "interval": "",
           "legendFormat": "Transmit Total ({{container}})",
           "refId": "B"
@@ -434,14 +457,16 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:539",
           "format": "short",
-          "label": null,
+          "label": "KB/s",
           "logBase": 1,
           "max": null,
           "min": null,
           "show": true
         },
         {
+          "$$hashKey": "object:540",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -503,13 +528,13 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_fs_writes_bytes_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container)",
+          "expr": "sum(rate(container_fs_writes_bytes_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container) / 1024",
           "interval": "",
           "legendFormat": "Write ({{container}})",
           "refId": "A"
         },
         {
-          "expr": "sum(rate(container_fs_reads_bytes_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container)",
+          "expr": "sum(rate(container_fs_reads_bytes_total{namespace=~\"$namespace\",pod=~\"$pod\",container!=\"\"}[$__rate_interval])) by (container) / 1024",
           "interval": "",
           "legendFormat": "Read ({{container}})",
           "refId": "B"
@@ -535,14 +560,17 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:568",
+          "decimals": null,
           "format": "short",
-          "label": null,
+          "label": "KB/s",
           "logBase": 1,
           "max": null,
           "min": null,
           "show": true
         },
         {
+          "$$hashKey": "object:569",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -565,7 +593,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "prometheus",
           "value": "prometheus"
         },
@@ -734,8 +762,8 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "prometheus-node-exporter",
-          "value": "prometheus-node-exporter"
+          "text": "prometheus-server",
+          "value": "prometheus-server"
         },
         "datasource": "http://prometheus.k8s-flannel.freedom.org",
         "definition": "label_values({namespace=~\"$namespace\"}, container)",
@@ -772,7 +800,7 @@
             "value": "kube-state-metrics"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "prometheus-node-exporter",
             "value": "prometheus-node-exporter"
           },
@@ -782,7 +810,7 @@
             "value": "prometheus-pushgateway"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "prometheus-server",
             "value": "prometheus-server"
           },
@@ -831,48 +859,8 @@
           },
           {
             "selected": false,
-            "text": "node-exporter-tlmxl",
-            "value": "node-exporter-tlmxl"
-          },
-          {
-            "selected": false,
-            "text": "node-exporter-77nsm",
-            "value": "node-exporter-77nsm"
-          },
-          {
-            "selected": false,
-            "text": "node-exporter-xdhlj",
-            "value": "node-exporter-xdhlj"
-          },
-          {
-            "selected": false,
-            "text": "node-exporter-b5xnk",
-            "value": "node-exporter-b5xnk"
-          },
-          {
-            "selected": false,
-            "text": "node-exporter-r7qcj",
-            "value": "node-exporter-r7qcj"
-          },
-          {
-            "selected": false,
-            "text": "node-exporter-bj6ws",
-            "value": "node-exporter-bj6ws"
-          },
-          {
-            "selected": false,
-            "text": "node-exporter-p8jvk",
-            "value": "node-exporter-p8jvk"
-          },
-          {
-            "selected": false,
-            "text": "node-exporter-rgq66",
-            "value": "node-exporter-rgq66"
-          },
-          {
-            "selected": false,
-            "text": "node-exporter-tp76z",
-            "value": "node-exporter-tp76z"
+            "text": "prometheus-0",
+            "value": "prometheus-0"
           }
         ],
         "query": "label_values({namespace=~\"$namespace\",container=~\"$container\"},pod)",
@@ -889,12 +877,12 @@
     ]
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Kubernetes Pods",
   "uid": "XhySDuonz",
-  "version": 19
+  "version": 24
 }

@@ -1,5 +1,6 @@
 # 说明：查询pod的基本运行状态，此语句用于在dashboard中使用。查询语句并没有很复杂，只是针对cpu/mem/network/disk的基础指标列出来而已。
 
+# 单位为cpu
 - name: CPU Utilization
   - expr: sum(rate(container_cpu_cfs_throttled_seconds_total{container!="POD",namespace=~"$namespace",pod=~"$pod", container!=""}[$__rate_interval])) by (container)
     legendFormat: CFS throttled ({{container}})
@@ -14,13 +15,13 @@
     legendFormat: User ({{container}})
 
 
-
+# 单位为MB
 - name: Memory Utilization
-  - expr: sum(container_memory_working_set_bytes{container!="POD",namespace=~"$namespace",pod=~"$pod", container!=""} OR windows_container_memory_usage_commit_bytes{container!="POD",namespace=~"$namespace",pod=~"$pod", container!=""}) by (container)
+  - expr: sum(container_memory_working_set_bytes{container!="POD",namespace=~"$namespace",pod=~"$pod", container!=""} / 1024 / 1024 OR windows_container_memory_usage_commit_bytes{container!="POD",namespace=~"$namespace",pod=~"$pod", container!=""}) by (container) / 1024 / 1024
     legendFormat: ({{container}})
 
 
-
+# 单位为p/s
 - name: Network Traffic
   - expr: sum(rate(container_network_receive_packets_total{namespace=~"$namespace",pod=~"$pod",container!=""}[$__rate_interval])) by (container) OR sum(rate(windows_container_network_receive_packets_total{namespace=~"$namespace",pod=~"$pod",container!=""}[$__rate_interval])) by (container)
     legendFormat: Receive Total ({{container}})
@@ -41,17 +42,17 @@
     legendFormat: Transmit Dropped ({{container}})
 
 
-
+# 单位为KB/s
 - name: Network I/O
-  - expr: sum(rate(container_network_receive_bytes_total{namespace=~"$namespace",pod=~"$pod",container!=""}[$__rate_interval])) by (container) OR sum(rate(windows_container_network_receive_bytes_total{namespace=~"$namespace",pod=~"$pod",container!=""}[$__rate_interval])) by (container)
+  - expr: sum(rate(container_network_receive_bytes_total{namespace=~"$namespace",pod=~"$pod",container!=""}[$__rate_interval])) by (container) / 1024 OR sum(rate(windows_container_network_receive_bytes_total{namespace=~"$namespace",pod=~"$pod",container!=""}[$__rate_interval])) by (container) / 1024
     legendFormat: Receive Total ({{container}})
-  - expr: sum(rate(container_network_transmit_bytes_total{namespace=~"$namespace",pod=~"$pod",container!=""}[$__rate_interval])) by (container) OR sum(rate(windows_container_network_transmit_bytes_total{namespace=~"$namespace",pod=~"$pod",container!=""}[$__rate_interval])) by (container)
+  - expr: sum(rate(container_network_transmit_bytes_total{namespace=~"$namespace",pod=~"$pod",container!=""}[$__rate_interval])) by (container) / 1024 OR sum(rate(windows_container_network_transmit_bytes_total{namespace=~"$namespace",pod=~"$pod",container!=""}[$__rate_interval])) by (container) / 1024
     legendFormat: Transmit Total ({{container}})
 
 
-
+# 单位为KB/s
 - name: Disk I/O
-  - expr: sum(rate(container_fs_writes_bytes_total{namespace=~"$namespace",pod=~"$pod",container!=""}[$__rate_interval])) by (container)
+  - expr: sum(rate(container_fs_writes_bytes_total{namespace=~"$namespace",pod=~"$pod",container!=""}[$__rate_interval])) by (container) / 1024
     legendFormat: Write ({{container}})
-  - expr: sum(rate(container_fs_reads_bytes_total{namespace=~"$namespace",pod=~"$pod",container!=""}[$__rate_interval])) by (container)
+  - expr: sum(rate(container_fs_reads_bytes_total{namespace=~"$namespace",pod=~"$pod",container!=""}[$__rate_interval])) by (container) / 1024
     legendFormat: Read ({{container}})
