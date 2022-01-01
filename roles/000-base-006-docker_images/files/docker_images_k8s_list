@@ -43,3 +43,4 @@ calico/typha:v3.20.1#calico/kube-controllers:v3.20.1#calico/kube-controllers:v3.
 
 quay.io/coreos/kube-state-metrics:v2.0.0-alpha.3#quay.io/coreos/kube-state-metrics:v2.0.0-alpha.3#quay.io/kube-state-metrics:v2.0.0-alpha.3
 quay.io/coreos/kube-state-metrics:v2.0.0-rc.0#quay.io/coreos/kube-state-metrics:v2.0.0-rc.0#harbor.freedom.org/quay.io/kube-state-metrics:v2.0.0-rc.0
+quay.io/keycloak/keycloak:16.1.0#quay.io/keycloak/keycloak:16.1.0#harbor.freedom.org/quay.io/keycloak:16.1.0
