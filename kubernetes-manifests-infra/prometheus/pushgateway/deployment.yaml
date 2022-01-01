@@ -19,7 +19,7 @@ spec:
     spec:
       priorityClassName: system-cluster-critical
       containers:
-        - name: prometheus-pushgateway
+        - name: pushgateway
           image: "harbor.freedom.org/prom/pushgateway:master"
           imagePullPolicy: "Always"
           env:
