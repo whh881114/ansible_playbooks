@@ -65,7 +65,7 @@ spec:
     - metadata:
         name: keycloak-mysql-data
         annotations:
-          volume.beta.kubernetes.io/storage-class: storageclass-nfs-infra
+          volume.beta.kubernetes.io/storage-class: storageclass-nfs-mysql
       spec:
         accessModes: ["ReadWriteOnce"]
         resources:
