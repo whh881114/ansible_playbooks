@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: jenkins
-          image: harbor.freedom.org/freedom/jenkins-centos7:latest
+          image: harbor.freedom.org/freedom/jenkins-centos7:2.319.1-1.1
           imagePullPolicy: Always
           ports:
             - name: tcp8080
@@ -27,11 +27,11 @@ spec:
               value: Asia/Shanghai
           resources:
             limits:
-              cpu: 2000m
-              memory: 4096Mi
+              cpu: 4000m
+              memory: 8192Mi
             requests:
-              cpu: 1000m
-              memory: 1024Mi
+              cpu: 100m
+              memory: 256Mi
           volumeMounts:
             - name: jenkins-data
               mountPath: /data
