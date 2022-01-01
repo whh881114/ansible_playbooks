@@ -5,7 +5,7 @@
     value: "{{ item.value }}"
     sysctl_set: yes
     reload: yes
-    sysctl_file: "{{ elasticstack_sysctl_file }}"
+    sysctl_file: "{{ elastic_sysctl_file }}"
   with_items:
     - { name: "vm.max_map_count", value: 655360 }
 
@@ -23,17 +23,17 @@
     - systemctl-daemon-reload
     - restart-elasticsearch
 
-- name: install elasticsearch {{ elasticstack_version }}
+- name: install elasticsearch {{ elastic_version }}
   yum:
     name: "{{ packages }}"
     state: present
   vars:
     packages:
-      - "{{ elasticstack_elasticsearch_pkg }}"
+      - "{{ elastic_elasticsearch_pkg }}"
 
-- name: config elasticsearch {{ elasticstack_version }}
+- name: config elasticsearch {{ elastic_version }}
   template:
-    src: "{{ elasticstack_major_version }}/elasticsearch.yml.j2"
+    src: "{{ elastic_major_version }}/elasticsearch.yml.j2"
     dest: /etc/elasticsearch/elasticsearch.yml
   notify: restart-elasticsearch
 
@@ -43,31 +43,31 @@
 
     cd /usr/share/elasticsearch/bin
 
-    echo -e "{{ elasticstack_superuser_password }}\n{{ elasticstack_superuser_password }}" | ./elasticsearch-users useradd superuser
+    echo -e "{{ elastic_superuser_password }}\n{{ elastic_superuser_password }}" | ./elasticsearch-users useradd superuser
     ./elasticsearch-users roles -a superuser superuser
     service elasticsearch restart
 
     echo -e "y\n" | ./elasticsearch-setup-passwords auto
 
-    curl -X PUT -H "Content-Type: application/json" -d '{"password": "{{ elasticstack_apm_system_password }}"}' -u superuser:"{{ elasticstack_superuser_password }}" \
+    curl -X PUT -H "Content-Type: application/json" -d '{"password": "{{ elastic_apm_system_password }}"}' -u superuser:"{{ elastic_superuser_password }}" \
     http://localhost:9200/_xpack/security/user/apm_system/_password
 
-    curl -X PUT -H "Content-Type: application/json" -d '{"password": "{{ elasticstack_kibana_system_password }}"}' -u superuser:"{{ elasticstack_superuser_password }}" \
+    curl -X PUT -H "Content-Type: application/json" -d '{"password": "{{ elastic_kibana_system_password }}"}' -u superuser:"{{ elastic_superuser_password }}" \
     http://localhost:9200/_xpack/security/user/kibana_system/_password
 
-    curl -X PUT -H "Content-Type: application/json" -d '{"password": "{{ elasticstack_kibana_password }}"}' -u superuser:"{{ elasticstack_superuser_password }}" \
+    curl -X PUT -H "Content-Type: application/json" -d '{"password": "{{ elastic_kibana_password }}"}' -u superuser:"{{ elastic_superuser_password }}" \
     http://localhost:9200/_xpack/security/user/kibana/_password
 
-    curl -X PUT -H "Content-Type: application/json" -d '{"password": "{{ elasticstack_logstash_system_password }}"}' -u superuser:"{{ elasticstack_superuser_password }}" \
+    curl -X PUT -H "Content-Type: application/json" -d '{"password": "{{ elastic_logstash_system_password }}"}' -u superuser:"{{ elastic_superuser_password }}" \
     http://localhost:9200/_xpack/security/user/logstash_system/_password
 
-    curl -X PUT -H "Content-Type: application/json" -d '{"password": "{{ elasticstack_beats_system_password }}"}' -u superuser:"{{ elasticstack_superuser_password }}" \
+    curl -X PUT -H "Content-Type: application/json" -d '{"password": "{{ elastic_beats_system_password }}"}' -u superuser:"{{ elastic_superuser_password }}" \
     http://localhost:9200/_xpack/security/user/beats_system/_password
 
-    curl -X PUT -H "Content-Type: application/json" -d '{"password": "{{ elasticstack_remote_monitoring_user_password }}"}' -u superuser:"{{ elasticstack_superuser_password }}" \
+    curl -X PUT -H "Content-Type: application/json" -d '{"password": "{{ elastic_remote_monitoring_user_password }}"}' -u superuser:"{{ elastic_superuser_password }}" \
     http://localhost:9200/_xpack/security/user/remote_monitoring_user/_password
 
-    curl -X PUT -H "Content-Type: application/json" -d '{"password": "{{ elasticstack_elastic_password }}"}' -u superuser:"{{ elasticstack_superuser_password }}" \
+    curl -X PUT -H "Content-Type: application/json" -d '{"password": "{{ elastic_elastic_password }}"}' -u superuser:"{{ elastic_superuser_password }}" \
     http://localhost:9200/_xpack/security/user/elastic/_password
 
     service elasticsearch restart

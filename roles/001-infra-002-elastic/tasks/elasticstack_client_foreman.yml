@@ -1,7 +1,7 @@
 ---
 - name: config log format
   copy:
-    src: "elasticstack_client_{{ elasticstack_client_type }}/{{ item.src }}"
+    src: "elastic_client_{{ elastic_client_type }}/{{ item.src }}"
     dest: "{{ item.dest }}"
   with_items:
     - { src: httpd.conf, dest: /etc/httpd/conf/httpd.conf }

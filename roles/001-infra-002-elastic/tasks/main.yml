@@ -1,0 +1,14 @@
+# Setup/install tasks.
+- include: common.yml
+
+- include: "elastic_client_{{ elastic_client_type }}.yml"
+  when: elastic_client_type is defined
+
+- include: elasticsearch.yml
+  when: elastic_elasticsearch
+
+- include: filebeat.yml
+  when: elastic_filebeat
+
+- include: kibana.yml
+  when: elastic_kibana

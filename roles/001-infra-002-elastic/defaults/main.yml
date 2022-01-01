@@ -1,0 +1,41 @@
+---
+elastic_version: 7.14.1
+elastic_major_version: 7
+
+elastic_elasticsearch: False
+elastic_filebeat: False
+elastic_kibana: False
+
+elastic_elasticsearch_pkg: "elasticsearch-{{ elastic_version }}"
+elastic_filebeat_pkg: "filebeat-{{ elastic_version }}"
+elastic_kibana_pkg: "kibana-{{ elastic_version }}"
+
+# 以下为elasticsearch配置变量
+elastic_elasticsearch_node_name: elasticsearch.freedom.org
+elastic_elasticsearch_cluster_name: elasticsearch
+elastic_elasticsearch_cluster_nodes: [elasticsearch.freedom.org]  # 在写playbook时指定变量值即可，需要写成数组类型的值。
+elastic_elasticsearch_cluster_minimum_nodes: 1
+elastic_elasticsearch_xms: 4g
+elastic_elasticsearch_xmx: 4g
+
+# 以下为kibana配置变量
+elastic_kibana_server_name: kibana.freedom.org
+elastic_kibana_elasticsearch_cluster_nodes:
+  - "http://elasticsearch.freedom.org:9200"
+
+# 以下为filebeat配置变量
+elastic_filebeat_elasticsearch_cluster_nodes:
+  - "http://elasticsearch.freedom.org:9200"
+
+# 调优配置
+elastic_sysctl_file: /etc/sysctl.d/100-elk.conf     # 系统调优参数
+
+# elastic开启认证后，需要配置的密码如下：kibana_system_password和kibana_password设置成一样的。
+elastic_superuser_password: i&Saun7Xjrcmpbjez5
+elastic_apm_system_password: nlgglKnk3lgdkug~M9
+elastic_kibana_system_password: rekqikf@xSHazuv83n
+elastic_kibana_password: "{{ elastic_kibana_system_password }}"
+elastic_logstash_system_password: takvsJebq&Lxtx2mh7
+elastic_beats_system_password: pqtvKwtjz2r-gz9cuZ
+elastic_remote_monitoring_user_password: dvB1xhbjaVxpd+lc7b
+elastic_elastic_password: 3ziosbgTkvrpxfQ|e5
