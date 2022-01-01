@@ -7,9 +7,9 @@
 
 - name: create consul_exporter service
   template:
-    src: consul_exporter.service.j2
-    dest: "{{ systemd_conf_dir }}/consul_exporter.service"
+    src: consul-exporter.service.j2
+    dest: "{{ systemd_conf_dir }}/consul-exporter.service"
   notify:
     - systemctl-daemon-reload
-    - enable-consul_exporter
-    - restart-consul_exporter
+    - enable-consul-exporter
+    - restart-consul-exporter
