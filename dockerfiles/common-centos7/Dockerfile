@@ -4,7 +4,7 @@ LABEL AUTHOR="Wanghaohao"
 LABEL DATACENTER="DELL-R620-PERSONAL-DATACENTER"
 
 # 注册内部yum源，安装基础包。
-RUN set -eux && yum -y install subscription-manager
+RUN set -eux && yum -y install subscription-manager http://foreman.freedom.org/pub/katello-ca-consumer-latest.noarch.rpm
 RUN set -eux && subscription-manager register --force --org=Default_Organization --activationkey=CentOS-7-x86_64
 RUN set -eux && \
     yum -y install curl \
