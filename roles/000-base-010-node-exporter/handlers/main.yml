@@ -2,13 +2,13 @@
   systemd:
     daemon_reload: yes
 
-- name: enable-node_exporter
+- name: enable-node-exporter
   service:
-    name: node_exporter
+    name: node-exporter
     enabled: yes
 
-- name: restart-node_exporter
+- name: restart-node-exporter
   service:
-    name: node_exporter
+    name: node-exporter
     state: restarted
     enabled: yes

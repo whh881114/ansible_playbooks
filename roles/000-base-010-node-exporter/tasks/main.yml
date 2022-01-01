@@ -7,9 +7,9 @@
 
 - name: create node_exporter service
   template:
-    src: node_exporter.service.j2
-    dest: "{{ systemd_conf_dir }}/node_exporter.service"
+    src: node-exporter.service.j2
+    dest: "{{ systemd_conf_dir }}/node-exporter.service"
   notify:
     - systemctl-daemon-reload
-    - enable-node_exporter
-    - restart-node_exporter
+    - enable-node-exporter
+    - restart-node-exporter
