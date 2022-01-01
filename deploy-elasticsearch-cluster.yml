@@ -30,7 +30,7 @@
       tags:
         - puppet-agent
 
-    - role: 001-infra-002-elastic
+    - role: 001-infra-002-elastic-stack
       tags:
         - elastic
       vars:
@@ -73,7 +73,7 @@
       tags:
         - puppet-agent
 
-    - role: 001-infra-002-elastic
+    - role: 001-infra-002-elastic-stack
       tags:
         - elastic
       vars:
@@ -116,7 +116,7 @@
       tags:
         - puppet-agent
 
-    - role: 001-infra-002-elastic
+    - role: 001-infra-002-elastic-stack
       tags:
         - elastic
       vars:

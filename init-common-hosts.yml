@@ -10,6 +10,6 @@
     - role: 001-infra-018-zabbix
       tags: zabbix
 
-    - role: 000-base-010-node_exporter
+    - role: 000-base-010-node-exporter
       tags:
-        - node_exporter
+        - node-exporter
