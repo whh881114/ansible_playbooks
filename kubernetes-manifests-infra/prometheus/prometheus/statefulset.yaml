@@ -24,7 +24,7 @@ spec:
     spec:
       imagePullSecrets:
         - name: qcloudregistry
-      serviceAccountName: prometheus-k8s
+      serviceAccountName: prometheus
       initContainers:
       - name: "init-chown-data"
         image: "harbor.freedom.org/docker.io/busybox:1.31.1"
@@ -35,7 +35,7 @@ spec:
           mountPath: /data
           subPath: ""
       containers:
-        - name: prometheus-server
+        - name: prometheus
           image: "harbor.freedom.org/prom/prometheus:v2.30.0"
           imagePullPolicy: "IfNotPresent"
           env:
