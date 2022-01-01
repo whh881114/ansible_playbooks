@@ -5,7 +5,7 @@ LABEL DATACENTER="DELL-R620-PERSONAL-DATACENTER"
 
 
 RUN set -eux && \
-    yum -y install ftp://foreman.freedom.org/pub/jenkins-2.319.1-1.1.noarch.rpm \
+    yum -y install http://foreman.freedom.org/pub/jenkins-2.319.1-1.1.noarch.rpm \
                    docker-ce
 
 WORKDIR /root
