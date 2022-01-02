@@ -13,3 +13,9 @@
           maxmemory: 2GB
           limits_memory: 2Gi
           storageclass_capacity: 2G
+
+        - name: password-bank
+          password: x-Pvvkw2cytxfusWedkgxztxqdhp5ocs
+          maxmemory: 2GB
+          limits_memory: 2Gi
+          storageclass_capacity: 2G

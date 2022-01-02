@@ -11,3 +11,7 @@
         - name: public
           password: kz2zv&eoynpneQbyeowebyu0beGxkgvy
           storageclass_capacity: 50G
+
+        - name: password-bank
+          password: tsayjvqnaydsoftmu6jJA/rbajuy2vzo
+          storageclass_capacity: 50G
