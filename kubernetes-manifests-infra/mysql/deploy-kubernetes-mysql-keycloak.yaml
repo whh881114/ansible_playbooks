@@ -37,8 +37,9 @@ data:
     pid-file=/var/lib/mysql/mysqld.pid
 
     # Roy Wong added those lines. 2020-01-09
-    character_set_server = utf8mb4
-    collation_server = utf8mb4_unicode_ci
+    # character_set_server = utf8mb4
+    # collation_server = utf8mb4_unicode_ci
+    character_set_server = utf8
 
     server-id = 1
     log-bin = /var/lib/mysql/mysql-bin
