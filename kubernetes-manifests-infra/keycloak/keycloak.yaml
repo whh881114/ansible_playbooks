@@ -65,24 +65,15 @@ spec:
           - name: DB_VENDOR
             value: "mysql"
           - name: DB_ADDR
-            value: "keycloak-mysql.keycloak"
+            value: "keycloak.mysql"
           - name: DB_PORT
             value: "3306"
           - name: DB_DATABASE
-            valueFrom:
-              configMapKeyRef:
-                name: keycloak-mysql-vars
-                key: MYSQL_DATABASE
+            value: "keycloak"
           - name: DB_USER
-            valueFrom:
-              configMapKeyRef:
-                name: keycloak-mysql-vars
-                key: MYSQL_USER
+            value: "keycloak"
           - name: DB_PASSWORD
-            valueFrom:
-              configMapKeyRef:
-                name: keycloak-mysql-vars
-                key: MYSQL_PASSWORD
+            value: "Keycloak_2@220102"
         ports:
         - name: http
           containerPort: 8080
