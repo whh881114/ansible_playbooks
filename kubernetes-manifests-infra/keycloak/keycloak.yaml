@@ -43,7 +43,8 @@ metadata:
   labels:
     app: keycloak
 spec:
-  replicas: 3
+  # 当前keycloak使用的是"standalone clustered"模式，理论上replicas可以设置为大于1，但是在测试过登录时出现无限循环。
+  replicas: 1
   selector:
     matchLabels:
       app: keycloak
@@ -76,9 +77,9 @@ spec:
             value: "Keycloak_2@220102"
           # https://github.com/keycloak/keycloak-containers/blob/16.1.0/server/README.md#replication-and-fail-over
           - name: CACHE_OWNERS_COUNT
-            value: "2"
+            value: "1"
           - name: CACHE_OWNERS_AUTH_SESSIONS_COUNT
-            value: "2"
+            value: "1"
           # https://github.com/keycloak/keycloak-containers/blob/16.1.0/server/README.md#enable-some-metrics
           - name: KEYCLOAK_STATISTICS
             value: "all"
