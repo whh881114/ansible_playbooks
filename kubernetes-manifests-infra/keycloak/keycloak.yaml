@@ -65,7 +65,7 @@ spec:
           - name: DB_VENDOR
             value: "mysql"
           - name: DB_ADDR
-            value: "keycloak.mysql"
+            value: "keycloak-0.keycloak.mysql"
           - name: DB_PORT
             value: "3306"
           - name: DB_DATABASE
