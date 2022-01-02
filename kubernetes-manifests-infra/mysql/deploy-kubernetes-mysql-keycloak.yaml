@@ -39,6 +39,11 @@ data:
     # Roy Wong added those lines. 2020-01-09
     # character_set_server = utf8mb4
     # collation_server = utf8mb4_unicode_ci
+
+    # 不能使用utf8mb4编码，否则会报错，错误信息如下。
+    # Reason: liquibase.exception.DatabaseException: Row size too large. The maximum row size for the used table type,
+    # not counting BLOBs, is 65535. This includes storage overhead, check the manual. You have to change some columns
+    # to TEXT or BLOBs [Failed SQL: ALTER TABLE keycloak.REALM MODIFY CERTIFICATE VARCHAR(4000)]
     character_set_server = utf8
 
     server-id = 1
