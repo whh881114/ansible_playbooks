@@ -43,7 +43,7 @@ metadata:
   labels:
     app: keycloak
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: keycloak
@@ -74,6 +74,11 @@ spec:
             value: "keycloak"
           - name: DB_PASSWORD
             value: "Keycloak_2@220102"
+          # https://github.com/keycloak/keycloak-containers/blob/16.1.0/server/README.md#replication-and-fail-over
+          - name: CACHE_OWNERS_COUNT
+            value: "2"
+          - name: CACHE_OWNERS_AUTH_SESSIONS_COUNT
+            value: "2"
         ports:
         - name: http
           containerPort: 8080
