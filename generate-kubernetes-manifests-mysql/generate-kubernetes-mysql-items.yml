@@ -15,3 +15,7 @@
         - name: password-bank
           password: tsayjvqnaydsoftmu6jJA/rbajuy2vzo
           storageclass_capacity: 50G
+
+        - name: keycloak
+          password: tjnyjjuXbrbrhzmctkdzOxl-7jkez4sj
+          storageclass_capacity: 50G
