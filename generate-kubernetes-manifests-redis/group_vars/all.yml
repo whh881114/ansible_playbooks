@@ -1,8 +1,0 @@
----
-redis_output_dir: /opt/ansible_playbooks
-
-redis_namespace: redis
-
-redis_image: harbor.freedom.org/docker.io/redis:5.0.7
-
-redis_storageclass: storageclass-nfs-redis

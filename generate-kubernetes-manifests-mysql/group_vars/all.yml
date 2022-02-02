@@ -1,8 +1,0 @@
----
-mysql_output_dir: /opt/ansible_playbooks
-
-mysql_namespace: mysql
-
-mysql_image: harbor.freedom.org/docker.io/mysql:5.7.29
-
-mysql_storageclass: storageclass-nfs-mysql
