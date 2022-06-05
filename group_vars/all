@@ -18,8 +18,8 @@ pkg_installed_dir: /usr/local   # 第三方包存放路径默认在/usr/local目
 resource_dir: /usr/local/src    # 存放包的路径
 
 # 内网DNS
-bind_master_ip: 192.168.2.1
-bind_slave_ip: 192.168.2.2
+bind_master_ip: 192.168.2.250
+bind_slave_ip: 192.168.2.251
 
 # 文件服务器地址
 files_server: http://files.freedom.org
