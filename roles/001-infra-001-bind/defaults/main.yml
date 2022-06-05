@@ -23,15 +23,15 @@ bind_pid_file: "/run/named/named.pid"
 bind_session_keyfile: "/run/named/session.key"
 
 # Custom location for master zone files
-bind_master_zone_dir: "{{ bind_dir }}"
+bind_master_zone_dir: "{{ bind_dir }}/data"
 bind_slave_zone_dir: "{{ bind_dir }}/slaves"
 
 
 bind_zones:
   - freedom.org
-  - ceph.freedom.org
+  - consul.freedom.org
   - k8s.freedom.org
-  - nfs.freedom.org
+  - ns.freedom.org
 
 bind_rev_zones:
   - {ip: "{{ bind_foreman_rev_net }}", domain_name: "freedom.org"}

@@ -9,9 +9,5 @@ $TTL 600
 
         NS  ns01.{{ domain_name }}.
         NS  ns02.{{ domain_name }}.
-ns01    A   {{ bind_master_ip }}
-ns02    A   {{ bind_slave_ip }}
-
-node01         IN      A           192.168.2.21
-node02         IN      A           192.168.2.22
-node03         IN      A           192.168.2.23
+node01    A   {{ bind_master_ip }}
+node02    A   {{ bind_slave_ip }}
