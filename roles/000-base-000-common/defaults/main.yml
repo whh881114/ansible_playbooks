@@ -1,5 +1,5 @@
 ---
-common_repo_type: katello
+common_repo_type: not_katello
 common_local_dns: true
 common_selinux_state: disabled
 common_register_org: Default_Organization
