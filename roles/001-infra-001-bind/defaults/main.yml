@@ -11,7 +11,8 @@ bind_packages:
 
 bind_service: named
 
-bind_dir: /var/named
+bind_root_dir: /var/named
+bind_data_dir: data
 bind_conf_dir: "/etc/named"
 bind_auth_file: "{{ bind_conf_dir }}/auth_transfer.conf"
 
@@ -23,8 +24,8 @@ bind_pid_file: "/run/named/named.pid"
 bind_session_keyfile: "/run/named/session.key"
 
 # Custom location for master zone files
-bind_master_zone_dir: "{{ bind_dir }}/data"
-bind_slave_zone_dir: "{{ bind_dir }}/slaves"
+bind_master_zone_dir: "{{ bind_root_dir }}/{{ bind_data_dir }}"
+bind_slave_zone_dir: "{{ bind_root_dir }}/slaves"
 
 
 bind_zones:
