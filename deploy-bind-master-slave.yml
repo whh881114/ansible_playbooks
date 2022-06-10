@@ -7,6 +7,7 @@
       tags: common
       vars:
         - common_local_dns: False
+        - common_repo_type: "not_katello"
 
     - role: 000-base-001-consul
       tags: consul-agent
@@ -34,6 +35,7 @@
       tags: common
       vars:
         - common_local_dns: False
+        - common_repo_type: "not_katello"
 
     - role: 000-base-001-consul
       tags: consul-agent
