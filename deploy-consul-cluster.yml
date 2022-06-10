@@ -1,0 +1,38 @@
+---
+- name: deploy consul server
+  hosts: 192.168.2.6
+  user: root
+  roles:
+    - role: 000-base-000-common
+      tags: common
+
+    - role: 000-base-001-consul
+      tags: consul-server
+      vars:
+        consul_server_role: True
+
+
+- name: deploy consul server
+  hosts: 192.168.2.7
+  user: root
+  roles:
+    - role: 000-base-000-common
+      tags: common
+
+    - role: 000-base-001-consul
+      tags: consul-server
+      vars:
+        consul_server_role: True
+
+
+- name: deploy consul server
+  hosts: 192.168.2.8
+  user: root
+  roles:
+    - role: 000-base-000-common
+      tags: common
+
+    - role: 000-base-001-consul
+      tags: consul-server
+      vars:
+        consul_server_role: True
