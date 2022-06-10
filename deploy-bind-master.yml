@@ -16,6 +16,8 @@
         consul_agent_items:
           services:
             - { name: consul-agent, port: 8500 }
+            - { name: node-exporter, port: 9100 }
+            - { name: zabbix-agent,  port: 10050 }
             - { name: bind, port: 53 }
 
     - role: 001-infra-001-bind
