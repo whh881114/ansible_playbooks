@@ -8,9 +8,9 @@
     state: directory
     recurse: yes
   loop:
-    - /data/kubernetes-datastorage-nfs-pvc/infra
-    - /data/kubernetes-datastorage-nfs-pvc/mysql
-    - /data/kubernetes-datastorage-nfs-pvc/redis
+    - /data/k8s-pvc-nfs/infra
+    - /data/k8s-pvc-nfs/mysql
+    - /data/k8s-pvc-nfs/redis
 
 - name: chown kubernetes nfs pvc directories
   file:
@@ -18,6 +18,6 @@
     owner: polkitd
     group: nfsnobody
   loop:
-    - /data/kubernetes-datastorage-nfs-pvc/infra
-    - /data/kubernetes-datastorage-nfs-pvc/mysql
-    - /data/kubernetes-datastorage-nfs-pvc/redis
+    - /data/k8s-pvc-nfs/infra
+    - /data/k8s-pvc-nfs/mysql
+    - /data/k8s-pvc-nfs/redis
