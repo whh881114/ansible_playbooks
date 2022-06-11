@@ -15,4 +15,4 @@
 
 - include: "{{ nginx_role_path }}/{{ item }}.yml"
   loop:
-    - "{{ nginx_role }}"
+    - "{{ nginx_roles }}"
