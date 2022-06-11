@@ -20,7 +20,8 @@
     - role: 001-infra-005-nginx
       tags: nginx
       vars:
-        - nginx_roles: file-server
+        - nginx_roles:
+            - file-server
 
     - role: 001-infra-024-nfs
       tags:
