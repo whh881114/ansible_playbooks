@@ -16,11 +16,11 @@ docker_cgroupdriver: cgroupfs
 # 如果业务日志增长过快，可以将max-size设置大些，可以是10G/20G/30G，max-file设置小些。
 # 这样的作用是，防止磁盘爆掉，并且后端elasticsearch或其他服务中断的时间过长，容器本地日志还写原来的文件中，这样就可以继续读取文件。
 # 如果文件发生了roration后，就需要找到发生roration前的日志，手动读取。
- docker_log_driver: json-file
- docker_log_opts:
-   - key: max-size
-     value: 1g
-   - key: max-file
-     value: 5
-   - key: labels
-     value: docker
+docker_log_driver: json-file
+docker_log_opts:
+  - key: max-size
+    value: 1g
+  - key: max-file
+    value: 5
+  - key: labels
+    value: docker
