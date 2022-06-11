@@ -1,4 +1,4 @@
-kubernetes_version: "1.18.20"
+kubernetes_version: "1.22.2"
 
 kubernetes_kernel_version: "5.14.9"
 
@@ -9,9 +9,3 @@ kubernetes_pkgs:
 
 # 2021-10-02，kubernetes与docker版本有关联关系，目前我使用了1.22.2版本，这个是支持了最新docker版本，即20.10.8。此变量先注释。
 #kubernetes_docker_ce_version: "20.10.8"
-
-# 镜像相关下载已转移至docker_images角色中了，此变量先注释。
-#quay_v1_16_2_imgs:
-#  - quay.io/coreos/flannel:v0.11.0-amd64
-#  - quay.io/external_storage/nfs-client-provisioner:latest
-#  - quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.28.0
