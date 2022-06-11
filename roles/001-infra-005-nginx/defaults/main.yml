@@ -1,6 +1,6 @@
 ---
 nginx_user: nginx
 nginx_group: nginx
-nginx_version: "1.20.1-9"
+nginx_version: "1.20.1"
 nginx_roles: default
 nginx_sub_conf_dir: /etc/nginx/conf.d/
