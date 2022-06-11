@@ -15,9 +15,13 @@ metadata:
   namespace: kube-system
 spec:
   rules:
-  - host: hubble-ui.k8s.freedom.org
-    http:
-      paths:
-      - backend:
-          serviceName: hubble-ui
-          servicePort: 80
+    - host: hubble-ui.k8s.freedom.org
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: hubble-ui
+                port:
+                  name: hubble-ui
