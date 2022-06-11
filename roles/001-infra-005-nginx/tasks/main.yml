@@ -13,4 +13,4 @@
   notify:
     - reload-nginx
 
-- include: "{{ nginx_roles }}.yml"
+- include: "{{ nginx_roles }}"

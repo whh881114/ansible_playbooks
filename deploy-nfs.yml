@@ -21,7 +21,7 @@
       tags: nginx
       vars:
         - nginx_roles:
-            - file-server
+            - file-server.yml
 
     - role: 001-infra-024-nfs
       tags:
