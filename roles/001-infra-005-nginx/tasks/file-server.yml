@@ -2,7 +2,7 @@
 - name: make directories for file-server
   file:
     name: "{{ item }}"
-    state: diretory
+    state: directory
     recurse: yes
     owner: "{{ nginx_owner }}"
     group: "{{ nginx_group }}"
