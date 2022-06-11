@@ -23,6 +23,9 @@ worker03        IN      A           192.168.2.16
 ; 最后发现，安装失败的原因是docker中配置的logdriver的服务没有安装。
 apiserver       IN      A           192.168.2.2
 
-; 配置泛域名解析，为k8s集群7层导流。
-*               IN      A           192.168.2.2
+; 配置泛域名解析，为k8s集群7层导流，但是这样会导致容器访问不了外网，因为在/etc/resolv.conf文件中，有一个search k8s.freedom.org配置，
+; 这样就会导致全部走泛解析，所以先取消。
+jenkins               IN      A           192.168.2.2
+rancher               IN      A           192.168.2.2
+hubble-ui             IN      A           192.168.2.2
 
