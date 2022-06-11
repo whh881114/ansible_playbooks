@@ -1,6 +1,6 @@
 ---
 ingress_nginx_version: 4.0.3
-ingress_nginx_pkg_url: "{{ files_server }}/kubernetes/ingress-nginx/ingress-nginx-{{ ingress_nginx_version }}.tgz"
+ingress_nginx_pkg_url: "{{ file_server }}/kubernetes/ingress-nginx/ingress-nginx-{{ ingress_nginx_version }}.tgz"
 
 ingress_nginx_http_port: 32080
 ingress_nginx_https_port: 32443
