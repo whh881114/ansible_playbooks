@@ -19,7 +19,7 @@
 - name: mkdir /etc/docker directory
   file:
     path: /etc/docker
-    state: present
+    state: directory
 
 - name: generate docker-ce configuration file
   template:
