@@ -13,6 +13,5 @@
   notify:
     - reload-nginx
 
-- include: "{{ nginx_role_path }}/{{ item | to_json }}.yml"
-  loop:
-    - "{{ nginx_roles }}"
+- include: "{{ nginx_role_path }}/{{ item }}.yml"
+  loop: "{{ nginx_roles }}"
