@@ -10,25 +10,6 @@
       tags:
         - common
 
-    - role: 000-base-003-puppet
-      tags:
-        - puppet
-
-    - role: 000-base-001-consul
-      tags: consul-agent
-      vars:
-        consul_agent_role: True
-        consul_agent_items:
-          services:
-            - { name: kubelet, port: 10250 }
-            - { name: kube-proxy-ingress-nginx-http-nodeport, port: 32080 }
-            - { name: kube-proxy-ingress-nginx-https-nodeport, port: 32443 }
-            - { name: consul-agent, port: 8500 }
-            - { name: node-exporter, port: 9100 }
-
-    - role: 000-base-002-fluentd
-      tags: fluentd
-
     - role: 000-base-005-docker
       tags: docker
       vars:
@@ -41,14 +22,3 @@
       tags:
         - k8s
         - kubernetes
-      vars:
-        - kubernetes_version: 1.21.5
-
-    - role: 001-infra-018-zabbix
-      tags: zabbix
-
-    - role: 001-infra-025-ceph
-      tags:
-        - ceph
-      vars:
-        - ceph_type: kubernetes
