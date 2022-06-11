@@ -1,0 +1,9 @@
+server {
+    listen       80;
+    listen       [::]:80;
+    server_name  file.freedom.org;
+    root         /data/file-server;
+
+    # Load configuration files for the default server block.
+    include /etc/nginx/file-server.d/*.conf;
+}

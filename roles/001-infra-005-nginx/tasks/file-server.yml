@@ -1,0 +1,22 @@
+---
+- name: make directories for file-server
+  file:
+    name: "{{ item }}"
+    state: diretory
+    recurse: yes
+    owner: "{{ nginx_owner }}"
+    group: "{{ nginx_group }}"
+  loop:
+    - /data/file-server
+    - /etc/nginx/file-server.d
+
+- name: generate configuration file
+  template:
+    src: "{{ item.src}}"
+    dest: "{{ item.dest }}"
+    owner: "{{ nginx_owner }}"
+    group: "{{ nginx_group }}"
+  with_items:
+    - { src: file-server.conf.j2, dest: "{{ nginx_sub_conf_dir }}/file-server.conf }
+  notify:
+    - reload-nginx

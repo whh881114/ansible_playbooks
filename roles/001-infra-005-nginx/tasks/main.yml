@@ -1,0 +1,17 @@
+---
+- name: install nginx {{ nginx_version }}
+  yum:
+    name: "nginx-{{ nginx_version }}"
+    state: present
+
+- name: generate nginx main configuration file
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { src: nginx.conf.j2, dest: /etc/nginx/nginx.conf }
+  notify:
+    - reload-nginx
+
+- include: "{{ item }}.yml"
+  loop: "{{ nginx_roles }}"
