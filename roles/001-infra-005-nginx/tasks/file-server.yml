@@ -18,5 +18,4 @@
     group: "{{ nginx_group }}"
   with_items:
     - { src: file-server.conf.j2, dest: "{{ nginx_sub_conf_dir }}/file-server.conf }
-  notify:
-    - reload-nginx
+  notify: reload-nginx
