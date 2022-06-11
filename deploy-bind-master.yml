@@ -20,6 +20,10 @@
             - { name: zabbix-agent,  port: 10050 }
             - { name: bind, port: 53 }
 
+    - role: 000-base-010-node-exporter
+      tags:
+        - node_exporter
+
     - role: 001-infra-001-bind
       tags:
         - dns

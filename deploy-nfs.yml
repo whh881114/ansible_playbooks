@@ -17,6 +17,10 @@
             - { name: zabbix-agent,  port: 10050 }
             - { name: nfs, port: 2049 }
 
+    - role: 000-base-010-node-exporter
+      tags:
+        - node_exporter
+
     - role: 001-infra-005-nginx
       tags: nginx
       vars:
