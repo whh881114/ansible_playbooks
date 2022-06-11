@@ -3,7 +3,7 @@
 
 [elrepo]
 name=ELRepo.org Community Enterprise Linux Repository - el7
-baseurl=http://mirrors.tuna.tsinghua.edu.cn/elrepo/el7/$basearch/
+baseurl=http://mirrors.tuna.tsinghua.edu.cn/elrepo/elrepo/el7/$basearch/
 #mirrorlist=http://mirrors.elrepo.org/mirrors-elrepo.el7
 enabled=1
 gpgcheck=1
