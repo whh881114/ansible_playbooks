@@ -1,6 +1,6 @@
 ---
 - name: deploy consul server
-  hosts: 192.168.2.6
+  hosts: node01.consul.freedom.org
   user: root
   roles:
     - role: 000-base-000-common
@@ -13,7 +13,7 @@
 
 
 - name: deploy consul server
-  hosts: 192.168.2.7
+  hosts: node02.consul.freedom.org
   user: root
   roles:
     - role: 000-base-000-common
@@ -26,7 +26,7 @@
 
 
 - name: deploy consul server
-  hosts: 192.168.2.8
+  hosts: node03.consul.freedom.org
   user: root
   roles:
     - role: 000-base-000-common

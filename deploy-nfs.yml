@@ -1,6 +1,6 @@
 ---
 - name: deploy nfs server
-  hosts: 192.168.2.4
+  hosts: nfs.freedom.org
   user: root
   roles:
     - role: 000-base-000-common
