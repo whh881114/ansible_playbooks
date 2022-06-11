@@ -13,4 +13,6 @@
   notify:
     - reload-nginx
 
-- include: "{{ nginx_roles }}"
+- include: "{{ item }}"
+  loop:
+    - "{{ nginx_roles }}"
