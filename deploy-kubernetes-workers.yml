@@ -1,5 +1,5 @@
 ---
-- name: init k8s workers
+- name: deploy k8s worker nodes
   hosts:
     - worker01.k8s.freedom.org
     - worker02.k8s.freedom.org
