@@ -1,5 +1,5 @@
 ---
-- name: init k8s master nodes
+- name: deploy kubernetes master nodes
   hosts:
     - master01.k8s.freedom.org
     - master02.k8s.freedom.org
@@ -7,30 +7,29 @@
   user: root
   roles:
     - role: 000-base-000-common
-      tags:
-        - common
+      tags: common
 
-    - role: 000-base-001-consul
-      tags: consul-agent
-      vars:
-        consul_agent_role: True
-        consul_agent_items:
-          services:
-            - { name: kube-apiserver, port: 6443 }
-            - { name: kube-scheduler, port: 10259 }
-            - { name: kube-controlle, port: 10257 }
-            - { name: kubelet, port: 10250 }
-            - { name: kube-proxy-ingress-nginx-http-nodeport, port: 32080 }
-            - { name: kube-proxy-ingress-nginx-https-nodeport, port: 32443 }
-            - { name: consul-agent, port: 8500 }
-            - { name: node-exporter, port: 9100 }
+#    - role: 000-base-001-consul
+#      tags: consul-agent
+#      vars:
+#        consul_agent_role: True
+#        consul_agent_items:
+#          services:
+#            - { name: kube-apiserver, port: 6443 }
+#            - { name: kube-scheduler, port: 10259 }
+#            - { name: kube-controlle, port: 10257 }
+#            - { name: kubelet, port: 10250 }
+#            - { name: kube-proxy-ingress-nginx-http-nodeport, port: 32080 }
+#            - { name: kube-proxy-ingress-nginx-https-nodeport, port: 32443 }
+#            - { name: consul-agent, port: 8500 }
+#            - { name: node-exporter, port: 9100 }
 
-    - role: 000-base-003-puppet
-      tags:
-        - puppet
+#    - role: 000-base-003-puppet
+#      tags:
+#        - puppet
 
-    - role: 000-base-002-fluentd
-      tags: fluentd
+#    - role: 000-base-002-fluentd
+#      tags: fluentd
 
     - role: 000-base-005-docker
       tags: docker
@@ -47,11 +46,11 @@
       vars:
         - kubernetes_version: 1.21.5
 
-    - role: 001-infra-018-zabbix
-      tags: zabbix
-
-    - role: 001-infra-025-ceph
-      tags:
-        - ceph
-      vars:
-        - ceph_type: kubernetes
+#    - role: 001-infra-018-zabbix
+#      tags: zabbix
+#
+#    - role: 001-infra-025-ceph
+#      tags:
+#        - ceph
+#      vars:
+#        - ceph_type: kubernetes
