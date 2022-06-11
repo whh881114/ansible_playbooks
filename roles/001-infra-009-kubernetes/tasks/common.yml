@@ -1,10 +1,10 @@
 ---
 - name: update kernel
   yum:
-    name: "kernel-ml-{{ kubernetes_kernel_version }}"
+    name: "kernel-{{ kubernetes_kernel_version }}"
     state: present
 
-- name: set default boot kernel to kernel-ml-{{ kubernetes_kernel_version }}
+- name: set default boot kernel to kernel-{{ kubernetes_kernel_version }}
   shell: |
     grub2-set-default 0
 
