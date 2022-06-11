@@ -1,34 +1,13 @@
-# 镜像列表格式：项目/镜像名:镜像版本，"#"之后是注释。
+# 格式：镜像地址#源镜像地址（安装k8s时要求是此格式）#内部harbor服务器地址，前面默认会加上harbor服务器地址前缀
 
-docker.io/nginx:1.17.8
-docker.io/httpd:2.4.41
-docker.io/mysql:5.7.29
-docker.io/php:7.4.2
-docker.io/redis:5.0.7
-docker.io/busybox:1.31.1
-docker.io/consul:1.10.2
+registry.aliyuncs.com/google_containers/kube-apiserver:v1.22.2#k8s.gcr.io/kube-apiserver:v1.22.2#k8s.gcr.io/kube-apiserver:v1.22.2
+registry.aliyuncs.com/google_containers/kube-controller-manager:v1.22.2#k8s.gcr.io/kube-controller-manager:v1.22.2#k8s.gcr.io/kube-controller-manager:v1.22.2
+registry.aliyuncs.com/google_containers/kube-scheduler:v1.22.2#k8s.gcr.io/kube-scheduler:v1.22.2#k8s.gcr.io/kube-scheduler:v1.22.2
+registry.aliyuncs.com/google_containers/kube-proxy:v1.22.2#k8s.gcr.io/kube-proxy:v1.22.2#k8s.gcr.io/kube-proxy:v1.22.2
+registry.aliyuncs.com/google_containers/pause:3.5#k8s.gcr.io/pause:3.5#k8s.gcr.io/pause:3.5
+registry.aliyuncs.com/google_containers/etcd:3.5.0-0#k8s.gcr.io/etcd:3.5.0-0#k8s.gcr.io/etcd:3.5.0-0
+registry.aliyuncs.com/google_containers/coredns:v1.8.4#k8s.gcr.io/coredns/coredns:v1.8.4#k8s.gcr.io/coredns:v1.8.4
 
-zabbix/zabbix-agent:centos-5.0.12
-zabbix/zabbix-java-gateway:centos-5.0.12
-zabbix/zabbix-server-mysql:centos-5.0.12
-zabbix/zabbix-web-apache-mysql:centos-5.0.12
-
-prom/prometheus:v2.30.0
-prom/alertmanager:master
-prom/pushgateway:master
-prom/mysqld-exporter:master
-prom/node-exporter:master
-prom/blackbox-exporter:master
-
-prom/alertmanager:v0.23.0
-prom/pushgateway:v1.4.1
-prom/mysqld-exporter:v0.13.0
-prom/node-exporter:v1.2.2
-
-elastic/elasticsearch:7.14.1
-elastic/filebeat:7.14.1
-elastic/kibana:7.14.1
-elastic/logstash:7.14.1
-elastic/metricbeat:7.14.1
-
-jenkins/jenkins:lts
+liangjw/ingress-nginx-controller:v0.49.2#k8s.gcr.io/ingress-nginx-controller:v0.49.2#k8s.gcr.io/ingress-nginx-controller:v0.49.2
+liangjw/ingress-nginx-controller:v1.0.2#k8s.gcr.io/ingress-nginx-controller:v1.0.2#k8s.gcr.io/ingress-nginx-controller:v1.0.2
+liangjw/kube-webhook-certgen:v1.0#k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.0#k8s.gcr.io/kube-webhook-certgen:v1.0

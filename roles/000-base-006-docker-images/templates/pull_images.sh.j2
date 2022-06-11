@@ -2,11 +2,16 @@
 
 while read line
 do
+    mirror_image=`echo $line | awk -F'#' '{print $1}'`
+    original_image=`echo $line | awk -F'#' '{print $2}'`
+    harbor_image=`echo $line | awk -F'#' '{print "{{ docker_images_register }}/"$3}'`
 {% if docker_images_role == "harbor" %}
-    docker pull "$line"
-    docker tag  "$line" "{{ docker_images_register }}/$line"
-    docker push "{{ docker_images_register }}/$line"
+    docker pull $mirror_image
+    docker tag $mirror_image $original_image
+    docker tag $mirror_image $harbor_image
+    docker push $harbor_image
 {% else %}
-    docker pull "{{ docker_images_register }}/$line"
+    docker pull $harbor_image
+    docker tag $harbor_image $original_image
 {% endif %}
 done < {{ docker_images_list_file }}

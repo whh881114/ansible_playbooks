@@ -1,14 +1,3 @@
 - name: systemctl-daemon-reload
   systemd:
     daemon_reload: yes
-
-- name: enable-haproxy_exporter
-  service:
-    name: haproxy_exporter
-    enabled: yes
-
-- name: restart-haproxy_exporter
-  service:
-    name: haproxy_exporter
-    state: restarted
-    enabled: yes
