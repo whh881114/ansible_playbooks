@@ -1,0 +1,4 @@
+[kubernetes]
+name=kubernetes
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/kubernetes/yum/repos/kubernetes-el7-$basearch
+enabled=1

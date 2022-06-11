@@ -15,6 +15,19 @@
     - { src: "el{{ ansible_distribution_major_version }}-repos/CentOS-Sources.repo", dest: /etc/yum.repos.d/CentOS-Sources.repo }
     - { src: "el{{ ansible_distribution_major_version }}-repos/CentOS-Vault.repo", dest: /etc/yum.repos.d/CentOS-Vault.repo }
     - { src: "el{{ ansible_distribution_major_version }}-repos/epel.repo", dest: /etc/yum.repos.d/epel.repo }
+    - { src: "el{{ ansible_distribution_major_version }}-repos/docker-ce.repo", dest: /etc/yum.repos.d/docker-ce.repo }
+    - { src: "el{{ ansible_distribution_major_version }}-repos/kubernetes.repo", dest: /etc/yum.repos.d/kubernetes.repo }
+    - { src: "el{{ ansible_distribution_major_version }}-repos/elrepo.repo", dest: /etc/yum.repos.d/elrepo.repo }
+
+- name: import rpm pgp key files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: "0644"
+  with_items:
+    - { src: "el{{ ansible_distribution_major_version }}-repos/RPM-GPG-KEY-elrepo.org", dest: /etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org }
 
 - name: install common packages
   yum:
