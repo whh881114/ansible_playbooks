@@ -1,8 +1,0 @@
----
-- name: install k8s prometheus token
-  copy:
-    src: k8s-prometheus.token
-    dest: "{{ prometheus_config_dir }}/k8s-prometheus.token"
-    owner: prometheus
-    group: prometheus
-    mode: 0644
