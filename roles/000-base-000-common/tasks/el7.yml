@@ -19,7 +19,7 @@
     - { src: "el{{ ansible_distribution_major_version }}-repos/kubernetes.repo", dest: /etc/yum.repos.d/kubernetes.repo }
     - { src: "el{{ ansible_distribution_major_version }}-repos/elrepo.repo", dest: /etc/yum.repos.d/elrepo.repo }
 
-- name: import rpm pgp key files
+- name: copy rpm pgp key files
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -27,7 +27,14 @@
     group: root
     mode: "0644"
   with_items:
+    - { src: "el{{ ansible_distribution_major_version }}-repos/RPM-GPG-KEY-CentOS-7", dest: /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7 }
     - { src: "el{{ ansible_distribution_major_version }}-repos/RPM-GPG-KEY-elrepo.org", dest: /etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org }
+
+- name: import rpm gpg key files
+  shell: rpm --import "{{ item }}"
+  loop:
+    - /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+    - /etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org
 
 - name: install common packages
   yum:
