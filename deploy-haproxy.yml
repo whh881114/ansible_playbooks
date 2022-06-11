@@ -24,7 +24,7 @@
 
     - role: 000-base-010-node-exporter
       tags:
-        - node_exporter
+        - node-exporter
 
     - role: 001-infra-001-bind
       tags: dns
