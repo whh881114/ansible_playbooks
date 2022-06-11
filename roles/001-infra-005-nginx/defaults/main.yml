@@ -4,5 +4,6 @@ nginx_group: nginx
 nginx_version: "1.20.1"
 nginx_sub_conf_dir: /etc/nginx/conf.d/
 
+nginx_role_path: roles/001-infra-005-nginx/tasks/
 nginx_roles:
-  - default.yml
+  - default

@@ -13,6 +13,6 @@
   notify:
     - reload-nginx
 
-- include: "{{ item }}"
+- include: "{{ nginx_role_path }}/{{ item }}.yml"
   loop:
-    - "{{ nginx_roles }}"
+    - "{{ nginx_role }}"
