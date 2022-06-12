@@ -18,21 +18,9 @@
             - { name: consul-agent, port: 8500 }
             - { name: node-exporter, port: 9100 }
 
-    - role: 000-base-003-puppet
-      tags:
-        - puppet
-
     - role: 000-base-010-node-exporter
       tags:
         - node-exporter
-
-    - role: 001-infra-001-bind
-      tags: dns
-      vars:
-        - bind_slave_role: true
-
-    - role: 001-infra-018-zabbix
-      tags: zabbix
 
     - role: 001-infra-019-haproxy
       tags:
