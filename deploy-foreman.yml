@@ -5,28 +5,17 @@
   roles:
     - role: 000-base-000-common
       tags: common
-      vars:
-        - common_local_dns: false
-        - common_selinux_state: disabled
 
     - role: 000-base-001-consul
       tags: consul
       vars:
-        consul_server_role: True
+        consul_agent_role: True
+        consul_agent_items:
+          services:
+            - { name: foreman, port: 8443 }
+            - { name: consul-agent, port: 8500 }
+            - { name: node-exporter, port: 9100 }
         consul_template_role: True
-
-    - role: 000-base-002-fluentd
-      tags: fluentd
-
-    - role: 000-base-005-docker
-      tags: docker
-
-    - role: 001-infra-001-bind
-      tags:
-        - dns
-        - bind
-      vars:
-        - bind_master_role: true
 
     - role: 001-infra-015-vsftpd
       tags: vsftpd
@@ -37,52 +26,3 @@
     - role: 000-base-010-node-exporter
       tags:
         - node_exporter
-
-    - role: 001-infra-018-zabbix
-      tags: zabbix
-
-    - role: 001-infra-024-nfs
-      tags:
-        - nfs
-      vars:
-        - nfs_app: kubernetes
-
-
-# 删除不必要的角色
-#    - role: 001-infra-017-mysql
-#      tags: mysql
-#
-#    - role: 001-infra-018-zabbix
-#      tags: zabbix
-#      vars:
-#        zabbix_server_role: true
-#
-#    # 涉及到修改httpd日志格式，所以httpd的子配置文件存放在此角色中。
-#    - role: 001-infra-002-elastic
-#      tags:
-#        - es
-#        - elastic
-#      vars:
-#        - elastic_elasticsearch: true
-#        - elastic_kibana: true
-#        - elastic_filebeat: true
-#        - elastic_client_type: foreman
-#
-#    - role: 001-infra-011-prometheus
-#      tags:
-#        - prometheus
-#        - prom
-#
-#    - role: 001-infra-012-alertmanager
-#      tags:
-#        - alertmanager
-#        - am
-#
-#    - role: 001-infra-013-pushgateway
-#      tags:
-#        - pushgateway
-#        - pg
-#
-#    - role: 001-infra-014-grafana
-#      tags:
-#        - grafana
