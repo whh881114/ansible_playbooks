@@ -51,14 +51,16 @@
       - telnet
       - python2-pip
 
-- name: install katello-ca-consumer-latest.noarch.rpm
-  yum:
-    name: "{{ item }}"
-  loop:
-    - subscription-manager
-    - http://foreman.freedom.org/pub/katello-ca-consumer-latest.noarch.rpm
+
 
 - block:
+    - name: install katello-ca-consumer-latest.noarch.rpm
+      yum:
+        name: "{{ item }}"
+      loop:
+        - subscription-manager
+        - http://foreman.freedom.org/pub/katello-ca-consumer-latest.noarch.rpm  # 此处可能会发生变化。
+
     - name: delete original repo files
       file:
         path: "/etc/yum.repos.d/{{ item }}"
