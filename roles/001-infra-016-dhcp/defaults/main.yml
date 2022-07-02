@@ -1,5 +1,0 @@
----
-dhcp_pkgs:
-  - dhcp
-  - dhcp-libs
-  - dhcp-common
