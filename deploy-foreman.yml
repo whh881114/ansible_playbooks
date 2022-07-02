@@ -20,9 +20,6 @@
     - role: 001-infra-015-vsftpd
       tags: vsftpd
 
-    - role: 001-infra-016-dhcp
-      tags: dhcp
-
     - role: 000-base-010-node-exporter
       tags:
         - node_exporter
