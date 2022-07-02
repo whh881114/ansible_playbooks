@@ -16,9 +16,6 @@
             - { name: consul-agent, port: 8500 }
             - { name: node-exporter, port: 9100 }
 
-    - role: 000-base-002-fluentd
-      tags: fluentd
-
     - role: 000-base-003-puppet
       tags:
         - puppet
