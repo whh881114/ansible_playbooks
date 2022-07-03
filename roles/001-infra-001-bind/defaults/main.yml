@@ -32,6 +32,7 @@ bind_zones:
   - freedom.org
   - consul.freedom.org
   - k8s.freedom.org
+  - indv.freedom.org
 
 bind_rev_zones:
   - {ip: "{{ bind_foreman_rev_net }}", domain_name: "freedom.org"}
