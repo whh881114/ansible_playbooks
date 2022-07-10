@@ -1,3 +1,5 @@
 ---
 istio_version: 1.14.1
 istio_file: istio-{{ istio_version }}-linux-amd64.tar.gz
+istio_directory: /root
+istio_profile: demo

@@ -2,4 +2,13 @@
 - name: install istio pkg
   unarchive:
     src: "{{ istio_file }}"
-    dest: /root
+    dest: "{{ istio_directory }}"
+
+- name: deploy istio
+  shell: |
+    cd "{{ istio_directory }}/istio-{{ istio_version }}/bin"
+    ./istioctl install --set profile={{ istio_profile }} -y
+  register: deploy_istio
+
+- name: show deploy_istio log
+  debug: var=deploy_istio.stdout_lines verbosity=0
