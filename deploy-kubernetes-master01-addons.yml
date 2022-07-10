@@ -17,3 +17,7 @@
         - ingress-nginx
       vars:
         - ingress_nginx_enable_hubble_ui: true
+
+    - role: 001-infra-022-istio
+      tags:
+        - istio
