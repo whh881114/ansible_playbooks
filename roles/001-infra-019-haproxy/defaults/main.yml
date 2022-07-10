@@ -84,7 +84,7 @@ haproxy_service_items:
       - worker01.k8s.freedom.org
       - worker02.k8s.freedom.org
       - worker03.k8s.freedom.org
-    backend_server_listen_port: 30661
+    backend_server_listen_port: 30661   # 安装istio时其端口没有指定，所以下次安装时，此端口需要使用`kubectl get svc istio-ingressgateway -n istio-system`查询。
   - name: istio-ingressgateway-https
     mode: tcp
     listen_ip: 192.168.2.111
