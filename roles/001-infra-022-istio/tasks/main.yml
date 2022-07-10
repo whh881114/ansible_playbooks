@@ -1,5 +1,5 @@
 ---
-- name: install ingress-nginx pkg
+- name: install istio pkg
   unarchive:
     src: "{{ istio_file }}"
     dest: /root
