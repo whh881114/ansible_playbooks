@@ -70,3 +70,31 @@ haproxy_service_items:
       - worker02.k8s.freedom.org
       - worker03.k8s.freedom.org
     backend_server_listen_port: 32443
+
+  # 定义istio转发
+  - name: istio-ingressgateway-http
+    mode: tcp
+    listen_ip: 192.168.2.111
+    listen_port: 80
+    backend_server_mode: static
+    backend_server_items:
+      - master01.k8s.freedom.org
+      - master02.k8s.freedom.org
+      - master03.k8s.freedom.org
+      - worker01.k8s.freedom.org
+      - worker02.k8s.freedom.org
+      - worker03.k8s.freedom.org
+    backend_server_listen_port: 30661
+  - name: istio-ingressgateway-https
+    mode: tcp
+    listen_ip: 192.168.2.111
+    listen_port: 443
+    backend_server_mode: static
+    backend_server_items:
+      - master01.k8s.freedom.org
+      - master02.k8s.freedom.org
+      - master03.k8s.freedom.org
+      - worker01.k8s.freedom.org
+      - worker02.k8s.freedom.org
+      - worker03.k8s.freedom.org
+    backend_server_listen_port: 30967
