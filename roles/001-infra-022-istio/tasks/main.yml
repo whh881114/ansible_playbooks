@@ -12,3 +12,19 @@
 
 - name: show deploy_istio log
   debug: var=deploy_istio.stdout_lines verbosity=0
+
+- block:
+    - name: install an istio demo
+      shell: |
+        kubectl label namespace default istio-injection=enabled
+
+        export "{{ istio_directory }}/istio-{{ istio_version }}/bin"
+        cd "{{ istio_directory }}/istio-{{ istio_version }}"
+
+        kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
+        kubectl get services
+        kubectl get pods
+
+        kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+        istioctl analyze
+  when: istio_profile == "demo"
