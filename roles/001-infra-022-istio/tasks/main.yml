@@ -27,4 +27,7 @@
 
         kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
         istioctl analyze
+
+        kubectl apply -f samples/addons
+        kubectl rollout status deployment/kiali -n istio-system
   when: istio_profile == "demo"
