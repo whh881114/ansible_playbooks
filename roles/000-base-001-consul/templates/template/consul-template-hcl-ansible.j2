@@ -19,7 +19,7 @@ wait {
 
 
 template {
-    source = "[[ consul_template_data_dir  ]]/[[ consul_template_service ]].ctmpl"
+    source = "[[ consul_template_dir  ]]/data/[[ consul_template_service ]].ctmpl"
     destination = "/etc/ansible/hosts"
     command = "echo 'refesh ansible hosts done'"
     command_timeout = "60s"
