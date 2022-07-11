@@ -1,0 +1,9 @@
+{{ range services }}[{{ .Name }}]
+{{ range service .Name }}{{ .Address }}
+{{ end }}
+{{ end }}
+
+{{ range services }}[{{ .Name }}]
+{{ range service .Name }}{{ .Hostname }}
+{{ end }}
+{{ end }}

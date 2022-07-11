@@ -1,0 +1,12 @@
+---
+- name: generate consul template hcl file {{ consul_template_service }}
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: 0644
+    variable_start_string: "[["
+    variable_end_string: "]]"
+  with_items:
+    - { src: "template/consul-template-hcl-{{ consul_template_service }}.j2",    dest: "{{ consul_template_config_dir }}/{{ consul_template_service }}.hcl" }
+    - { src: "template/consul-template-hcl-{{ consul_template_service }}.ctmpl", dest: "{{ consul_template_data_dir }}/{{ consul_template_service }}.ctmpl" }
+  notify: restart-consul-template

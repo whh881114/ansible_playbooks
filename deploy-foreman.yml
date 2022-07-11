@@ -16,6 +16,7 @@
             - { name: consul-agent, port: 8500 }
             - { name: node-exporter, port: 9100 }
         consul_template_role: True
+        consul_template_service: ansible
 
     - role: 001-infra-015-vsftpd
       tags: vsftpd

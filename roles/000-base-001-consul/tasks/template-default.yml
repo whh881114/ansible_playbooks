@@ -1,0 +1,7 @@
+---
+- name: generate consul template hcl file {{ consul_template_service }}
+  template:
+    src: template/consul-template-hcl.j2
+    dest: "{{ consul_template_config_dir }}/consul-template.hcl"
+    mode: 0644
+  notify: restart-consul-template

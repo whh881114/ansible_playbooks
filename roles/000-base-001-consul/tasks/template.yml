@@ -32,9 +32,4 @@
     daemon_reload: yes
 
 - name: generate consul template hcl
-  tags: generate-config
-  template:
-    src: template/consul-template-hcl.j2
-    dest: "{{ consul_template_config_dir }}/consul-template.hcl"
-    mode: 0644
-  notify: restart-consul-template
+  include: template-{{ consul_template_service }}.yml

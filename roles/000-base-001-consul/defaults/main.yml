@@ -33,6 +33,7 @@ consul_template_dir: /etc/consul-template
 consul_template_data_dir: "{{ consul_template_dir }}/data"
 consul_template_config_dir: "{{ consul_template_dir }}/conf"
 consul_template_pid_file: "{{ consul_template_data_dir }}/consul-template.pid"
+consul_template_service: "default"
 
 consul_server_dir: /etc/consul-server
 consul_server_log_dir: "{{ consul_server_dir }}/log"
