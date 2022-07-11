@@ -18,25 +18,6 @@
     "client_addr": "0.0.0.0",
     "leave_on_terminate": true,
     "rejoin_after_leave": true,
-{% if consul_agent_items.checks is defined %}
-    "enable_script_checks": true,
-    "enable_local_script_checks": true,
-    "checks": [
-    {% for item in consul_agent_items.checks %}
-        {
-            "name": "{{item.name}}",
-            "service_id": "udf-check-service",
-            "args": ["{{ consul_agent_script_dir }}/{{ item.script_name }}"],
-            "interval": "10s",
-            "timeout": "1s"
-        {%- if loop.last %}
-        }
-        {% else %}
-        },
-        {% endif %}
-    {% endfor %}
-    ],
-{% endif %}
     "services": [
 {% for item in consul_agent_items.services %}
         {
@@ -51,8 +32,5 @@
             ]
         }
 {% endfor %}
-        {
-            "name": "udf-check-service"
-        }
     ]
 }
