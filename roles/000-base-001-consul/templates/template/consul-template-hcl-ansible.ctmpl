@@ -4,6 +4,6 @@
 {{ end }}
 
 {{ range services }}[{{ .Name }}]
-{{ range service .Name }}{{ .Hostname }}
+{{ range service .Name }}{{ .Node }}
 {{ end }}
 {{ end }}
