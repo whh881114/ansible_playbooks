@@ -24,13 +24,13 @@
             "name": "{{ item.name }}",
             "port": {{ item.port }},
             "tags": [
-    {% if loop.first %}
-                "main-service"
-    {% else %}
                 "{{ item.name }}"
-    {% endif %}
             ]
+        {%- if loop.last %}
         }
+        {% else %}
+        },
+        {% endif %}
 {% endfor %}
     ]
 }
