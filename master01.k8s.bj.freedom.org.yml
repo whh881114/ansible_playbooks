@@ -1,7 +1,7 @@
 ---
-- name: masters01.k8s.bj.freedom.org.yml
+- name: master01.k8s.bj.freedom.org.yml
   hosts:
-    - masters01.k8s.bj.freedom.org
+    - master01.k8s.bj.freedom.org
   user: root
   roles:
     - role: 000-base-000-common
