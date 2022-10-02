@@ -1,3 +1,4 @@
 ---
+# https://github.com/helm/helm/releases
 helm_version: v3.10.0
 helm_pkg_url: "{{ file_server }}/kubernetes/helm/helm-{{ helm_version }}-linux-amd64.tar.gz"
