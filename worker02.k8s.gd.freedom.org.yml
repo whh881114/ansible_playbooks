@@ -1,0 +1,22 @@
+---
+- name: worker02.k8s.gd.freedom.org
+  hosts:
+    - worker02.k8s.gd.freedom.org
+  user: root
+  roles:
+    - role: 000-base-000-common
+      tags:
+        - common
+
+    - role: 000-base-005-docker
+      tags: docker
+      vars:
+        - docker_cgroupdriver: systemd
+
+    - role: 000-base-006-docker-images
+      tags: docker-images
+
+    - role: 001-infra-009-kubernetes
+      tags:
+        - k8s
+        - kubernetes
