@@ -1,9 +1,10 @@
 ---
 # cilium_version和cilium_hubble_version要匹配，安装hubble时要看release中的说明。
+# https://github.com/cilium/cilium-cli/releases
 # https://github.com/cilium/hubble/releases
 
-cilium_version: v0.9.1
+cilium_version: v0.12.4
 cilium_pkg_url: "{{ file_server }}/kubernetes/cilium/{{ cilium_version }}/cilium-linux-amd64.tar.gz"
 
-cilium_hubble_version: v0.8.2
+cilium_hubble_version: v0.10.0
 cilium_hubble_pkg_url: "{{ file_server }}/kubernetes/hubble/{{ cilium_hubble_version }}/hubble-linux-amd64.tar.gz"
