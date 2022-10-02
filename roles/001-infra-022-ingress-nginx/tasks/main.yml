@@ -26,17 +26,3 @@
     msg:
       - "{{ ingress_nginx_status_result.stdout_lines }}"
       - "{{ ingress_nginx_status_result.stderr_lines }}"
-
-- block:
-  - name: generate hubble-ui ingress-nginx file
-    template:
-      src: ingress-nginx-cilium.yml
-      dest: ingress-nginx-cilium.yml
-
-  - name: config hubble-ui ingress-nginx
-    shell: |
-      sleep 60
-      echo "Wait ingress-nginx service to start for 60 seconds."
-      export KUBECONFIG=/etc/kubernetes/admin.conf
-      kubectl apply -f ingress-nginx-cilium.yml
-  when: ingress_nginx_enable_hubble_ui
