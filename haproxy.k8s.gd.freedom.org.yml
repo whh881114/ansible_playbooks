@@ -1,0 +1,72 @@
+---
+- name: haproxy.k8s.gd.freedom.org.yml
+  hosts: haproxy.k8s.gd.freedom.org
+  user: root
+  roles:
+    - role: 000-base-000-common
+      tags: common
+
+    - role: 000-base-001-consul
+      tags: consul-agent
+      vars:
+        consul_agent_role: true
+        consul_agent_items:
+          services:
+            - { name: hubernetes-apiserver, port: 6443 }
+            - { name: hubernetes-ingress-http, port: 32080 }
+            - { name: hubernetes-ingress-https, port: 32443 }
+            - { name: consul-agent, port: 8500 }
+            - { name: node-exporter, port: 9100 }
+
+    - role: 000-base-010-node-exporter
+      tags:
+        - node-exporter
+
+    - role: 001-infra-019-haproxy
+      tags:
+        - haproxy
+      vars:
+        haproxy_version: 1.8.27
+        haproxy_nic_name: ens192
+
+        haproxy_nic_ipaddr: 192.168.6.1
+        haproxy_nic_netmask: 24
+        haproxy_nic_gateway: 192.168.6.254
+
+        # haproxy_auth_username最好不要使用"@"字符。
+        haproxy_auth_username: freedom
+        haproxy_auth_password: freedom
+
+        # 在haproxy上配置单网卡多ip
+        haproxy_ip_list:
+          - 192.168.6.11
+
+        haproxy_service_items:
+          - name: kubernetes-apiserver
+            mode: tcp
+            listen_ip: "{{ haproxy_nic_ipaddr }}"
+            listen_port: 6443
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.gd.freedom.org
+            backend_server_listen_port: 6443
+          - name: kubernetes-ingress-http
+            mode: tcp
+            listen_ip: "{{ haproxy_nic_ipaddr }}"
+            listen_port: 80
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.gd.freedom.org
+              - worker01.k8s.gd.freedom.org
+              - worker02.k8s.gd.freedom.org
+            backend_server_listen_port: 32080
+          - name: kubernetes-ingress-https
+            mode: tcp
+            listen_ip: "{{ haproxy_nic_ipaddr }}"
+            listen_port: 443
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.gd.freedom.org
+              - worker01.k8s.gd.freedom.org
+              - worker02.k8s.gd.freedom.org
+            backend_server_listen_port: 32443
