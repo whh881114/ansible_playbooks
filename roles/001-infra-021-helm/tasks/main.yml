@@ -1,7 +1,14 @@
 ---
-- name: install helm pkg
+- name: download helm pkg
   unarchive:
     src: "{{helm_pkg_url }}"
-    dest: /usr/local/bin
+    dest: "{{ helm_download_dir }}"
+    mode: "0755"
+    remote_src: yes
+
+- name: install helm bin
+  copy:
+    src: "{{ helm_download_dir }}/linux-amd64/helm"
+    dest: "{{ helm_bin_path }}"
     mode: "0755"
     remote_src: yes
