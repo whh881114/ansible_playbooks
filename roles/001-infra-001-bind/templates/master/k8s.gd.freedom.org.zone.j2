@@ -18,7 +18,7 @@ worker01        IN      A           192.168.6.3
 worker02        IN      A           192.168.6.4
 
 ; haproxy转发k8s的apiserver，所以地址写haproxy即可。
+apiserver       IN      A           192.168.6.1
+
+; 所有的ingress入口域名均指向haproxy服务器。
 rancher         IN      A           192.168.6.1
-
-
-
