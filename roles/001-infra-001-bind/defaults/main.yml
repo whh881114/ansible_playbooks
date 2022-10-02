@@ -31,8 +31,14 @@ bind_slave_zone_dir: "{{ bind_root_dir }}/slaves"
 bind_zones:
   - freedom.org
   - consul.freedom.org
-  - k8s.freedom.org
   - indv.freedom.org
+  - bj.freedom.org
+  - sh.freedom.org
+  - gd.freedom.org
+  - k8s.bj.freedom.org
+  - k8s.sh.freedom.org
+  - k8s.gd.freedom.org
+
 
 bind_rev_zones:
   - {ip: "{{ bind_foreman_rev_net }}", domain_name: "freedom.org"}
