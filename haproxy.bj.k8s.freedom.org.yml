@@ -1,0 +1,29 @@
+---
+- name: haproxy.bj.k8s.freedom.org.yml
+  hosts: haproxy.bj.k8s.freedom.org
+  user: root
+  roles:
+    - role: 000-base-000-common
+      tags: common
+
+    - role: 000-base-001-consul
+      tags: consul-agent
+      vars:
+        consul_agent_role: true
+        consul_agent_items:
+          services:
+            - { name: hubernetes-apiserver, port: 6443 }
+            - { name: hubernetes-ingress-http, port: 32080 }
+            - { name: hubernetes-ingress-https, port: 32443 }
+            - { name: consul-agent, port: 8500 }
+            - { name: node-exporter, port: 9100 }
+
+    - role: 000-base-010-node-exporter
+      tags:
+        - node-exporter
+
+    - role: 001-infra-019-haproxy
+      tags:
+        - haproxy
+      vars:
+        - haproxy_version: 1.8.27

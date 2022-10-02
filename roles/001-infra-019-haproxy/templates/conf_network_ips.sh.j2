@@ -2,6 +2,7 @@
 
 cd /etc/sysconfig/network-scripts
 
+{% if haproxy_ip_list is defined %}
 {% for ip in haproxy_ip_list %}
 echo "DEVICE=\"{{ haproxy_nic_name }}:{{ loop.index | int - 1 }}\"" > ifcfg-{{ haproxy_nic_name }}:{{ loop.index | int - 1 }}
 echo "ONBOOT=\"yes\"" >> ifcfg-{{ haproxy_nic_name }}:{{ loop.index | int - 1 }}
@@ -10,5 +11,6 @@ echo "PREFIX=\"{{ haproxy_nic_netmask }}\"" >> ifcfg-{{ haproxy_nic_name }}:{{ l
 echo "GATEWAY=\"{{ haproxy_nic_gateway }}\"" >> ifcfg-{{ haproxy_nic_name }}:{{ loop.index | int - 1 }}
 
 {% endfor %}
+{% endif %}
 
 service network restart
