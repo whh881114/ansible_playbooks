@@ -1,6 +1,6 @@
 ---
-- name: haproxy.bj.k8s.freedom.org.yml
-  hosts: haproxy.bj.k8s.freedom.org
+- name: haproxy.k8s.bj.freedom.org.yml
+  hosts: haproxy.k8s.bj.freedom.org
   user: root
   roles:
     - role: 000-base-000-common
