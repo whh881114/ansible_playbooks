@@ -1,6 +1,6 @@
 kubernetes_version: "1.22.2"
 
-kubernetes_kernel_version: "lt-5.4.197"
+kubernetes_kernel_version: "lt"
 
 kubernetes_pkgs:
   - "kubeadm-{{ kubernetes_version }}"
