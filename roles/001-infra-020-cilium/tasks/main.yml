@@ -12,7 +12,7 @@
 - name: install cilium and enable hubble
   shell: |
     cilium install
-    cilium hubble enable --ui
+    cilium hubble enable
   ignore_errors: yes
   register: cilium_install_result
 
