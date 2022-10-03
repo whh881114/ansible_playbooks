@@ -6,5 +6,7 @@
 cilium_version: v0.12.4
 cilium_pkg_url: "{{ file_server }}/kubernetes/cilium/{{ cilium_version }}/cilium-linux-amd64.tar.gz"
 
+cilium_cluster_pool_ipv4_cidr: 10.0.0.0/8
+
 cilium_hubble_version: v0.10.0
 cilium_hubble_pkg_url: "{{ file_server }}/kubernetes/hubble/{{ cilium_hubble_version }}/hubble-linux-amd64.tar.gz"

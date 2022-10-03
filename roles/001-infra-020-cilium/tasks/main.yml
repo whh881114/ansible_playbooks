@@ -11,7 +11,7 @@
 
 - name: install cilium and enable hubble
   shell: |
-    cilium install
+    cilium install --config cluster-pool-ipv4-cidr={{ cilium_cluster_pool_ipv4_cidr }}
     cilium hubble enable
   ignore_errors: yes
   register: cilium_install_result
