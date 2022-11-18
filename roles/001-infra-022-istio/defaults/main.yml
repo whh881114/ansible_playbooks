@@ -1,5 +1,8 @@
 ---
-istio_version: 1.14.1
+# 当前k8s版本为1.22，所以对应最后（估计）一个版本，版本兼容说明：https://istio.io/latest/docs/releases/supported-releases/#support-status-of-istio-releases
+istio_version: 1.16.0
 istio_file: istio-{{ istio_version }}-linux-amd64.tar.gz
 istio_directory: /root
 istio_profile: demo
+
+istioctl_file: istioctl-{{ istio_version }}-linux-amd64.tar.gz
