@@ -11,5 +11,11 @@
     group: nfsnobody
   loop:
     - /data/k8s-pvc-nfs/bj/infra
+    - /data/k8s-pvc-nfs/bj/mysql
+    - /data/k8s-pvc-nfs/bj/redis
+    - /data/k8s-pvc-nfs/sh/infra
     - /data/k8s-pvc-nfs/sh/mysql
+    - /data/k8s-pvc-nfs/sh/redis
+    - /data/k8s-pvc-nfs/gd/infra
+    - /data/k8s-pvc-nfs/gd/mysql
     - /data/k8s-pvc-nfs/gd/redis
