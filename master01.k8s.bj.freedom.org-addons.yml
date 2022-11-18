@@ -18,6 +18,6 @@
       tags:
         - ingress-nginx
 
-#    - role: 001-infra-022-istio
-#      tags:
-#        - istio
+    - role: 001-infra-022-istio
+      tags:
+        - istio
