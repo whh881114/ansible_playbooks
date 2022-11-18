@@ -7,17 +7,9 @@
     path: "{{ item }}"
     state: directory
     recurse: yes
-  loop:
-    - /data/k8s-pvc-nfs/infra
-    - /data/k8s-pvc-nfs/mysql
-    - /data/k8s-pvc-nfs/redis
-
-- name: chown kubernetes nfs pvc directories
-  file:
-    path: "{{ item }}"
     owner: polkitd
     group: nfsnobody
   loop:
-    - /data/k8s-pvc-nfs/infra
-    - /data/k8s-pvc-nfs/mysql
-    - /data/k8s-pvc-nfs/redis
+    - /data/k8s-pvc-nfs/bj/infra
+    - /data/k8s-pvc-nfs/sh/mysql
+    - /data/k8s-pvc-nfs/gd/redis
