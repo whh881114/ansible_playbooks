@@ -8,8 +8,8 @@
 
     - role: 000-base-001-consul
       tags: consul-agent
-      vars:
-        consul_server:
+      vars:s
+        consul_servers:
           - consul-server.k8s.bj.freedom.org
         consul_agent_role: true
         consul_agent_items:
