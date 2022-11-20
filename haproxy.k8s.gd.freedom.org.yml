@@ -9,6 +9,8 @@
     - role: 000-base-001-consul
       tags: consul-agent
       vars:
+        consul_servers:
+          - consul-server.k8s.gd.freedom.org
         consul_agent_role: true
         consul_agent_items:
           services:
@@ -50,6 +52,7 @@
             backend_server_items:
               - master01.k8s.gd.freedom.org
             backend_server_listen_port: 6443
+
           - name: kubernetes-ingress-http
             mode: tcp
             listen_ip: "{{ haproxy_nic_ipaddr }}"
@@ -60,6 +63,7 @@
               - worker01.k8s.gd.freedom.org
               - worker02.k8s.gd.freedom.org
             backend_server_listen_port: 32080
+
           - name: kubernetes-ingress-https
             mode: tcp
             listen_ip: "{{ haproxy_nic_ipaddr }}"
@@ -70,3 +74,14 @@
               - worker01.k8s.gd.freedom.org
               - worker02.k8s.gd.freedom.org
             backend_server_listen_port: 32443
+
+          - name: kubernetes-consul-server
+            mode: tcp
+            listen_ip: "{{ haproxy_nic_ipaddr }}"
+            listen_port: 8300
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.gd.freedom.org
+              - worker01.k8s.gd.freedom.org
+              - worker02.k8s.gd.freedom.org
+            backend_server_listen_port: 31195 # 此端口为consul的nodeport端口值
