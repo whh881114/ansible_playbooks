@@ -85,3 +85,26 @@
               - worker01.k8s.bj.freedom.org
               - worker02.k8s.bj.freedom.org
             backend_server_listen_port: 30391 # 此端口为consul的nodeport端口值
+
+          # istio-ingressgateway   LoadBalancer   172.16.195.172   <pending>     15021:32652/TCP,80:32373/TCP,443:30280/TCP,31400:30871/TCP,15443:30099/TCP   44h
+          - name: istio-ingress-http
+            mode: tcp
+            listen_ip: 192.168.4.11
+            listen_port: 80
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.bj.freedom.org
+              - worker01.k8s.bj.freedom.org
+              - worker02.k8s.bj.freedom.org
+            backend_server_listen_port: 32373
+
+          - name: istio-ingress-https
+            mode: tcp
+            listen_ip: 192.168.4.11
+            listen_port: 443
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.bj.freedom.org
+              - worker01.k8s.bj.freedom.org
+              - worker02.k8s.bj.freedom.org
+            backend_server_listen_port: 30280
