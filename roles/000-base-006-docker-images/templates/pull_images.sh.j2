@@ -2,7 +2,7 @@
 
 while read line
 do
-    if `echo $line | grep '^#'`; then
+    if `echo $line | grep -E '^#|^$|^\ *$'`; then
         continue
     else
         mirror_image=`echo $line | awk -F'#' '{print $1}'`
@@ -17,4 +17,5 @@ do
         docker pull $harbor_image
         docker tag $harbor_image $original_image
 {% endif %}
+    fi
 done < {{ docker_images_list_file }}
