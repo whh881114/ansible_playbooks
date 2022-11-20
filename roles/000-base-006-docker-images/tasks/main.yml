@@ -4,7 +4,7 @@
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
   with_items:
-    - { src: "{{ docker_images_list_file }}", dest: "/tmp/{{ docker_images_list_file }}" }
+    - { src: "{{ docker_images_list_file }}", dest: "{{ docker_images_list_file }}" }
 
 - name: generate scripts
   template:
@@ -12,13 +12,12 @@
     dest: "{{ item.dest }}"
     mode: "0755"
   with_items:
-    - { src: pull_images.sh.j2, dest: /tmp/pull_images.sh }
+    - { src: pull_images.sh.j2, dest: pull_images.sh }
 
 - name: pull/push docker images
   shell: |
-    cd /tmp
     dos2unix "{{ docker_images_list_file }}"
-    sh -x /tmp/pull_images.sh
+    sh -x pull_images.sh
   register: result
   ignore_errors: yes
 
