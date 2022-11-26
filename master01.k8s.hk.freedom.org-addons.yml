@@ -8,7 +8,7 @@
       tags:
         - cilium
       vars:
-        - cilium_cluster_pool_ipv4_cidr: 10.0.0.0/16
+        - cilium_cluster_pool_ipv4_cidr: 10.3.0.0/16
 
     - role: 001-infra-021-helm
       tags:
