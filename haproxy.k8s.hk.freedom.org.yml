@@ -31,9 +31,9 @@
         haproxy_version: 1.8.27
         haproxy_nic_name: ens192
 
-        haproxy_nic_ipaddr: 192.168.6.1
+        haproxy_nic_ipaddr: 192.168.7.1
         haproxy_nic_netmask: 24
-        haproxy_nic_gateway: 192.168.6.254
+        haproxy_nic_gateway: 192.168.7.254
 
         # haproxy_auth_username最好不要使用"@"字符。
         haproxy_auth_username: freedom
