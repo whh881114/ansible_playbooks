@@ -84,7 +84,7 @@
               - master01.k8s.hk.freedom.org
               - worker01.k8s.hk.freedom.org
               - worker02.k8s.hk.freedom.org
-            backend_server_listen_port: 32212 # 此端口为consul 8301的nodeport端口值
+            backend_server_listen_port: 30372 # 此端口为consul 8300的nodeport端口值
 
           # kubectl -n istio-system get service istio-ingressgateway
           - name: istio-ingress-http
