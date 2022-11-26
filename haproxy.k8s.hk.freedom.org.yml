@@ -76,17 +76,6 @@
               - worker02.k8s.hk.freedom.org
             backend_server_listen_port: 32443
 
-          - name: kubernetes-consul-server
-            mode: tcp
-            listen_ip: "{{ haproxy_nic_ipaddr }}"
-            listen_port: 8300
-            backend_server_mode: static
-            backend_server_items:
-              - master01.k8s.hk.freedom.org
-              - worker01.k8s.hk.freedom.org
-              - worker02.k8s.hk.freedom.org
-            backend_server_listen_port: 30372 # 此端口为consul 8300的nodeport端口值
-
           # kubectl -n istio-system get service istio-ingressgateway
           - name: istio-ingress-http
             mode: tcp
