@@ -19,3 +19,6 @@
     - /data/k8s-pvc-nfs/gd/infra
     - /data/k8s-pvc-nfs/gd/mysql
     - /data/k8s-pvc-nfs/gd/redis
+    - /data/k8s-pvc-nfs/hk/infra
+    - /data/k8s-pvc-nfs/hk/mysql
+    - /data/k8s-pvc-nfs/hk/redis
