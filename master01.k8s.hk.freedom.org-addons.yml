@@ -1,0 +1,23 @@
+---
+- name: master01.k8s.hk.freedom.org
+  hosts: master01.k8s.hk.freedom.org
+  user: root
+  roles:
+    # cilium安装是要等到k8s集群部署完成后才能执行
+    - role: 001-infra-020-cilium
+      tags:
+        - cilium
+      vars:
+        - cilium_cluster_pool_ipv4_cidr: 10.0.0.0/16
+
+    - role: 001-infra-021-helm
+      tags:
+        - helm
+
+    - role: 001-infra-022-ingress-nginx
+      tags:
+        - ingress-nginx
+
+    - role: 001-infra-022-istio
+      tags:
+        - istio
