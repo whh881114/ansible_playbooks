@@ -89,7 +89,7 @@
           # kubectl -n istio-system get service istio-ingressgateway
           - name: istio-ingress-http
             mode: tcp
-            listen_ip: 192.168.6.11
+            listen_ip: 192.168.7.11
             listen_port: 80
             backend_server_mode: static
             backend_server_items:
@@ -100,7 +100,7 @@
 
           - name: istio-ingress-https
             mode: tcp
-            listen_ip: 192.168.6.11
+            listen_ip: 192.168.7.11
             listen_port: 443
             backend_server_mode: static
             backend_server_items:
