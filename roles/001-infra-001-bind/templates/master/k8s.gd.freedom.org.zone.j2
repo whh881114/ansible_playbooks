@@ -22,11 +22,12 @@ apiserver       IN      A           192.168.6.1
 
 ; 所有的ingress入口域名均指向haproxy服务器。
 rancher         IN      A           192.168.6.1
-consul-web      IN      A           192.168.6.1
-consul-server   IN      A           192.168.6.1
 alertmanager    IN      A           192.168.6.1
 grafana         IN      A           192.168.6.1
 prometheus      IN      A           192.168.6.1
+
+consul-web      IN      A           192.168.6.1
+consul-server   IN      A           192.168.6.2
 
 ; istio流量走istio-ingressgateway入口。
 productpage.default.istio   IN      A           192.168.6.11
