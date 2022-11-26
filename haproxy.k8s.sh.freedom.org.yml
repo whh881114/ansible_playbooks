@@ -11,6 +11,7 @@
       vars:
         consul_servers:
           - consul-server.k8s.sh.freedom.org
+        consul_datacenter: sh
         consul_agent_role: true
         consul_agent_items:
           services:
