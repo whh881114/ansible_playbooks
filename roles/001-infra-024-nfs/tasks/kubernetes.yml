@@ -6,7 +6,7 @@
   file:
     path: "{{ item }}"
     state: directory
-    recurse: yes
+    # recurse: yes
     owner: polkitd
     group: nfsnobody
   loop:
