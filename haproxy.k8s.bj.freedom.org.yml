@@ -90,17 +90,6 @@
               - worker02.k8s.bj.freedom.org
             backend_server_listen_port: 32478
 
-          - name: istiod-https-dns
-            mode: tcp
-            listen_ip: 192.168.4.11
-            listen_port: 15012
-            backend_server_mode: static
-            backend_server_items:
-              - master01.k8s.bj.freedom.org
-              - worker01.k8s.bj.freedom.org
-              - worker02.k8s.bj.freedom.org
-            backend_server_listen_port: 31403
-
           - name: istiod-https-webhook
             mode: tcp
             listen_ip: 192.168.4.11
@@ -111,17 +100,6 @@
               - worker01.k8s.bj.freedom.org
               - worker02.k8s.bj.freedom.org
             backend_server_listen_port: 30175
-
-          - name: istiod-http-monitoring
-            mode: tcp
-            listen_ip: 192.168.4.11
-            listen_port: 15014
-            backend_server_mode: static
-            backend_server_items:
-              - master01.k8s.bj.freedom.org
-              - worker01.k8s.bj.freedom.org
-              - worker02.k8s.bj.freedom.org
-            backend_server_listen_port: 31357
 
 
           ### istio-ingressgateway
