@@ -29,8 +29,11 @@ prometheus      IN      A           192.168.4.1
 consul-web      IN      A           192.168.4.1
 consul-server   IN      A           192.168.4.2
 
+; istiod流量出入口
+istiod          IN      A           192.168.4.11
+
 ; istio-ingressgateway流量出入口
-productpage.default.istio   IN      A           192.168.4.11
+productpage.default.istio   IN      A           192.168.4.12
 
 ; istio-eastwestgateway流量出入口
-istio-eastwestgateway       IN      A           192.168.4.12
+istio-eastwestgateway       IN      A           192.168.4.13
