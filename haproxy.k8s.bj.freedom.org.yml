@@ -44,6 +44,7 @@
         haproxy_ip_list:
           - 192.168.4.11
           - 192.168.4.12
+          - 192.168.4.13
 
         haproxy_service_items:
           - name: kubernetes-apiserver
@@ -77,30 +78,30 @@
               - worker02.k8s.bj.freedom.org
             backend_server_listen_port: 32443
 
-
-          - name: istio-ingressgateway-status-port
+          ### istiod
+          - name: istiod-grpc-xds
             mode: tcp
             listen_ip: 192.168.4.11
-            listen_port: 15021
+            listen_port: 15010
             backend_server_mode: static
             backend_server_items:
               - master01.k8s.bj.freedom.org
               - worker01.k8s.bj.freedom.org
               - worker02.k8s.bj.freedom.org
-            backend_server_listen_port: 30123
+            backend_server_listen_port: 32478
 
-          - name: istio-ingressgateway-http2
+          - name: istiod-https-dns
             mode: tcp
             listen_ip: 192.168.4.11
-            listen_port: 80
+            listen_port: 15012
             backend_server_mode: static
             backend_server_items:
               - master01.k8s.bj.freedom.org
               - worker01.k8s.bj.freedom.org
               - worker02.k8s.bj.freedom.org
-            backend_server_listen_port: 32545
+            backend_server_listen_port: 31403
 
-          - name: istio-ingressgateway-https
+          - name: istiod-https-webhook
             mode: tcp
             listen_ip: 192.168.4.11
             listen_port: 443
@@ -109,10 +110,22 @@
               - master01.k8s.bj.freedom.org
               - worker01.k8s.bj.freedom.org
               - worker02.k8s.bj.freedom.org
-            backend_server_listen_port: 32462
+            backend_server_listen_port: 30175
+
+          - name: istiod-http-monitoring
+            mode: tcp
+            listen_ip: 192.168.4.11
+            listen_port: 15014
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.bj.freedom.org
+              - worker01.k8s.bj.freedom.org
+              - worker02.k8s.bj.freedom.org
+            backend_server_listen_port: 31357
 
 
-          - name: istio-eastwestgateway-status-port
+          ### istio-ingressgateway
+          - name: istio-ingressgateway-status-port
             mode: tcp
             listen_ip: 192.168.4.12
             listen_port: 15021
@@ -121,37 +134,72 @@
               - master01.k8s.bj.freedom.org
               - worker01.k8s.bj.freedom.org
               - worker02.k8s.bj.freedom.org
-            backend_server_listen_port: 31711
+            backend_server_listen_port: 30517
+
+          - name: istio-ingressgateway-http2
+            mode: tcp
+            listen_ip: 192.168.4.12
+            listen_port: 80
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.bj.freedom.org
+              - worker01.k8s.bj.freedom.org
+              - worker02.k8s.bj.freedom.org
+            backend_server_listen_port: 30695
+
+          - name: istio-ingressgateway-https
+            mode: tcp
+            listen_ip: 192.168.4.12
+            listen_port: 443
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.bj.freedom.org
+              - worker01.k8s.bj.freedom.org
+              - worker02.k8s.bj.freedom.org
+            backend_server_listen_port: 31139
+
+
+          ### istio-eastwestgateway
+          - name: istio-eastwestgateway-status-port
+            mode: tcp
+            listen_ip: 192.168.4.13
+            listen_port: 15021
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.bj.freedom.org
+              - worker01.k8s.bj.freedom.org
+              - worker02.k8s.bj.freedom.org
+            backend_server_listen_port: 30496
 
           - name: istio-eastwestgateway-tls
             mode: tcp
-            listen_ip: 192.168.4.12
+            listen_ip: 192.168.4.13
             listen_port: 15443
             backend_server_mode: static
             backend_server_items:
               - master01.k8s.bj.freedom.org
               - worker01.k8s.bj.freedom.org
               - worker02.k8s.bj.freedom.org
-            backend_server_listen_port: 31672
+            backend_server_listen_port: 31994
 
           - name: istio-eastwestgateway-tls-istiod
             mode: tcp
-            listen_ip: 192.168.4.12
+            listen_ip: 192.168.4.13
             listen_port: 15012
             backend_server_mode: static
             backend_server_items:
               - master01.k8s.bj.freedom.org
               - worker01.k8s.bj.freedom.org
               - worker02.k8s.bj.freedom.org
-            backend_server_listen_port: 30084
+            backend_server_listen_port: 30631
 
           - name: istio-eastwestgateway-tls-webhook
             mode: tcp
-            listen_ip: 192.168.4.12
+            listen_ip: 192.168.4.13
             listen_port: 15017
             backend_server_mode: static
             backend_server_items:
               - master01.k8s.bj.freedom.org
               - worker01.k8s.bj.freedom.org
               - worker02.k8s.bj.freedom.org
-            backend_server_listen_port: 32069
+            backend_server_listen_port: 31451
