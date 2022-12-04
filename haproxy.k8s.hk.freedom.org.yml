@@ -43,6 +43,7 @@
         # 在haproxy上配置单网卡多ip
         haproxy_ip_list:
           - 192.168.7.11
+          - 192.168.7.12
 
         haproxy_service_items:
           - name: kubernetes-apiserver
@@ -76,25 +77,47 @@
               - worker02.k8s.hk.freedom.org
             backend_server_listen_port: 32443
 
-          # kubectl -n istio-system get service istio-ingressgateway
-          - name: istio-ingress-http
+          # kubectl -n external-istiod get svc istio-eastwestgateway -o yaml
+          - name: istio-eastwestgateway-status-port
             mode: tcp
-            listen_ip: 192.168.7.11
-            listen_port: 80
+            listen_ip: 192.168.7.12
+            listen_port: 15021
             backend_server_mode: static
             backend_server_items:
               - master01.k8s.hk.freedom.org
               - worker01.k8s.hk.freedom.org
               - worker02.k8s.hk.freedom.org
-            backend_server_listen_port: 30772
+            backend_server_listen_port: 30043
 
-          - name: istio-ingress-https
+          - name: istio-eastwestgateway-tls
             mode: tcp
-            listen_ip: 192.168.7.11
-            listen_port: 443
+            listen_ip: 192.168.7.12
+            listen_port: 15443
             backend_server_mode: static
             backend_server_items:
               - master01.k8s.hk.freedom.org
               - worker01.k8s.hk.freedom.org
               - worker02.k8s.hk.freedom.org
-            backend_server_listen_port: 31921
+            backend_server_listen_port: 32279
+
+          - name: istio-eastwestgateway-tls-istiod
+            mode: tcp
+            listen_ip: 192.168.7.12
+            listen_port: 15012
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.hk.freedom.org
+              - worker01.k8s.hk.freedom.org
+              - worker02.k8s.hk.freedom.org
+            backend_server_listen_port: 31874
+
+          - name: istio-eastwestgateway-tls-webhook
+            mode: tcp
+            listen_ip: 192.168.7.12
+            listen_port: 15017
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.hk.freedom.org
+              - worker01.k8s.hk.freedom.org
+              - worker02.k8s.hk.freedom.org
+            backend_server_listen_port: 31013
