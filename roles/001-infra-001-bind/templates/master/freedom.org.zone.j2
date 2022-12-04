@@ -31,3 +31,6 @@ pfsense             IN      A           192.168.2.254
 docker              IN      CNAME       harbor
 ; nfs.freedom.org规划成文件服务器，所以将常用的大文件放在上面。
 file                IN      CNAME       nfs
+
+; istiod流量出入口，作为独立部署的控制平台，将域名移至freedom.org下。
+istio-external-controlplane          IN      A           192.168.4.11
