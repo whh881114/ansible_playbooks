@@ -43,6 +43,7 @@
         # 在haproxy上配置单网卡多ip
         haproxy_ip_list:
           - 192.168.5.11
+          - 192.168.5.12
 
         haproxy_service_items:
           - name: kubernetes-apiserver
@@ -76,7 +77,7 @@
               - worker02.k8s.sh.freedom.org
             backend_server_listen_port: 32443
 
-          # kubectl -n istio-system get service istio-ingressgateway
+          # kubectl -n external-istiod get svc istio-ingressgateway -o yaml
           - name: istio-ingress-http
             mode: tcp
             listen_ip: 192.168.5.11
@@ -98,3 +99,60 @@
               - worker01.k8s.sh.freedom.org
               - worker02.k8s.sh.freedom.org
             backend_server_listen_port: 32130
+
+          - name: istio-ingress-status-port
+            mode: tcp
+            listen_ip: 192.168.5.11
+            listen_port: 15021
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.sh.freedom.org
+              - worker01.k8s.sh.freedom.org
+              - worker02.k8s.sh.freedom.org
+            backend_server_listen_port: 30316
+
+          # kubectl -n external-istiod get svc istio-eastwestgateway -o yaml
+          - name: istio-eastwestgateway-status-port
+            mode: tcp
+            listen_ip: 192.168.5.12
+            listen_port: 15021
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.sh.freedom.org
+              - worker01.k8s.sh.freedom.org
+              - worker02.k8s.sh.freedom.org
+            backend_server_listen_port: 32693
+
+          - name: istio-eastwestgateway-tls
+            mode: tcp
+            listen_ip: 192.168.5.12
+            listen_port: 15443
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.sh.freedom.org
+              - worker01.k8s.sh.freedom.org
+              - worker02.k8s.sh.freedom.org
+            backend_server_listen_port: 30596
+
+          - name: istio-eastwestgateway-tls-istiod
+            mode: tcp
+            listen_ip: 192.168.5.12
+            listen_port: 15012
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.sh.freedom.org
+              - worker01.k8s.sh.freedom.org
+              - worker02.k8s.sh.freedom.org
+            backend_server_listen_port: 30681
+
+          - name: istio-eastwestgateway-tls-webhook
+            mode: tcp
+            listen_ip: 192.168.5.12
+            listen_port: 15017
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.sh.freedom.org
+              - worker01.k8s.sh.freedom.org
+              - worker02.k8s.sh.freedom.org
+            backend_server_listen_port: 32587
+
