@@ -94,7 +94,7 @@
           - name: istio-ingressgateway-tls-xds
             mode: tcp
             listen_ip: 192.168.4.11
-            listen_port: 80
+            listen_port: 15012
             backend_server_mode: static
             backend_server_items:
               - master01.k8s.bj.freedom.org
@@ -105,7 +105,7 @@
           - name: istio-ingressgateway-tls-webhook
             mode: tcp
             listen_ip: 192.168.4.11
-            listen_port: 443
+            listen_port: 15017
             backend_server_mode: static
             backend_server_items:
               - master01.k8s.bj.freedom.org
