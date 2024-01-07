@@ -28,10 +28,14 @@ grafana         IN      A           192.168.4.1
 prometheus      IN      A           192.168.4.1
 kibana          IN      A           192.168.4.1
 elasticsearch   IN      A           192.168.4.1
-es              IN      A           192.168.4.1
 argocd          IN      A           192.168.4.1
-public-zookeeper    IN      A           192.168.4.1
-public-jenkins      IN      A           192.168.4.1
+hubble-ui       IN      A           192.168.4.1
+zookeeper       IN      A           192.168.4.1
+jenkins         IN      A           192.168.4.1
+
+es              IN      CNAME       elasticsearch
+
+
 
 ; consul-server部署在k8s集群中，集群外的主机要和consul-server通信，最方便的方法是打通集群外和集群内的网络。
 ; consul-server解析的地址为ClusterIP。
