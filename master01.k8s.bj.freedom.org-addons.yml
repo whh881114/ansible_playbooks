@@ -17,6 +17,8 @@
     - role: 001-infra-022-ingress-nginx
       tags:
         - ingress-nginx
+      vars:
+        ingress_nginx_cilium_host: hubble-ui.k8s.bj.freedom.org
 
     # - role: 001-infra-022-istio
     #   tags:
