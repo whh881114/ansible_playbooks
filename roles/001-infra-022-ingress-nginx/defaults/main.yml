@@ -14,11 +14,6 @@ ingress_nginx_patch_image: k8s.gcr.io/kube-webhook-certgen
 ingress_nginx_patch_tag: v1.0
 ingress_nginx_patch_digest: sha256:a0f92f5f828e9bf8e3a4c672080067e0079e95f9af8583059eab0c11f4dc7cfe
 
-ingress_nginx_enable_hubble_ui: false
-
-ingress_nginx_cilium_host: hubble-ui.k8s.freedom.org
-
-
 # 3.38.0版本变量
 # ingress_nginx_version: 3.38.0
 # ingress_nginx_image_tag: v0.49.2
