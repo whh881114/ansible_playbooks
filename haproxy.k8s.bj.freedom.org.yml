@@ -89,28 +89,48 @@
               - master01.k8s.bj.freedom.org
               - worker01.k8s.bj.freedom.org
               - worker02.k8s.bj.freedom.org
-            backend_server_listen_port: 32329
+            backend_server_listen_port: 32735
 
-          - name: istio-ingressgateway-tls-xds
+          - name: istio-ingressgateway-http2
             mode: tcp
             listen_ip: 192.168.4.11
-            listen_port: 15012
+            listen_port: 80
             backend_server_mode: static
             backend_server_items:
               - master01.k8s.bj.freedom.org
               - worker01.k8s.bj.freedom.org
               - worker02.k8s.bj.freedom.org
-            backend_server_listen_port: 30574
+            backend_server_listen_port: 31267
 
-          - name: istio-ingressgateway-tls-webhook
+          - name: istio-ingressgateway-https
             mode: tcp
             listen_ip: 192.168.4.11
-            listen_port: 15017
+            listen_port: 443
             backend_server_mode: static
             backend_server_items:
               - master01.k8s.bj.freedom.org
               - worker01.k8s.bj.freedom.org
               - worker02.k8s.bj.freedom.org
-            backend_server_listen_port: 30195
+            backend_server_listen_port: 30025
 
+          - name: istio-ingressgateway-tcp
+            mode: tcp
+            listen_ip: 192.168.4.11
+            listen_port: 31400
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.bj.freedom.org
+              - worker01.k8s.bj.freedom.org
+              - worker02.k8s.bj.freedom.org
+            backend_server_listen_port: 30010
 
+          - name: istio-ingressgateway-tls
+            mode: tcp
+            listen_ip: 192.168.4.11
+            listen_port: 15443
+            backend_server_mode: static
+            backend_server_items:
+              - master01.k8s.bj.freedom.org
+              - worker01.k8s.bj.freedom.org
+              - worker02.k8s.bj.freedom.org
+            backend_server_listen_port: 31313
