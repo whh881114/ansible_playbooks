@@ -1,0 +1,11 @@
+---
+- name: deploy dns master
+  hosts: 192.168.2.253
+  user: root
+  roles:
+    - role: 001-infra-001-bind
+      tags:
+        - dns
+        - bind
+      vars:
+        - bind_master_role: true
